@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.22.2" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.23.1" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -222,6 +222,10 @@
   <!-- 2-04-2026   GS   id on frontmatter                                         -->
   <!-- 2-06-2026   GS   restore block-insert and block-delete                     -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.23                              -->
+  <!-- ========================================================================== -->
+  <!-- 2-09-2026   GS   JIRA X2S-61 Schema adjustments for commentary             -->
+  <!-- ========================================================================== -->
 
 
   <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
@@ -258,7 +262,7 @@
         <xs:element maxOccurs="1" minOccurs="0" ref="objectives"/>
         <xs:element maxOccurs="1" minOccurs="0" ref="note"/>
         <!--Adding commentary to the header-group-->
-        <xs:element maxOccurs="1" minOccurs="0" ref="commentary"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="prefatory-commentary"/>
       </xs:choice>
     </xs:sequence>
   </xs:group>
@@ -268,118 +272,131 @@
   <xs:group name="level-1-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-2"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-2-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-3"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-3-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-4"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-4-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-5"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-5-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-6"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-6-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-7"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-7-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-8"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-8-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-9"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-9-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-10"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-10-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="level-11"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
   <xs:group name="level-11-bodymatters">
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
+      <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="relocated-to"/>
       </xs:choice>
+      <xs:element ref="closing-commentary" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
@@ -604,6 +621,7 @@
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="volume" maxOccurs="unbounded"/>
       </xs:sequence>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="schema-version" use="required" type="xs:token"/>      
       <xs:attribute name="schematron-version" use="optional" type="xs:token"/>
@@ -693,7 +711,7 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-1-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
+        <xs:element ref="conclusion" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -722,12 +740,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-2-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -752,7 +768,6 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-3-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -781,12 +796,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-4-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -810,12 +823,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-5-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -839,12 +850,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-6-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -868,12 +877,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-7-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -897,12 +904,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-8-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -926,12 +931,10 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-9-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -955,7 +958,6 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-10-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -983,7 +985,6 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-11-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -3091,7 +3092,7 @@
   
   <!-- ****************** -->
 
-    <xs:element name="commentary">
+  <xs:complexType name="commentary-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Commentary: The format of the Commentary includes the full text of each
@@ -3099,10 +3100,9 @@
         that text.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element minOccurs="0" ref="titlegroup" />
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
           <!--BH - added section to commentary-->
           <xs:element ref="section"/>
           <xs:element ref="bibliography"/>
@@ -3113,7 +3113,11 @@
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
-  </xs:element>
+
+  <xs:element name="commentary" type="commentary-type"><!-- after body; "regular" commentary --></xs:element>
+  <xs:element name="prefatory-commentary" type="commentary-type" ><!-- in the header --></xs:element>
+  <xs:element name="closing-commentary" type="commentary-type" ><!-- after the child legislative levels --></xs:element>
+  <xs:element name="concluding-commentary" type="commentary-type" ><!-- in the conclusion --></xs:element>
 
   <xs:element name="exception">
     <xs:annotation>
@@ -3152,8 +3156,9 @@
           <xs:element ref="objectives"/>
         </xs:choice>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="p"/> <!-- GS 2026-01-23 NOT "para-elements" because that includes commentary -->
+          <xs:group ref="para-elements" />
         </xs:choice>
+        <xs:element ref="commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
@@ -3504,6 +3509,25 @@
 
   <!-- ****************** -->
 
+  <xs:element name="conclusion">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Conclusion: a conclusion is material at the end of a legislative level larger than a section. 
+          This material describes the entire level and may include a bibliography for sources possibly followed by 
+          commentary providing an editorial description of the content.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="bibliography" />
+        <xs:element minOccurs="0" ref="concluding-commentary" />
+      </xs:sequence>
+      <xs:attributeGroup ref="id-attributes" />
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ****************** -->
+
   <xs:element name="appendix">
     <xs:annotation>
       <xs:appinfo>
@@ -3519,7 +3543,6 @@
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-1-bodymatters"/>
-        <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
