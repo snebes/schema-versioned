@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.28.00" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.29.06" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -258,6 +258,21 @@
   <!-- ========================================================================== -->
   <!-- 4-01-2026   GS   JIRA X2S-115 other-model content as legislative sublevel  -->
   <!-- 4-01-2026   GS   JIRA X2S-116 list item commentary                         -->
+  <!-- ========================================================================== -->
+  <!--                                  Version 1.29                              -->
+  <!-- ========================================================================== -->
+  <!-- 4-13-2026   GS   JIRA X2S-143 add revision, revision-list, instruction,    -->
+  <!--                   and revision-description to the model for ref            -->
+  <!-- 4-13-2026   GS   JIRA X2S-144 add preamble to numbered levels              -->
+  <!-- 4-14-2026   GS   JIRA X2S-146 add relocation-table                         -->
+  <!-- 4-14-2026   GS   JIRA X2S-147 add editorial-commentary                     -->
+  <!-- 4-14-2026   GS   JIRA X2S-153 text-color attribute on boxed-text and aside -->
+  <!-- 4-20-2026   GS   JIRA X2S-168 allow multiple relocated-from                -->
+  <!-- 4-22-2026   GS   JIRA CHWG-2320 bibliography contains editorial-commentary -->
+  <!-- 4-24-2026   GS   JIRA X2S-186 allow url in correlated                      -->
+  <!-- 5-13-2026   GS   JIRA X2S-194 require body wrapper for block element       -->
+  <!--                   content in blocks-then-sections elements                 -->
+  <!-- 5-13-2026   GS   JIRA X2S-195 change boxed-text content model              -->
   <!-- ========================================================================== -->
 
 
@@ -724,7 +739,11 @@
         <xs:element ref="publisher-note" minOccurs="0"/>
         <xs:element ref="foreword" minOccurs="0"/>
         <xs:element ref="preface" minOccurs="0"/>
-        <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="relocation-table" minOccurs="0"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="section"/>
+          <xs:element ref="editorial-commentary"/>
+        </xs:choice>
         <xs:element ref="toc" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
@@ -744,7 +763,8 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -774,7 +794,8 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -796,14 +817,13 @@
   <xs:element name="level-3">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 3: Third-level to eleventh-level (level-3 to level-11) elements used
-        to capture the subsections associated to 'Part' or 'Article' of the publication. Attribute
-        role identifies the type of the element. The possible value of role is 'legis-section'.</xs:documentation>
+        <xs:documentation>Level 3</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -826,13 +846,13 @@
   <xs:element name="level-4">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 4: This is a forth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 4: This is a forth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -854,13 +874,13 @@
   <xs:element name="level-5">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 5: This is a fifth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 5: This is a fifth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -882,13 +902,13 @@
   <xs:element name="level-6">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 6: This is a sixth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 6: This is a sixth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -910,13 +930,13 @@
   <xs:element name="level-7">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 7: This is a seventh-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 7: This is a seventh-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -938,13 +958,13 @@
   <xs:element name="level-8">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 8: This is an eighth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 8: This is an eighth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -966,13 +986,13 @@
   <xs:element name="level-9">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 9: This is an ninth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 9: This is an ninth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -994,13 +1014,13 @@
   <xs:element name="level-10">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 10: This is an tenth-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 10: This is an tenth-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -1022,13 +1042,13 @@
   <xs:element name="level-11">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Level 11: This is a eleventh-level element. The possible value of role is
-        'legis-section'.</xs:documentation>
+        <xs:documentation>Level 11: This is a eleventh-level element.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -1390,67 +1410,95 @@
   </xs:element>
 
   <!-- ****************** -->
+  <xs:element name="preamble">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The preamble appears before the title of a numbered level. This is not common and preambles are optional elements.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="instruction" />
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="titlegroup" />
+          <xs:choice maxOccurs="unbounded">
+            <xs:group ref="block-elements" />
+          </xs:choice>
+        </xs:sequence>
+      </xs:choice>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="tocentry" type="yesorno" />
+    </xs:complexType>
+  </xs:element>
 
-  <xs:element name="preface">
+  <xs:element name="preface" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Preface: Preface is an introductory content prior to the first chapter in
         the publication.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:group ref="block-elements" maxOccurs="unbounded"/>
-            <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:element ref="section" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-    </xs:complexType>
   </xs:element>
+  
+  <xs:element name="relocation-table" type="blocks-then-sections-with-id">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Relocation tables allow direct management of change information for a volume.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  
+  <xs:complexType name="blocks-then-sections">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>This is a common pattern for front matter, broadly constructed.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="metadata" />
+      <xs:element minOccurs="0" ref="titlegroup" />
+      <xs:element minOccurs="0" ref="body" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="section" />
+        <xs:element ref="editorial-commentary" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attributeGroup ref="revision-attributes" />
+    <xs:attribute name="tocentry" type="yesorno" />
+  </xs:complexType>
+  
+  <xs:attributeGroup name="section-attributes">
+    <xs:attribute name="disp-level" type="xs:integer" />
+    <xs:attribute name="indexnum" type="xs:string" />
+    <xs:attribute name="reservecount" type="xs:integer" />
+  </xs:attributeGroup>
+  
+  <xs:complexType name="blocks-then-sections-with-id">
+      <xs:complexContent>
+        <xs:extension base="blocks-then-sections">
+          <xs:attributeGroup ref="id-attributes" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
 
   <!-- ****************** -->
 
-  <xs:element name="foreword">
+  <xs:element name="foreword" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Foreword: A section at the beginning of a book that introduces the book
         and is usually written by someone other than the book's author.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:group ref="block-elements" maxOccurs="unbounded"/>
-            <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:element ref="section" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-    </xs:complexType>
   </xs:element>
 
 
   <!-- ****************** -->
 
-  <xs:element name="publisher-note">
+  <xs:element name="publisher-note" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Publisher Note: A section at the beginning of a book that provides further
@@ -1458,24 +1506,6 @@
         the book. </xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:group ref="block-elements" maxOccurs="unbounded"/>
-            <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:element ref="section" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-    </xs:complexType>
   </xs:element>
 
   <!-- ****************** -->
@@ -1740,27 +1770,24 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:element ref="body"/>
-            <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:element ref="section" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
-      <xs:attribute name="disp-level" type="xs:integer"/>
+      <xs:complexContent>
+        <xs:extension base="blocks-then-sections-with-id">
+          <xs:attributeGroup ref="section-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="editorial-commentary" type="blocks-then-sections">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The various flavours of regular commentary are text about legislative content
+          (= content expressed in numbered levels). There's a parallel requirement to add comments on
+          editorial content (= content in frontmatter, as broadly constructed.) This is being expressed
+          by creating an element which has (minus @id and some attributes specific to section-the-element)
+          the same content model as section.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
   </xs:element>
 
   <!-- ****************** -->
@@ -2008,7 +2035,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="committee-desig" minOccurs="0"/>
         <xs:element ref="term"/>
         <xs:sequence minOccurs="0">
@@ -2239,6 +2266,7 @@
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
+       
     </xs:complexType>
   </xs:element>
 
@@ -2873,7 +2901,7 @@
   </xs:element>
 
   <xs:attributeGroup name="cell-color-attributes">
-    <xs:attribute name="background-color" type="xs:string" use="optional">
+    <xs:attribute name="background-color" use="optional" type="xs:string">
       <xs:annotation>
         <xs:documentation>Background Color: Specifies the background color of the entry.</xs:documentation>
       </xs:annotation>
@@ -3009,24 +3037,13 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:group ref="block-elements" maxOccurs="unbounded"/>
-            <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:element ref="section" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:choice>
-      </xs:sequence>
-      
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="generic-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
-      <xs:attribute name="background-color" type="xs:string"/>
+      <xs:choice maxOccurs="unbounded">
+        <xs:group ref="block-elements" />
+      </xs:choice>
+      <xs:attribute name="role" type="generic-roles" />
+      <xs:attributeGroup ref="para-attributes" />
+      <xs:attribute ref="background-color" />
+      <xs:attribute ref="text-color" />
     </xs:complexType>
   </xs:element>
 
@@ -3127,6 +3144,8 @@
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
+      <xs:attribute ref="background-color"/>
+      <xs:attribute ref="text-color"/>
     </xs:complexType>
   </xs:element>
 
@@ -3263,7 +3282,7 @@
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="para-elements"/>
         </xs:choice>
-        <xs:element ref="commentary" minOccurs="0"/>
+        <xs:element ref="editorial-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
@@ -3320,11 +3339,70 @@
       <xs:sequence>
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
+        <xs:element ref="revision-list" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="ref-text" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="revision-list">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Sometimes a reference comes with descriptive text detailing what changes are to be made. The revision list is the wrapper containing one or more individual descriptions.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="titlegroup" minOccurs="0"/>
+        <xs:element ref="revision" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="common-attributes"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="revision">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The descriptive text describing one change associated with a ref.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="instruction"/>
+        <xs:element ref="revision-description" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="instruction">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The type and location of the change the reader is expected to make; "delete", "revise", etc. It gets its own element as an aide to formatting.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="inline-elements"/>
+      </xs:choice>
+      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="para-attributes"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="revision-description">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The text which details the change contained in the revision.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="block-elements" maxOccurs="unbounded"/>
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 
@@ -3498,13 +3576,14 @@
   <xs:element name="correlated">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Insert: It is used to capture inserted text of track change.</xs:documentation>
+        <xs:documentation>The correlated element captures location information for content that is Correlated with content from another publication, where "Correlated" has a specific business meaning.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="publication-ref"/>
         <xs:element ref="ICC-publication-ref"/>
+        <xs:element ref="url"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
@@ -3651,6 +3730,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
+        <xs:element ref="preamble" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
         <xs:group ref="level-1-bodymatters"/>
@@ -4036,7 +4116,7 @@
     <xs:attribute name="display" type="xs:string">
       <xs:annotation>
         <xs:appinfo>
-          <xs:documentation>Display: The display attribute specifies the element should be styled.</xs:documentation>
+          <xs:documentation>Display: The display attribute specifies how the element should be styled.</xs:documentation>
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
@@ -4304,7 +4384,7 @@
         <xs:documentation>Float: Specifies style information to be used when rendering the float.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="background-color" type="xs:string">
+    <xs:attribute ref="background-color">
       <xs:annotation>
         <xs:documentation>Background Color: Specifies the background color of the table.</xs:documentation>
       </xs:annotation>
@@ -4333,6 +4413,11 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
+
+  <!-- GDS 2026-04-14 used several places outside of table cells;
+    want to keep it singly defined should we start to restrict it -->
+  <xs:attribute name="background-color" type="xs:string"/>
+  <xs:attribute name="text-color" type="xs:string"/>
 
   <xs:attributeGroup name="html-table-attributes">
     <xs:attribute name="class" type="xs:string">
