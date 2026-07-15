@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.23.1" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.24.0" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -489,10 +489,9 @@
 
   <xs:group name="para-elements">
     <xs:choice>
-      
-      <xs:element ref="p"/>
+      <xs:element ref="aside"/>
       <xs:element ref="exception"/>
-      
+      <xs:element ref="p"/>
     </xs:choice>
   </xs:group>
 
@@ -507,7 +506,6 @@
     <xs:choice>
       <xs:element ref="ol"/>
       <xs:element ref="ul"/>
-      <xs:element ref="where-list"/>
       <xs:element ref="def-list"/>
     </xs:choice>
   </xs:group>
@@ -594,7 +592,7 @@
     <xs:choice>
       <xs:element ref="xref"/>
       <xs:element ref="url"/>
-      
+      <xs:element ref="ICC-publication-ref"/>
       <xs:element ref="publication-ref"/>
     </xs:choice>
   </xs:group>
@@ -714,6 +712,7 @@
         <xs:element ref="conclusion" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -742,6 +741,7 @@
         <xs:group ref="level-2-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -770,6 +770,7 @@
         <xs:group ref="level-3-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -798,6 +799,7 @@
         <xs:group ref="level-4-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -825,6 +827,7 @@
         <xs:group ref="level-5-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -852,6 +855,7 @@
         <xs:group ref="level-6-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -879,6 +883,7 @@
         <xs:group ref="level-7-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -906,6 +911,7 @@
         <xs:group ref="level-8-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -933,6 +939,7 @@
         <xs:group ref="level-9-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -960,6 +967,7 @@
         <xs:group ref="level-10-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -987,6 +995,7 @@
         <xs:group ref="level-11-bodymatters"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
+      <xs:attribute name="role" type="legis-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -1048,6 +1057,7 @@
         <xs:group ref="inline-elements"/>
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="generic-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1180,10 +1190,12 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
+      <xs:attribute name="role" type="isbn-roles" />
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
+ 
 
   <!-- ****************** -->
 
@@ -1281,22 +1293,31 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="publication-ref">
+  <xs:element name="publication-ref" type="pub-ref-type" >
+    <xs:annotation>
+      <xs:documentation>A reference to a publication produced by an entity which is not ICC.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ICC-publication-ref" type="pub-ref-type" >
+    <xs:annotation>
+      <xs:documentation>A reference to a publication produced by ICC.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  
+  <xs:complexType mixed="true" name="pub-ref-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Publication Reference: This element is used as a reference to other
         publications.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="publication-id" type="xs:string"/>
-      <xs:attribute name="internal-id" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:group ref="inline-elements" />
+    </xs:choice>
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attribute name="publication-id" type="xs:string" />
+    <xs:attribute name="internal-id" type="xs:string" />
+  </xs:complexType>
 
   <xs:element name="printing-location">
     <xs:annotation>
@@ -1734,7 +1755,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      
+      <xs:attribute name="role" type="ordered-list-roles" />
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="prefix" type="xs:string"/>
@@ -1775,6 +1796,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
+      <xs:attribute name="role" type="unordered-list-roles" />
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1810,9 +1832,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="var-def" minOccurs="0"/>
-        <!--BH:  made this minOccurs="0" because found a where clause without a var-entries structure.-->
-        <xs:element ref="var-entries" minOccurs="0"/>
+        <!-- GS 2026-02-24 IRC2025V2 has a second var-def -->
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="var-def" />
+          <!--BH:  made this minOccurs="0" because found a where clause without a var-entries structure.-->
+          <xs:element minOccurs="0" ref="var-entries" />
+        </xs:choice>
         <!--Added
         the ability to have an informal equation or a where-list in a where-list
         based on findings of PDF generation and confirmation by Jen Fitzsimmons.-->
@@ -2073,6 +2098,7 @@
     <xs:complexType>
       <xs:group ref="block-math"/>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="data-changed-group"/>
       <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -2355,6 +2381,7 @@
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="table-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="cals-table-attributes"/>
       <xs:attributeGroup ref="html-table-attributes"/>
@@ -2383,6 +2410,7 @@
         <xs:element ref="table-notes" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="table-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="cals-table-attributes"/>
       <xs:attributeGroup ref="html-table-attributes"/>
@@ -2876,7 +2904,6 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="table-note" maxOccurs="unbounded"/>
       </xs:sequence>
-      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2955,6 +2982,7 @@
       </xs:sequence>
       
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="generic-roles" />
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
       <xs:attribute name="background-color" type="xs:string"/>
@@ -3003,7 +3031,6 @@
           <xs:group ref="list-elements"/>
         </xs:choice>
       </xs:sequence>
-      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3023,8 +3050,8 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="paragraph-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
       <xs:attribute name="vertical" default="no">
@@ -3045,7 +3072,22 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
+  
+  <xs:element name="aside">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Aside: A minimal editorial note; same content model as a paragraph. These get distinct formatting and the text is semantically distinct from the legislative content around it. No associated id so an aside cannot be referenced.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="inline-elements"/>
+      </xs:choice>
+      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="para-attributes"/>
+    </xs:complexType>
+  </xs:element>
 
   <xs:element name="relocated-to">
     <xs:annotation>
@@ -3101,7 +3143,7 @@
       </xs:appinfo>
     </xs:annotation>
       <xs:sequence>
-      <xs:element minOccurs="0" ref="titlegroup" />
+      <xs:element minOccurs="0" ref="titlegroup"/>
       <xs:choice maxOccurs="unbounded" minOccurs="1">
           <!--BH - added section to commentary-->
           <xs:element ref="section"/>
@@ -3115,9 +3157,9 @@
     </xs:complexType>
 
   <xs:element name="commentary" type="commentary-type"><!-- after body; "regular" commentary --></xs:element>
-  <xs:element name="prefatory-commentary" type="commentary-type" ><!-- in the header --></xs:element>
-  <xs:element name="closing-commentary" type="commentary-type" ><!-- after the child legislative levels --></xs:element>
-  <xs:element name="concluding-commentary" type="commentary-type" ><!-- in the conclusion --></xs:element>
+  <xs:element name="prefatory-commentary" type="commentary-type"><!-- in the header --></xs:element>
+  <xs:element name="closing-commentary" type="commentary-type"><!-- after the child legislative levels --></xs:element>
+  <xs:element name="concluding-commentary" type="commentary-type"><!-- in the conclusion --></xs:element>
 
   <xs:element name="exception">
     <xs:annotation>
@@ -3156,7 +3198,7 @@
           <xs:element ref="objectives"/>
         </xs:choice>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="para-elements" />
+          <xs:group ref="para-elements"/>
         </xs:choice>
         <xs:element ref="commentary" minOccurs="0"/>
       </xs:sequence>
@@ -3331,8 +3373,7 @@
       <xs:appinfo>
         <xs:documentation>Phrase: The phrase is used to represent a span of text. The phrase element
         in ICC Schema has no specific semantic. It is provided as a container around a selection of
-        words smaller than a paragraph so that it is possible to provide an id or other attributes
-        for them.</xs:documentation>
+        words smaller than a paragraph so that it is possible to provide attributes for them.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
@@ -3340,6 +3381,7 @@
         <xs:group ref="inline-elements"/>
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
+      <xs:attribute name="role" type="phrase-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -3398,6 +3440,7 @@
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="publication-ref"/>
+        <xs:element ref="ICC-publication-ref"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
@@ -3420,6 +3463,7 @@
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="data-changed-group"/>
       <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -3503,6 +3547,7 @@
         <xs:element ref="level-1"/>
         <xs:element ref="index"/>
       </xs:choice>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -3519,10 +3564,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="bibliography" />
-        <xs:element minOccurs="0" ref="concluding-commentary" />
+        <xs:element minOccurs="0" ref="bibliography"/>
+        <xs:element minOccurs="0" ref="concluding-commentary"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="id-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -3650,7 +3695,6 @@
         <xs:element ref="term"/>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3669,7 +3713,6 @@
         <xs:element ref="term"/>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3705,7 +3748,6 @@
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="type" type="xs:string"/>
-      <!--<xs:attributeGroup ref="rid-attributes"/>-->
       <xs:attribute name="rid" type="xs:IDREFS" use="optional"/>
     </xs:complexType>
   </xs:element>
@@ -3924,14 +3966,6 @@
   </xs:attribute>
 
   <xs:attributeGroup name="common-attributes">
-    <xs:attribute name="role" type="xs:string">
-      <xs:annotation>
-        <xs:appinfo>
-          <xs:documentation>Role: It is parameterized differently because it is useful to be able to
-          subclass role independently on different elements.</xs:documentation>
-        </xs:appinfo>
-      </xs:annotation>
-    </xs:attribute>
     <xs:attribute name="display" type="xs:string">
       <xs:annotation>
         <xs:appinfo>
@@ -4005,6 +4039,14 @@
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="data-changed-group">
+    <xs:annotation>
+        <xs:appinfo>
+          <xs:documentation>Data-changed information is specific to insertions.</xs:documentation>
+        </xs:appinfo>
+      </xs:annotation>
     <xs:attribute name="data-changed" type="xs:string">
       <xs:annotation>
         <xs:appinfo>
@@ -4454,11 +4496,76 @@
     </xs:attribute>
   </xs:attributeGroup>
 
-  <!--Warnings,
-  Cautions and Notes-->
+  <!-- role attributes -->
+  <xs:simpleType name="generic-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Any role we have not yet enumerated is uncontrolled</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  
+  <xs:simpleType name="legis-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Roles for numbered levels representing legislative content</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="chapter"/>
+        <xs:enumeration value="errata"/>
+        <xs:enumeration value="in-legis-section"/>
+        <xs:enumeration value="legis-section"/>
+        <xs:enumeration value="part"/>
+        <xs:enumeration value="references"/>
+        <!--<xs:enumeration value="referenced_standards_chapter"/>-->
+      </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="isbn-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Roles for the isbn child element of copyright-page; effectively printable metadata.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PDF"/>
+      <xs:enumeration value="loose-leaf"/>
+      <xs:enumeration value="pdf-download"/>
+      <xs:enumeration value="soft-cover"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="ordered-list-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>An ordered list sometimes declares its numbering special.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="custom" />
+      <xs:enumeration value="no_mark" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="unordered-list-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>An unordered list sometimes declares its indicator character special.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="disc" />
+      <xs:enumeration value="no_mark" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="paragraph-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Sometimes a paragraph is special; we should consider an element for at least rights-ICC.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="no-text-change" />
+      <xs:enumeration value="rights-ICC" />
+    </xs:restriction>
+  </xs:simpleType>
 
-  <!--Warnings,
-  Cautions and Notes-->
+  <xs:simpleType name="phrase-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Phrase is sub-para text; sometimes the function should be identified.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="icc-publication"/>
+      <xs:enumeration value="jurisdiction-insert"/>
+      <xs:enumeration value="keyterm"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="table-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>Downstream processing is used to having tables with a code role.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="code"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!--Warnings, Cautions, and Notes-->
 
   <xs:group name="alert-elements">
     <xs:choice>
