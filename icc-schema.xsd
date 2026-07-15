@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.24.0" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.25.04" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -21,7 +21,7 @@
   <!--                                                                            -->
   <!-- Creation date   November 10, 2021                                          -->
   <!--                                                                            -->
-  <!-- Last modified   January 23, 2026                                           -->
+  <!-- Last modified   February 24, 2026                                          -->
   <!-- ========================================================================== -->
 
   <!-- ========================================================================== -->
@@ -225,6 +225,17 @@
   <!--                                  Version 1.23                              -->
   <!-- ========================================================================== -->
   <!-- 2-09-2026   GS   JIRA X2S-61 Schema adjustments for commentary             -->
+  <!-- ========================================================================== -->
+  <!-- ========================================================================== -->
+  <!--                                  Version 1.25                              -->
+  <!-- ========================================================================== -->
+  <!-- 2-24-2026   GS   enumerate (or remove) roles                               -->
+  <!-- 2-24-2026   GS   add new element aside                                     -->
+  <!-- 2-24-2026   GS   only permit where-list in block equations                 -->
+  <!-- 3-02-2026   GS   allow block-insert, block-delete in informal-equation     -->
+  <!-- 3-04-2026   GS   JIRA X2S-91 rearrange relocated-from and relocated-to     -->
+  <!-- 3-06-2026   GS   JIRA X2S-92 add change attributes on delete, block-delete -->
+  <!-- 3-09-2026   GS   JIRA X2S-94 block-delete before block-insert              -->
   <!-- ========================================================================== -->
 
 
@@ -482,7 +493,6 @@
       <xs:group ref="maths-elements"/>
       <xs:group ref="publishing-elements"/>
       <xs:element ref="promulgator"/>
-      <xs:element ref="relocated-from"/>
       <xs:group ref="alert-elements"/>
     </xs:choice>
   </xs:group>
@@ -492,13 +502,6 @@
       <xs:element ref="aside"/>
       <xs:element ref="exception"/>
       <xs:element ref="p"/>
-    </xs:choice>
-  </xs:group>
-
-  <xs:group name="relocation-elements">
-    <xs:choice>
-      <xs:element ref="relocated-to"/>
-      <xs:element ref="relocated-from"/>
     </xs:choice>
   </xs:group>
 
@@ -704,7 +707,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -734,7 +737,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -763,7 +766,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -792,7 +795,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -820,7 +823,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -848,7 +851,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -876,7 +879,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -904,7 +907,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -932,7 +935,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -960,7 +963,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -988,7 +991,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="relocation-elements" minOccurs="0"/>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:group ref="header-elements"/>
@@ -1944,16 +1947,16 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="titlegroup" minOccurs="0"/>
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.
     I found this scenario in IMC id ='IMCComm2024P1_Ch02_Sec202_Comment'.-->
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.-->
         <!-- GS 2026-02-02 put the commentary in the choice -->
         <xs:choice maxOccurs="unbounded">
+          <xs:element ref="commentary"/>
           <xs:element ref="def-item"/>
           <xs:element ref="relocated-to"/>
-          <xs:element ref="relocated-from"/>
-          <xs:element ref="commentary"/>
         </xs:choice>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2040,8 +2043,8 @@
         <xs:element ref="label" minOccurs="0"/>
         <xs:element ref="number" minOccurs="0"/>
         <xs:element ref="title" minOccurs="0"/>
-        <xs:element ref="block-insert" minOccurs="0"/>
         <xs:element ref="block-delete" minOccurs="0"/>
+        <xs:element ref="block-insert" minOccurs="0"/>
         <xs:group ref="block-math"/>
         <xs:element ref="where-list" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
@@ -2062,6 +2065,8 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+         <xs:element ref="block-delete" minOccurs="0"/>
+        <xs:element ref="block-insert" minOccurs="0"/>
         <xs:group ref="block-math"/>
         <xs:element ref="where-list" minOccurs="0"/>
       </xs:sequence>
@@ -2117,6 +2122,7 @@
         <xs:group ref="block-math"/>
       </xs:sequence>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="data-changed-group"/>
       <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -2751,7 +2757,6 @@
       <xs:choice maxOccurs="unbounded">
         <xs:group ref="para-elements"/>
         <xs:group ref="list-elements"/>
-        <xs:group ref="table-elements"/>
         <xs:group ref="figure-elements"/>
         <xs:group ref="maths-elements"/>
       </xs:choice>
@@ -3093,10 +3098,7 @@
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>relocated-to: An element used to show where a major chunk of content has
-        been relocated to another place in the document. The content that is moved should have an
-        attribute 'relocated-from' which is the id of the 'relocated-to' element. The 'rid'
-        attribute is required in order to create a cross-reference to the relocated text. The
-        'anchor-id' attribute should have the id of the section. </xs:documentation>
+        been relocated to another place in the document. The id attribute of the relocated-to element is the id which corresponds to what it used to be (so it sorts with its legislative level siblings); the rid attribute corresponds to where it is now.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
@@ -3108,17 +3110,14 @@
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
       <xs:attributeGroup ref="rid-attributes"/>
+      <xs:attribute name="formerly" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
   <xs:element name="relocated-from">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>relocated-from: An element used to show where a major chunk of content has
-        been relocated from another place in the document. The content that is moved should have an
-        attribute 'relocated-to' which is the id of the 'relocated-from' element. The 'rid'
-        attribute is required in order to create a cross-reference to the relocated text. The
-        'anchor-id' attribute should have the id of the section. </xs:documentation>
+        <xs:documentation>relocated-from: ~metadata on the legislative level that has been moved. Indicates that this content has been moved. The associated rid attribute points back to the relocated-to element located where this content used to be.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
@@ -3499,6 +3498,7 @@
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="data-changed-group"/>
     </xs:complexType>
   </xs:element>
 
@@ -3955,15 +3955,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
-  <xs:attribute name="rid" type="xs:IDREFS">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Reference Identifier: Points to an internal link target by identifying the
-        value of its @id attribute.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-  </xs:attribute>
 
   <xs:attributeGroup name="common-attributes">
     <xs:attribute name="display" type="xs:string">
@@ -4497,6 +4488,13 @@
   </xs:attributeGroup>
 
   <!-- role attributes -->
+  <xs:simpleType name="delete-roles">
+    <xs:annotation><xs:appinfo><xs:documentation>There's only one role known for delete but it's expected by downstream processing.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="deletion-marker"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
   <xs:simpleType name="generic-roles">
     <xs:annotation><xs:appinfo><xs:documentation>Any role we have not yet enumerated is uncontrolled</xs:documentation></xs:appinfo></xs:annotation>
     <xs:restriction base="xs:string"/>
