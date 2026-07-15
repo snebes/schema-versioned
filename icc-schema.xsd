@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.26.00" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.27.03" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -21,7 +21,7 @@
   <!--                                                                            -->
   <!-- Creation date   November 10, 2021                                          -->
   <!--                                                                            -->
-  <!-- Last modified   March 10, 2026                                             -->
+  <!-- Last modified   March 16, 2026                                             -->
   <!-- ========================================================================== -->
 
   <!-- ========================================================================== -->
@@ -246,6 +246,14 @@
   <!-- ========================================================================== -->
   <!-- 3-10-2026   GS   JIRA X2S-96 block-insert, block-delete for mediaobject    -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.27                              -->
+  <!-- ========================================================================== -->
+  <!-- 3-16-2026   GS   JIRA X2S-101 commentary in table, figure, equation        -->
+  <!-- 3-19-2026   GS   JIRA CH-396  add article, division as big level labels    -->
+  <!-- 3-19-2026   GS   JIRA PRAC-4629 make references optional in promulgator    -->
+  <!-- 3-25-2026   GS   JIRA X2S-107 allow optional rid on phrase                 -->
+  <!-- 3-31-2026   GS   JIRA X2S-114 make titlegroup optional in ref              -->
+  <!-- ========================================================================== -->
 
 
   <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
@@ -281,7 +289,6 @@
         <xs:element maxOccurs="1" minOccurs="0" ref="history"/>
         <xs:element maxOccurs="1" minOccurs="0" ref="objectives"/>
         <xs:element maxOccurs="1" minOccurs="0" ref="note"/>
-        <!--Adding commentary to the header-group-->
         <xs:element maxOccurs="1" minOccurs="0" ref="prefatory-commentary"/>
       </xs:choice>
     </xs:sequence>
@@ -524,7 +531,6 @@
 
   <xs:group name="table-elements">
     <xs:choice>
-      
       <xs:element ref="table"/>
       <xs:element ref="informal-table"/>
     </xs:choice>
@@ -548,9 +554,7 @@
 
   <xs:group name="publishing-elements">
     <xs:choice>
-      
       <xs:element ref="boxed-text"/>
-      
       <xs:element ref="address"/>
       <xs:element ref="note"/>
     </xs:choice>
@@ -1502,7 +1506,7 @@
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="pagenum" type="xs:string"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
+      <xs:attributeGroup ref="optional-rid-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -1750,7 +1754,7 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="li" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attribute name="type" default="arabic">
+      <xs:attribute name="type" default="custom">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>List Type: Indicates the desired numeration type.</xs:documentation>
@@ -1791,17 +1795,17 @@
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>List Type: Indicates the desired symbol type. The allowed values are:
-            disc, squire, gray-squire, circle, check, hyphen, none.</xs:documentation>
+            disc, square, gray-square, circle, check, hyphen, none.</xs:documentation>
           </xs:appinfo>
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="disc"/>
+            <xs:enumeration value="disc"/><!-- U+2022 -->
             <xs:enumeration value="square"/>
             <xs:enumeration value="gray-square"/>
             <xs:enumeration value="circle"/>
             <xs:enumeration value="check"/>
-            <xs:enumeration value="hyphen"/>
+            <xs:enumeration value="hyphen"/><!-- U+002D, U+2010 -->
             <xs:enumeration value="custom"/>
             <xs:enumeration value="none"/>
           </xs:restriction>
@@ -1954,7 +1958,6 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="titlegroup" minOccurs="0"/>
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.
     I found this scenario in IMC id ='IMCComm2024P1_Ch02_Sec202_Comment'.-->
@@ -2054,6 +2057,7 @@
         <xs:element ref="block-insert" minOccurs="0"/>
         <xs:group ref="block-math"/>
         <xs:element ref="where-list" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="equation-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2076,6 +2080,7 @@
         <xs:element minOccurs="0" ref="block-insert" />
         <xs:group ref="block-math"/>
         <xs:element minOccurs="0" ref="where-list" />
+        <xs:element ref="equation-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
@@ -2151,6 +2156,7 @@
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
         <xs:element ref="figure-notes" minOccurs="0"/>
+        <xs:element ref="figure-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2229,10 +2235,10 @@
           <xs:element ref="mediaobject-group"/>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
+        <xs:element ref="figure-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="orient" default="port">
         <xs:annotation>
           <xs:appinfo>
@@ -2387,6 +2393,7 @@
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
         <xs:element ref="table-notes" minOccurs="0"/>
+        <xs:element ref="table-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2417,6 +2424,7 @@
           <xs:element ref="mediaobject-group"/>
         </xs:choice>
         <xs:element ref="table-notes" minOccurs="0"/>
+        <xs:element ref="table-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="role" type="table-roles"/>
@@ -3163,6 +3171,33 @@
   <xs:element name="closing-commentary" type="commentary-type"><!-- after the child legislative levels --></xs:element>
   <xs:element name="concluding-commentary" type="commentary-type"><!-- in the conclusion --></xs:element>
 
+  <xs:complexType name="other-model-commentary-type">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Commentary added in content in other models (tables, whether HTML or CALS; equations,
+          whether images or MathML; figures, in whatever format) should not allow other-model block elements
+          (figure, equation, or table) in its content model lest we introduce a complex way to do unwanted
+          content nesting. Which means no sections as well as no table, equation, or figure children.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+      <xs:sequence>
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
+          <xs:element ref="bibliography"/>
+          <xs:group ref="para-elements"/>
+          <xs:group ref="list-elements"/>
+          <xs:element ref="note"/>
+          <xs:element ref="promulgator"/>
+          <xs:group ref="alert-elements"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="revision-attributes"/>
+  </xs:complexType>
+  
+  <xs:element name="equation-commentary" type="other-model-commentary-type"/>
+  <xs:element name="figure-commentary" type="other-model-commentary-type"/>
+  <xs:element name="table-commentary" type="other-model-commentary-type"/>
+  
   <xs:element name="exception">
     <xs:annotation>
       <xs:appinfo>
@@ -3224,7 +3259,7 @@
       <xs:sequence>
         <xs:element ref="acronym"/>
         <xs:element ref="address" minOccurs="0"/>
-        <xs:element ref="references"/>
+        <xs:element ref="references" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -3257,7 +3292,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup"/>
+        <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
@@ -3385,6 +3420,7 @@
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="role" type="phrase-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="optional-rid-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -3751,8 +3787,8 @@
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="type" type="xs:string"/>
-      <xs:attribute name="rid" type="xs:IDREFS" use="optional"/>
+      <xs:attribute name="type" type="generic-roles"/>
+      <xs:attributeGroup ref="optional-rid-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -3945,6 +3981,16 @@
         <xs:appinfo>
           <xs:documentation>The xml:base attribute was added to support XInclude. This attribute is
           not used or seen by the user, only the application of XInclude.</xs:documentation>
+        </xs:appinfo>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="optional-rid-attributes">
+    <xs:attribute name="rid" type="xs:IDREF" use="optional">
+      <xs:annotation>
+        <xs:appinfo>
+          <xs:documentation>"Reference Identifier". An internal link to an identifier (that is, id attribute value) in this document. The parent element does not require but does allow the reference.</xs:documentation>
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
@@ -4507,14 +4553,17 @@
   <xs:simpleType name="legis-roles">
     <xs:annotation><xs:appinfo><xs:documentation>Roles for numbered levels representing legislative content</xs:documentation></xs:appinfo></xs:annotation>
     <xs:restriction base="xs:string">
-        <xs:enumeration value="chapter"/>
-        <xs:enumeration value="errata"/>
-        <xs:enumeration value="in-legis-section"/>
-        <xs:enumeration value="legis-section"/>
-        <xs:enumeration value="part"/>
-        <xs:enumeration value="references"/>
-        <!--<xs:enumeration value="referenced_standards_chapter"/>-->
-      </xs:restriction>
+      <xs:enumeration value="appendix"/>
+      <xs:enumeration value="article"/>
+      <xs:enumeration value="chapter"/>
+      <xs:enumeration value="division"/>
+      <xs:enumeration value="errata"/>
+      <xs:enumeration value="in-legis-section"/>
+      <xs:enumeration value="legis-section"/>
+      <xs:enumeration value="part"/>
+      <xs:enumeration value="references"/>
+      <!--<xs:enumeration value="referenced_standards_chapter"/>-->
+    </xs:restriction>
   </xs:simpleType>
   
   <xs:simpleType name="isbn-roles">
