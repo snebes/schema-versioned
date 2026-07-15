@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema elementFormDefault="qualified" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" version="1.31.02" xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<xs:schema elementFormDefault="qualified" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" version="1.32.04" xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
   <!--                                                                            -->
@@ -20,7 +20,7 @@
   <!--                                                                            -->
   <!-- Creation date   November 10, 2021                                          -->
   <!--                                                                            -->
-  <!-- Last modified   March 16, 2026                                             -->
+  <!-- Last modified   July 10, 2026                                               -->
   <!-- ========================================================================== -->
   <!-- ========================================================================== -->
   <!-- Schema Version/Change History                                              -->
@@ -135,7 +135,7 @@
   <!--              Modifications were made.                                      -->
   <!--02-10-2025 -  Added values of '1', '2', '3' to correlated-types attribute   -->
   <!--              values.                                                       -->
-  <!--02-23=2025 -  Added value '4' to correlated-type.                           -->
+  <!--02-23-2025 -  Added value '4' to correlated-type.                           -->
   <!-- ========================================================================== -->
   <!--                                  Version 1.13                              -->
   <!-- ========================================================================== -->
@@ -210,7 +210,7 @@
   <!-- 1-26-2026   MM   changed publication/@schema-version from decimal to token;-->
   <!--                  publication/@schematron-version from string to token      -->
   <!-- ========================================================================== -->
-  <!--                                  Version 1.22                             -->
+  <!--                                  Version 1.22                              -->
   <!-- ========================================================================== -->
   <!-- 2-02-2026   GS   JIRA X2S-49 Production Schema                             -->
   <!--                  remove unused elements                                    -->
@@ -280,6 +280,16 @@
   <!-- 6-03-2026   GS   JIRA X2S-203 resource as a numbered level role value      -->
   <!-- 6-03-2026   GS   JIRA X2S-205 add revision attribute value expunge         -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.32                              -->
+  <!-- ========================================================================== -->
+  <!-- 6-11-2026   GS   JIRA X2S-43 relocated-from on other model sublevels       -->
+  <!-- 6-25-2026   GS   JIRA X2S-209 change attributes on li                      -->
+  <!-- 7-07-2026   GS   JIRA X2S-217 enumerate the display attribute's values     -->
+  <!-- 7-07-2026   GS   JIRA X2S-218 add figure-notes to informal-figure          -->
+  <!-- 7-08-2026   GS   JIRA X2S-222 permit body in index                         -->
+  <!-- 7-10-2026   GS   JIRA X2S-214 remove disp-level attribute everywhere       -->
+  <!-- ========================================================================== -->
+  
   <xs:import namespace="http://www.w3.org/1998/Math/MathML" schemaLocation="mathml3.0/mathml3.xsd" />
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
   <!-- ========================================================================== -->
@@ -1347,7 +1357,6 @@
     </xs:annotation>
   </xs:element>
   <xs:attributeGroup name="section-attributes">
-    <xs:attribute name="disp-level" type="xs:integer" />
     <xs:attribute name="indexnum" type="xs:string" />
     <xs:attribute name="reservecount" type="xs:integer" />
   </xs:attributeGroup>
@@ -1670,6 +1679,7 @@
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes" />
       <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="data-changed-group" />
       <xs:attribute name="indexnum" type="xs:string" />
     </xs:complexType>
   </xs:element>
@@ -1868,6 +1878,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
         <xs:element minOccurs="0" ref="label" />
         <xs:element minOccurs="0" ref="number" />
         <xs:element minOccurs="0" ref="title" />
@@ -1955,6 +1966,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
         <xs:element minOccurs="0" ref="metadata" />
         <xs:element ref="titlegroup" />
         <xs:element minOccurs="0" ref="history" />
@@ -2044,6 +2056,7 @@
           <xs:element ref="mediaobject-group" />
         </xs:choice>
         <xs:element minOccurs="0" ref="caption" />
+        <xs:element minOccurs="0" ref="figure-notes" />
         <xs:element minOccurs="0" ref="figure-commentary" />
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes" />
@@ -2179,6 +2192,7 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
         <xs:element minOccurs="0" ref="metadata" />
         <xs:element ref="titlegroup" />
         <xs:element minOccurs="0" ref="footnote-list" />
@@ -3313,6 +3327,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element minOccurs="0" ref="body" />
         <xs:choice>
           <xs:element maxOccurs="unbounded" minOccurs="0" ref="indexdiv" />
           <xs:element maxOccurs="unbounded" minOccurs="0" ref="index-entry" />
@@ -3650,12 +3665,19 @@
     </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="common-attributes">
-    <xs:attribute name="display" type="xs:string">
+    <xs:attribute name="display">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>Display: The display attribute specifies how the element should be styled.</xs:documentation>
         </xs:appinfo>
       </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="wrap" />
+          <xs:enumeration value="block" />
+          <xs:enumeration value="boxed" />
+        </xs:restriction>
+      </xs:simpleType>
     </xs:attribute>
     <xs:attribute name="verbatim" type="yesorno">
       <xs:annotation>
