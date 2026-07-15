@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.27.03" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.28.00" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -254,6 +254,11 @@
   <!-- 3-25-2026   GS   JIRA X2S-107 allow optional rid on phrase                 -->
   <!-- 3-31-2026   GS   JIRA X2S-114 make titlegroup optional in ref              -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.28                              -->
+  <!-- ========================================================================== -->
+  <!-- 4-01-2026   GS   JIRA X2S-115 other-model content as legislative sublevel  -->
+  <!-- 4-01-2026   GS   JIRA X2S-116 list item commentary                         -->
+  <!-- ========================================================================== -->
 
 
   <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
@@ -302,6 +307,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-2"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -314,6 +320,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-3"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -326,6 +333,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-4"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -338,6 +346,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-5"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -350,6 +359,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-6"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -362,6 +372,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-7"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -374,6 +385,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-8"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -386,6 +398,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-9"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -398,6 +411,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-10"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -410,6 +424,7 @@
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-11"/>
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -421,6 +436,7 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:element ref="commentary" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="other-model"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
       <xs:element ref="closing-commentary" minOccurs="0"/>
@@ -502,14 +518,14 @@
 
   <xs:group name="block-elements">
     <xs:choice>
-      <xs:group ref="para-elements"/>
-      <xs:group ref="list-elements"/>
-      <xs:group ref="table-elements"/>
-      <xs:group ref="figure-elements"/>
-      <xs:group ref="maths-elements"/>
-      <xs:group ref="publishing-elements"/>
-      <xs:element ref="promulgator"/>
       <xs:group ref="alert-elements"/>
+      <xs:group ref="figure-elements"/>
+      <xs:group ref="list-elements"/>
+      <xs:group ref="maths-elements"/>
+      <xs:group ref="para-elements"/>
+      <xs:element ref="promulgator"/>
+      <xs:group ref="publishing-elements"/>
+      <xs:group ref="table-elements"/>
     </xs:choice>
   </xs:group>
 
@@ -557,6 +573,14 @@
       <xs:element ref="boxed-text"/>
       <xs:element ref="address"/>
       <xs:element ref="note"/>
+    </xs:choice>
+  </xs:group>
+  
+  <xs:group name="other-model">
+    <xs:choice>
+      <xs:element ref="table"/>
+      <xs:element ref="figure"/>
+      <xs:element ref="equation"/>
     </xs:choice>
   </xs:group>
 
@@ -1206,7 +1230,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attribute name="role" type="isbn-roles" />
+      <xs:attribute name="role" type="isbn-roles"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1309,12 +1333,12 @@
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="publication-ref" type="pub-ref-type" >
+  <xs:element name="publication-ref" type="pub-ref-type">
     <xs:annotation>
       <xs:documentation>A reference to a publication produced by an entity which is not ICC.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ICC-publication-ref" type="pub-ref-type" >
+  <xs:element name="ICC-publication-ref" type="pub-ref-type">
     <xs:annotation>
       <xs:documentation>A reference to a publication produced by ICC.</xs:documentation>
     </xs:annotation>
@@ -1328,11 +1352,11 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:choice maxOccurs="unbounded" minOccurs="0">
-      <xs:group ref="inline-elements" />
+      <xs:group ref="inline-elements"/>
     </xs:choice>
-    <xs:attributeGroup ref="common-attributes" />
-    <xs:attribute name="publication-id" type="xs:string" />
-    <xs:attribute name="internal-id" type="xs:string" />
+    <xs:attributeGroup ref="common-attributes"/>
+    <xs:attribute name="publication-id" type="xs:string"/>
+    <xs:attribute name="internal-id" type="xs:string"/>
   </xs:complexType>
 
   <xs:element name="printing-location">
@@ -1828,6 +1852,7 @@
       <xs:sequence>
         <xs:element ref="label" minOccurs="0"/>
         <xs:group ref="block-elements" maxOccurs="unbounded"/>
+        <xs:element ref="list-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
@@ -1848,9 +1873,9 @@
       <xs:sequence>
         <!-- GS 2026-02-24 IRC2025V2 has a second var-def -->
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="var-def" />
+          <xs:element ref="var-def"/>
           <!--BH:  made this minOccurs="0" because found a where clause without a var-entries structure.-->
-          <xs:element minOccurs="0" ref="var-entries" />
+          <xs:element minOccurs="0" ref="var-entries"/>
         </xs:choice>
         <!--Added
         the ability to have an informal equation or a where-list in a where-list
@@ -2076,10 +2101,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="block-delete" />
-        <xs:element minOccurs="0" ref="block-insert" />
+        <xs:element minOccurs="0" ref="block-delete"/>
+        <xs:element minOccurs="0" ref="block-insert"/>
         <xs:group ref="block-math"/>
-        <xs:element minOccurs="0" ref="where-list" />
+        <xs:element minOccurs="0" ref="where-list"/>
         <xs:element ref="equation-commentary" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2126,7 +2151,7 @@
     <xs:complexType>
         <xs:group ref="block-math"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group" />
+      <xs:attributeGroup ref="data-changed-group"/>
       <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -2998,7 +3023,7 @@
       </xs:sequence>
       
       <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="generic-roles" />
+      <xs:attribute name="role" type="generic-roles"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
       <xs:attribute name="background-color" type="xs:string"/>
@@ -3170,6 +3195,7 @@
   <xs:element name="prefatory-commentary" type="commentary-type"><!-- in the header --></xs:element>
   <xs:element name="closing-commentary" type="commentary-type"><!-- after the child legislative levels --></xs:element>
   <xs:element name="concluding-commentary" type="commentary-type"><!-- in the conclusion --></xs:element>
+  <xs:element name="list-commentary" type="commentary-type"><!-- last thing in a list item --></xs:element>
 
   <xs:complexType name="other-model-commentary-type">
     <xs:annotation>
@@ -4579,8 +4605,8 @@
   <xs:simpleType name="paragraph-roles">
     <xs:annotation><xs:appinfo><xs:documentation>Sometimes a paragraph is special; we should consider an element for at least rights-ICC.</xs:documentation></xs:appinfo></xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="no-text-change" />
-      <xs:enumeration value="rights-ICC" />
+      <xs:enumeration value="no-text-change"/>
+      <xs:enumeration value="rights-ICC"/>
     </xs:restriction>
   </xs:simpleType>
 
