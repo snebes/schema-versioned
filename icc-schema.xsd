@@ -1,4 +1,4 @@
-<xs:schema version="1.18" xmlns="https://schema.iccsafe.org/book/schema/1.0"
+<xs:schema version="1.21.3" xmlns="https://schema.iccsafe.org/book/schema/1.0"
   xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://www.w3.org/1998/Math/MathML"
   targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
@@ -23,7 +23,7 @@
   <!--                                                                            -->
   <!-- Creation date   November 10, 2021                                          -->
   <!--                                                                            -->
-  <!-- Last modified   August 1, 2025                                             -->
+  <!-- Last modified   January 23, 2026                                           -->
   <!-- ========================================================================== -->
 
   <!-- ========================================================================== -->
@@ -207,7 +207,15 @@
   <!--                  "xs:decimal" to "xs:string" to allow for multiple decimals-->
   <!--                   (JIRA X2S-46)                                            -->
   <!-- ========================================================================== -->
- 
+  <!--                                  Version 1.21                              -->
+  <!-- ========================================================================== -->
+  <!-- 1-16-2026   MM   added "ref-text" as an attribute on <ref> (JIRA X2S-47)   -->
+  <!-- 1-23-2026   GS   add history to figure and equation;                       -->
+  <!--                  remove legistlative history from history                  -->
+  <!-- 1-23-2026   GS   allow "bibliography" in "commentary"                      -->
+  <!-- 1-26-2026   MM   changed publication/@schema-version from decimal to token;-->
+  <!--                  publication/@schematron-version from string to token      -->
+  <!-- ========================================================================== -->
 
 
   <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
@@ -635,13 +643,8 @@
       </xs:sequence>
       <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="schema-version" use="required" type="xs:decimal"/>
-      
-      <xs:attribute name="schematron-version" use="optional" type="xs:string"/>
-      
-    
-      
-      
+      <xs:attribute name="schema-version" use="required" type="xs:token"/>      
+      <xs:attribute name="schematron-version" use="optional" type="xs:token"/>
       <xs:attribute name="document-version" use="optional" type="xs:decimal"/>
     </xs:complexType>
   </xs:element>
@@ -1228,7 +1231,6 @@
           <xs:element ref="title"/>
         </xs:choice>
         <xs:element ref="sub-title" minOccurs="0"/>
-        <xs:element ref="history" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
@@ -2216,8 +2218,6 @@
         <xs:group ref="formatting-elements"/>
         <xs:group ref="linking-elements"/>
         <xs:group ref="track-change-elements"/>
-        <xs:element ref="history-date"/>
-        <xs:element ref="loclaw"/>
         <xs:element ref="footnote"/>
       </xs:choice>
       <xs:attributeGroup ref="id-optional"/>
@@ -2834,6 +2834,7 @@
       <xs:sequence>
         <xs:element ref="label" minOccurs="0"/>
         <xs:element ref="number" minOccurs="0"/>
+        <xs:element ref="history" minOccurs="0"/>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element ref="block-insert" minOccurs="0"/>
           <xs:element ref="block-delete" minOccurs="0"/>
@@ -2941,10 +2942,13 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
+        <xs:element ref="history" minOccurs="0"/>
         <xs:choice>
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
           <xs:element ref="form"/>
+          <xs:element ref="table"></xs:element>
+          <xs:element ref="informal-table"></xs:element>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
         <xs:element ref="figure-notes" minOccurs="0"/>
@@ -3382,6 +3386,7 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
+        <xs:element ref="history" minOccurs="0"/>
         <xs:element ref="QR-code" minOccurs="0"/>
         <xs:choice>
           <xs:group ref="cals-or-html-group"/>
@@ -4293,6 +4298,7 @@
         <xs:choice minOccurs="1" maxOccurs="unbounded">
           <!--BH - added section to commentary-->
           <xs:element ref="section"/>
+          <xs:element ref="bibliography"/>
           <xs:group ref="block-elements"/>
         </xs:choice>
       </xs:sequence>
@@ -4431,6 +4437,7 @@
       <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attribute name="ref-text" type="xs:string" use="optional"/>
     </xs:complexType>
   </xs:element>
 
@@ -5084,9 +5091,10 @@
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element ref="objectives"/>
         </xs:choice>
-        <xs:choice>
-          <xs:element ref="bibliodiv" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="bib-entry" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="p"/> <!-- GS 2026-01-23 NOT "para-elements" because that includes commentary -->
+          <xs:element ref="bibliodiv"/>
+          <xs:element ref="bib-entry"/>
         </xs:choice>
       </xs:sequence>
       <xs:attributeGroup ref="id-required"/>
