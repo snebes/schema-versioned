@@ -1,7 +1,5 @@
-<xs:schema version="1.21.3" xmlns="https://schema.iccsafe.org/book/schema/1.0"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xi="http://www.w3.org/2001/XInclude"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:m="http://www.w3.org/1998/Math/MathML"
-  targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.22.2" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -216,11 +214,18 @@
   <!-- 1-26-2026   MM   changed publication/@schema-version from decimal to token;-->
   <!--                  publication/@schematron-version from string to token      -->
   <!-- ========================================================================== -->
+    <!--                                  Version 1.22                             -->
+  <!-- ========================================================================== -->
+  <!-- 2-02-2026   GS   JIRA X2S-49 Production Schema                             -->
+  <!--                  remove unused elements                                    -->
+  <!--                  id attributes either required or not present              -->
+  <!-- 2-04-2026   GS   id on frontmatter                                         -->
+  <!-- 2-06-2026   GS   restore block-insert and block-delete                     -->
+  <!-- ========================================================================== -->
 
 
   <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-    schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
   <!-- ========================================================================== -->
   <!-- Group Definitions                                                          -->
   <!-- ========================================================================== -->
@@ -228,24 +233,14 @@
   <xs:group name="frontmatter-elements">
     <xs:choice>
       <xs:element ref="titlegroup"/>
-      <xs:element ref="authorgroup"/>
-      <xs:element ref="other-credit"/>
-      <xs:element ref="publisher"/>
       <xs:element ref="address"/>
-      <xs:element ref="volumenum"/>
-      <xs:element ref="edition"/>
-      <xs:element ref="pubdate"/>
       <xs:element ref="mediaobject-group"/>
       <xs:element ref="mediaobject"/>
       <xs:element ref="url"/>
-      <xs:element ref="issn"/>
       <xs:element ref="isbn"/>
       <xs:element ref="copyright"/>
       <xs:element ref="legalnotice"/>
-      <xs:element ref="disclaimer"/>
-      <xs:element ref="credit"/>
       <xs:element ref="trademarks"/>
-      <xs:element ref="tag-line"/>
       <xs:element ref="history"/>
       <xs:element ref="publication-history"/>
       <xs:element ref="printing-location"/>
@@ -256,24 +251,14 @@
 
   <xs:group name="header-elements">
     <xs:sequence>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="QR-code" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="toc" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="authorgroup" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="other-credit" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="history" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="disclaimer" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="objectives" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="related-links" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="note" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="abstract" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="keywords" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="question" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="answer" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="customer-id" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="record-id" minOccurs="0" maxOccurs="1"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element maxOccurs="1" minOccurs="0" ref="QR-code"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="toc"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="history"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="objectives"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="note"/>
         <!--Adding commentary to the header-group-->
-        <xs:element ref="commentary" minOccurs="0" maxOccurs="1"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="commentary"/>
       </xs:choice>
     </xs:sequence>
   </xs:group>
@@ -285,10 +270,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-2"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -297,10 +281,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-3"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -309,10 +292,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-4"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -321,10 +303,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-5"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -333,10 +314,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-6"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -345,10 +325,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-7"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -357,10 +336,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-8"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -369,10 +347,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-9"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -381,10 +358,9 @@
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="level-10"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -392,11 +368,9 @@
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-11"/>
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
-      <xs:element ref="nonxml" minOccurs="0"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -404,7 +378,6 @@
     <xs:sequence>
       <xs:element ref="body" minOccurs="0"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="section"/>
         <xs:element ref="relocated-to"/>
       </xs:choice>
     </xs:sequence>
@@ -439,7 +412,6 @@
           <xs:sequence>
             <xs:element ref="tr" maxOccurs="unbounded"/>
           </xs:sequence>
-          <xs:attributeGroup ref="id-optional"/>
           <xs:attributeGroup ref="common-attributes"/>
           <xs:attributeGroup ref="revision-attributes"/>
           <xs:attribute name="valign" type="vertical-alignment"/>
@@ -458,7 +430,6 @@
           <xs:sequence>
             <xs:element ref="tr" maxOccurs="unbounded"/>
           </xs:sequence>
-          <xs:attributeGroup ref="id-optional"/>
           <xs:attributeGroup ref="common-attributes"/>
           <xs:attributeGroup ref="revision-attributes"/>
           <xs:attribute name="valign" type="vertical-alignment"/>
@@ -477,7 +448,6 @@
           <xs:sequence>
             <xs:element ref="tr" maxOccurs="unbounded"/>
           </xs:sequence>
-          <xs:attributeGroup ref="id-optional"/>
           <xs:attributeGroup ref="common-attributes"/>
           <xs:attributeGroup ref="revision-attributes"/>
           <xs:attribute name="valign" type="vertical-alignment"/>
@@ -485,8 +455,6 @@
       </xs:element>
     </xs:sequence>
   </xs:group>
-
-  <!-- ****************** -->
 
   <xs:group name="block-elements">
     <xs:choice>
@@ -504,10 +472,10 @@
 
   <xs:group name="para-elements">
     <xs:choice>
-      <xs:element ref="commentary"/>
+      
       <xs:element ref="p"/>
       <xs:element ref="exception"/>
-      <xs:element ref="form"/>
+      
     </xs:choice>
   </xs:group>
 
@@ -529,7 +497,7 @@
 
   <xs:group name="table-elements">
     <xs:choice>
-      <xs:element ref="table-group"/>
+      
       <xs:element ref="table"/>
       <xs:element ref="informal-table"/>
     </xs:choice>
@@ -553,9 +521,9 @@
 
   <xs:group name="publishing-elements">
     <xs:choice>
-      <xs:element ref="margin-text"/>
+      
       <xs:element ref="boxed-text"/>
-      <xs:element ref="blockquote"/>
+      
       <xs:element ref="address"/>
       <xs:element ref="note"/>
     </xs:choice>
@@ -575,7 +543,7 @@
     <xs:sequence>
       <xs:element ref="m:math" minOccurs="0"/>
       <xs:element ref="inline-mediaobject" minOccurs="0"/>
-      <xs:element ref="inline-mediaobject-group" minOccurs="0"/>
+      
     </xs:sequence>
   </xs:group>
 
@@ -588,13 +556,9 @@
       <xs:group ref="track-change-elements"/>
       <xs:element ref="inline-equation"/>
       <xs:element ref="inline-mediaobject"/>
-      <xs:element ref="inline-mediaobject-group"/>
       <xs:element ref="acronym"/>
-      <xs:element ref="abbr"/>
       <xs:element ref="phrase"/>
       <xs:element ref="history"/>
-      <xs:element ref="keyterm"/>
-      <xs:element ref="index-term"/>
       <xs:element ref="footnote"/>
       <xs:element ref="no-break"/>
     </xs:choice>
@@ -613,7 +577,7 @@
     <xs:choice>
       <xs:element ref="xref"/>
       <xs:element ref="url"/>
-      <xs:element ref="legref"/>
+      
       <xs:element ref="publication-ref"/>
     </xs:choice>
   </xs:group>
@@ -639,9 +603,7 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="volume" maxOccurs="unbounded"/>
-        <xs:element ref="include" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="schema-version" use="required" type="xs:token"/>      
       <xs:attribute name="schematron-version" use="optional" type="xs:token"/>
@@ -664,11 +626,10 @@
         <xs:element ref="frontmatter" minOccurs="0"/>
         <xs:choice maxOccurs="unbounded">
           <xs:element ref="level-1"/>
-          <xs:element ref="division"/>
         </xs:choice>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="volume-attributes"/>
     </xs:complexType>
@@ -684,91 +645,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:element ref="meta-group"/>
         <xs:element ref="meta"/>
-        <xs:element ref="correlated-sections"/>
-        <xs:element ref="abstract"/>
-        <xs:element ref="keywords"/>
         <xs:element ref="isbn"/>
-        <xs:element ref="issn"/>
-        <xs:element ref="volumenum"/>
-        <xs:element ref="edition"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
-  </xs:element>
-
-  <xs:element name="correlated-sections">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Correlated Sections:  This element is designed to capture relationships between information
-          in the code book.  There is a parent/child relationship where one book has governance over the information
-        and can be used in other code books.  
-        </xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="correlated-section" minOccurs="1" maxOccurs="unbounded"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="correlated-section">
-    <xs:annotation>
-      <xs:appinfo>
-      <xs:documentation>Correlated Section: This element describes a relationship of the information from one book to 
-      another book.  </xs:documentation>
-    </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="correlated-target"/>
-        <xs:element ref="correlated-type"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="correlated-target" type="xs:string">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Correlated Target: It is the section the correlated content is related
-          to</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-  </xs:element>
-
-  <xs:element name="correlated-type">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Correlated Type: 
-          The editors use type 1, 2 or 3 to distinguish the correlated types.  The definition for
-          these types are:
-          •	Type 1 – Only in a single location but scoped to a committee outside the code where it resides.
-          •	Type 2 – Similar language with same technical requirements
-          •	Type 3 – Essentially identical language
-          •  Type 4 - Material from SDO
-          The following types are original in the schema:
-          Correlated 'required-control' and 'required-passive'
-          will always be marked up in pairs, meaning that there cannot be a 'required-control'
-          attribute set without a corresponding 'required-passive'. 'optional' and 'associated'
-          would be set as the type on both sides of the correlation.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:simpleType>
-      <xs:restriction base="xs:string">
-        <xs:enumeration value="1"/>
-        <xs:enumeration value="2"/>
-        <xs:enumeration value="3"/>
-        <xs:enumeration value="4"/>
-        <xs:enumeration value="optional"/>
-        <xs:enumeration value="associated"/>
-        <xs:enumeration value="required-control"/>
-        <xs:enumeration value="required-passive"/>
-        <xs:enumeration value="1"/>
-      </xs:restriction>
-    </xs:simpleType>
   </xs:element>
 
   <!-- ****************** -->
@@ -790,72 +671,12 @@
         <xs:element ref="section" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="toc" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
 
-  <!-- ****************** -->
-
-  <xs:element name="division">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Division: The division element is intended to be used as a collection of
-        related chapters. In other words divisions are divider pages that can be used to create a
-        substructure of related chapters.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:element ref="toc" minOccurs="0"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:choice maxOccurs="unbounded">
-              <xs:element ref="frontmatter"/>
-              <xs:group ref="block-elements"/>
-            </xs:choice>
-            <xs:choice minOccurs="0">
-              <xs:sequence>
-                <xs:choice>
-                  <xs:element ref="level-1" maxOccurs="unbounded"/>
-                  <xs:element ref="division" maxOccurs="unbounded"/>
-                </xs:choice>
-              </xs:sequence>
-            </xs:choice>
-          </xs:sequence>
-          <xs:sequence>
-            <xs:choice>
-              <xs:element ref="level-1" maxOccurs="unbounded"/>
-              <xs:element ref="division" maxOccurs="unbounded"/>
-            </xs:choice>
-          </xs:sequence>
-        </xs:choice>
-        <xs:element ref="backmatter" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="part" substitutionGroup="division">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>part: The part element is intended to be used as a collection of related
-        chapters. In other words parts are divider pages that can be used to create a substructure
-        of related chapters. A part has the same structure as a division and it is a
-        substitutionGroup for the division tag. </xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-  </xs:element>
-
-  <!-- ****************** -->
+   <!-- ****************** -->
 
   <xs:element name="level-1">
     <xs:annotation>
@@ -874,10 +695,9 @@
         <xs:group ref="level-1-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -904,7 +724,7 @@
         <xs:group ref="level-2-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -934,7 +754,7 @@
         <xs:group ref="level-3-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -963,7 +783,7 @@
         <xs:group ref="level-4-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -992,7 +812,7 @@
         <xs:group ref="level-5-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -1021,7 +841,7 @@
         <xs:group ref="level-6-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -1050,7 +870,7 @@
         <xs:group ref="level-7-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -1079,7 +899,7 @@
         <xs:group ref="level-8-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -1090,7 +910,7 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- ****************** -->
+    <!-- ****************** -->
 
   <xs:element name="level-9">
     <xs:annotation>
@@ -1108,7 +928,7 @@
         <xs:group ref="level-9-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -1137,10 +957,9 @@
         <xs:group ref="level-10-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
@@ -1166,32 +985,13 @@
         <xs:group ref="level-11-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="tocautoadd" type="yesorno"/>
       <xs:attribute name="reservecount" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="meta-group">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Meta Group: Container for a single piece of metadata.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="meta-group"/>
-        <xs:element ref="meta"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -1206,7 +1006,6 @@
         <xs:group ref="formatting-elements"/>
       </xs:choice>
       <xs:attribute name="name" use="required"/>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1227,12 +1026,11 @@
           <xs:element ref="committee-desig" minOccurs="0"/>
           <xs:element ref="label" minOccurs="0"/>
           <xs:element ref="number" minOccurs="0"/>
-          <xs:element ref="correlated" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="correlated" minOccurs="0"/>
           <xs:element ref="title"/>
+          <xs:element ref="sub-title" minOccurs="0"/>
         </xs:choice>
-        <xs:element ref="sub-title" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1248,7 +1046,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1265,7 +1062,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="responsible-for" type="xs:string"/>
@@ -1283,7 +1079,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1299,7 +1094,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1316,7 +1110,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="title-abbreviation" type="xs:string"/>
@@ -1335,7 +1128,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1353,7 +1145,6 @@
       <xs:sequence>
         <xs:group ref="frontmatter-elements" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1371,29 +1162,12 @@
       <xs:sequence>
         <xs:group ref="frontmatter-elements" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
 
   <!-- ****************** -->
-
-  <xs:element name="issn">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>ISSN: Used to capture an international standard serial number.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
 
   <xs:element name="isbn">
     <xs:annotation>
@@ -1405,7 +1179,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -1425,7 +1198,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="copyright-statement"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="year" type="xs:integer"/>
       <xs:attribute name="holder" type="xs:string"/>
@@ -1444,7 +1216,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1464,7 +1235,6 @@
       <xs:sequence>
         <xs:element ref="p" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1480,24 +1250,6 @@
       <xs:sequence>
         <xs:element ref="p" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="tag-line">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Tag Line: Tagline is a short text which serves to clarify a thought for.
-        Many tagline slogans are reiterated phrases associated with an individual, social group, or
-        product.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1512,9 +1264,7 @@
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="p" maxOccurs="unbounded"/>
-        <xs:element ref="publication-date" maxOccurs="unbounded"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="type">
         <xs:simpleType>
@@ -1541,29 +1291,9 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="publication-id" type="xs:string"/>
       <xs:attribute name="internal-id" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
-
-
-  <xs:element name="publication-date">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Publication Date: It is used to capture the publication date of a
-        document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="number" type="xs:string"/>
-      <xs:attribute name="year" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
@@ -1578,7 +1308,6 @@
       <xs:sequence>
         <xs:element ref="p" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1594,7 +1323,6 @@
         <xs:element ref="mediaobject" maxOccurs="unbounded"/>
         <xs:element ref="mediaobject-group" maxOccurs="unbounded"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1621,7 +1349,7 @@
           </xs:sequence>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="tocentry" type="yesorno"/>
@@ -1650,12 +1378,15 @@
           </xs:sequence>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="tocentry" type="yesorno"/>
     </xs:complexType>
   </xs:element>
+
+
+  <!-- ****************** -->
 
   <xs:element name="publisher-note">
     <xs:annotation>
@@ -1678,7 +1409,7 @@
           </xs:sequence>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="tocentry" type="yesorno"/>
@@ -1703,7 +1434,6 @@
           <xs:element ref="toc-entry"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1720,7 +1450,6 @@
         <xs:element ref="tocdiv"/>
         <xs:element ref="toc-entry"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -1737,204 +1466,9 @@
         <xs:element ref="label" minOccurs="0"/>
         <xs:element ref="title"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attribute name="pagenum" type="xs:string"/>
       <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="authorgroup">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Author Group: The authorgroup element is a container around multiple
-        authors or editors. May be formatted inline or as a displayed block, depending on context.
-        Sometimes given very special treatment, especially on title pages or other displayed areas.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="author"/>
-        <xs:element ref="editor"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="other-credit">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Other Credit: A person or entity, other than an author or editor, credited
-        in a document. May be formatted inline or as a displayed block, depending on context.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice>
-          <xs:element ref="personname"/>
-          <xs:element ref="orgname"/>
-        </xs:choice>
-        <xs:choice minOccurs="0">
-          <xs:element ref="affiliation"/>
-          <xs:element ref="address"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="author">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Author: The name of an individual author of a document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element ref="personname"/>
-          <xs:element ref="orgname"/>
-        </xs:choice>
-        <xs:choice minOccurs="0">
-          <xs:element ref="affiliation"/>
-          <xs:element ref="address"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="editor">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Editor: The name of an individual editor of a document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element ref="personname"/>
-          <xs:element ref="orgname"/>
-        </xs:choice>
-        <xs:choice minOccurs="0">
-          <xs:element ref="affiliation"/>
-          <xs:element ref="address"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="personname">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Person Name: The personname identifies the personal name of an individual.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="honorific"/>
-        <xs:element ref="firstname"/>
-        <xs:element ref="middlename"/>
-        <xs:element ref="surname"/>
-        <xs:element ref="lineage"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="honorific">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Honorific: An honorific occurs in the name of an individual. It is the
-        honorific title of the individual, such as Dr., Mr., or Ms.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="firstname">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>First Name: The Western-style first name of an author, editor, or other
-        individual.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="middlename">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Middle Name: The Western-style middle name of an author, editor, or other
-        individual.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="surname">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Surname: A surname is a family name; in Western cultures, the "last name."</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="lineage">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Lineage: A lineage is a portion of a person's name, typically Jr. or Sr.
-        The portion of a person's name indicating a relationship to ancestors.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -1951,45 +1485,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="affiliation">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Affiliation: The institutional affiliation of an author, contributor, or
-        other individual.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="orgname"/>
-        <xs:element ref="jobtitle"/>
-        <xs:element ref="address"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="jobtitle">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Job Title: A jobtitle describes the position of an individual within an
-        organization.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2006,54 +1501,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element ref="add-line"/>
         <xs:element ref="orgname"/>
+        <xs:element ref="phone"/>
         <xs:element ref="street"/>
         <xs:element ref="city"/>
         <xs:element ref="state"/>
         <xs:element ref="country"/>
         <xs:element ref="postalcode"/>
-        <xs:element ref="email"/>
         <xs:element ref="url"/>
-        <xs:element ref="phone"/>
-        <xs:element ref="fax"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="add-line">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Address Line: Within an address, add-line is for parts of an address other
-        than street, city, state, country, phone, fax, and email, postal code all of which have
-        elements specific to their content.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="street">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Street: In postal addresses, the street element contains the street
-        address portion of the address.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2069,24 +1525,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="state">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>State: A state is the name or postal abbreviation for a state (or
-        province) in an address.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2102,7 +1541,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2119,39 +1557,12 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="email">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Email: Inline markup identifying an email address.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="mailto" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Mail to: It is a Uniform Resource Identifier (URI) scheme for email
-            addresses. It is used to produce hyperlinks on websites that allow users to send an
-            email to a specific address directly from an HTML document, without having to copy it
-            and entering it into an email client.</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="phone">
+  
+    <xs:element name="phone">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Phone: A phone identifies a telephone number in an address.</xs:documentation>
@@ -2161,23 +1572,39 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
 
-  <xs:element name="fax">
+  <xs:element name="state">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Fax: A fax is a fax number in an address.</xs:documentation>
+        <xs:documentation>State: A state is the name or postal abbreviation for a state (or
+        province) in an address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
+      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="revision-attributes"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="street">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Street: In postal addresses, the street element contains the street
+        address portion of the address.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="inline-elements"/>
+      </xs:choice>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2197,7 +1624,6 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="body" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2220,241 +1646,8 @@
         <xs:group ref="track-change-elements"/>
         <xs:element ref="footnote"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="history-date">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>History Date: Date of the history item.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attribute name="type">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="amended"/>
-            <xs:enumeration value="last"/>
-            <xs:enumeration value="added"/>
-            <xs:enumeration value="adopted"/>
-            <xs:enumeration value="repealed"/>
-            <xs:enumeration value="readopted"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="legref">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Legal Reference: Legal reference of the history item.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="history-date"/>
-        <xs:element ref="loclaw"/>
-        <xs:element ref="footnote"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="ref" type="xs:string"/>
-      <xs:attribute name="sourceid" type="xs:string"/>
-      <xs:attribute name="error" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="loclaw">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Local Law: The number of the changed local law, or the local law that
-        required the change in the code book.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="sourceid" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Specify source id of local law.</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attribute name="fileordinance" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Specify file ordinance of local law.</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attribute name="fileminutes" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Specify file minutes of local law.</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="related-links">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Related Links: The related links is used to refer to other chapters in the
-        same legislation.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="para-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="abstract">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Abstract: It is expected to contain some sort of summary of the content
-        with which it is associated.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="keywords">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Keywords: A set of keywords describing the content of a document. Keywords
-        are provided by the author, editor, publisher, can be stored in the document
-        meta-information. Keywords can form an important part of an automated indexing or searching
-        strategy for a collection of documents.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="keyword" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="keyword">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Keyword: One of a set of keywords describing the content of a document. A
-        keyword is a term describing the content of a document. The keyword applies to the document
-        component that contains it.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="question">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Question: Used to capture questions of the document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="p" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="answer">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Answer: Used to capture answers of the document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="p" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="customer-id">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Customer ID: It is used to customer id.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="record-id">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Record ID: It is used to capture record id.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="number" type="xs:string"/>
-      <xs:attribute name="year" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
@@ -2488,8 +1681,6 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
-        <xs:element ref="abstract" minOccurs="0"/>
-        <xs:element ref="keywords" minOccurs="0"/>
         <xs:choice>
           <xs:sequence>
             <xs:element ref="body"/>
@@ -2500,10 +1691,9 @@
           </xs:sequence>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="indexnum" type="xs:string"/>
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="reservecount" type="xs:integer"/>
@@ -2543,7 +1733,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="prefix" type="xs:string"/>
@@ -2584,7 +1774,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2603,7 +1792,6 @@
         <xs:element ref="label" minOccurs="0"/>
         <xs:group ref="block-elements" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -2628,11 +1816,10 @@
         the ability to have an informal equation or a where-list in a where-list
         based on findings of PDF generation and confirmation by Jen Fitzsimmons.-->
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="informal-equation" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="where-list" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="informal-equation"/>
+          <xs:element ref="where-list"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2650,7 +1837,6 @@
         <xs:element ref="informal-equation"/>
         <xs:element ref="p"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
@@ -2683,7 +1869,6 @@
         <xs:element ref="varname"/>
         <xs:element ref="vardesc" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2700,7 +1885,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2717,7 +1901,6 @@
       <xs:choice maxOccurs="unbounded">
         <xs:group ref="block-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2738,16 +1921,15 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.
     I found this scenario in IMC id ='IMCComm2024P1_Ch02_Sec202_Comment'.-->
-        <xs:element ref="commentary" minOccurs="0"/>
+        <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.-->
+        <!-- GS 2026-02-02 put the commentary in the choice -->
         <xs:choice maxOccurs="unbounded">
           <xs:element ref="def-item"/>
           <xs:element ref="relocated-to"/>
           <xs:element ref="relocated-from"/>
+          <xs:element ref="commentary"/>
         </xs:choice>
-        <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.-->
-        <xs:element ref="commentary" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2765,12 +1947,13 @@
         <xs:element ref="relocated-from" minOccurs="0"/>
         <xs:element ref="committee-desig" minOccurs="0"/>
         <xs:element ref="term"/>
-        <xs:element ref="def" minOccurs="0"/>
-        <!--This commentary would be against a single def-item-->
-        <xs:element ref="commentary" minOccurs="0"/>
-
+        <xs:sequence minOccurs="0">
+          <xs:element ref="def"/>
+          <!--This commentary would be against a single def-item-->
+          <xs:element minOccurs="0" ref="commentary"/>
+        </xs:sequence>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -2791,13 +1974,10 @@
         <xs:group ref="linking-elements"/>
         <xs:group ref="track-change-elements"/>
         <xs:element ref="inline-mediaobject"/>
-        <xs:element ref="inline-mediaobject-group"/>
         <xs:element ref="acronym"/>
-        <xs:element ref="abbr"/>
         <xs:element ref="phrase"/>
         <xs:element ref="footnote"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2814,7 +1994,6 @@
       <xs:sequence>
         <xs:group ref="block-elements" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2834,61 +2013,16 @@
       <xs:sequence>
         <xs:element ref="label" minOccurs="0"/>
         <xs:element ref="number" minOccurs="0"/>
-        <xs:element ref="history" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="block-insert" minOccurs="0"/>
-          <xs:element ref="block-delete" minOccurs="0"/>
-          <xs:group ref="block-math"/>
-        </xs:choice>
+        <xs:element ref="title" minOccurs="0"/>
+        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:element ref="block-delete" minOccurs="0"/>
+        <xs:group ref="block-math"/>
         <xs:element ref="where-list" minOccurs="0" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="tocentry" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="block-insert">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Block Insert: The ability to include an insert at the block level.
-        Currently only m:math is allowed as an element because MathML is a standard and it's
-        own schema created by the W3C.  This allows the ability to have the revision attributes
-        when math is added.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:group ref="block-math"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="errata-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="block-delete">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Block Delete: The ability to include an delete at the block level.
-          Currently only m:math is allowed as an element because MathML is a standard and it's
-          own schema created by the W3C.  This allows the ability to have the revision attributes
-          when math is added.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:group ref="block-math"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -2905,7 +2039,6 @@
         <xs:group ref="block-math"/>
         <xs:element ref="where-list" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2922,9 +2055,42 @@
       <xs:sequence>
         <xs:group ref="inline-math"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
+    </xs:complexType>
+  </xs:element>
+
+<xs:element name="block-insert">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Block Insert: The ability to include an insert at the block level.
+        Currently only m:math is allowed as an element because MathML is a standard and it's
+        own schema created by the W3C.  This allows the ability to have the revision attributes
+        when math is added.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:group ref="block-math"/>
+      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="errata-attributes"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="block-delete">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Block Delete: The ability to include an delete at the block level.
+          Currently only m:math is allowed as an element because MathML is a standard and it's
+          own schema created by the W3C.  This allows the ability to have the revision attributes
+          when math is added.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="block-math"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -2946,20 +2112,15 @@
         <xs:choice>
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
-          <xs:element ref="form"/>
-          <xs:element ref="table"></xs:element>
-          <xs:element ref="informal-table"></xs:element>
+          <xs:element ref="table"/>
+          <xs:element ref="informal-table"/>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
         <xs:element ref="figure-notes" minOccurs="0"/>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attribute name="tocentry" type="yesorno"/>
       <xs:attribute name="float" type="float"/>
       <xs:attribute name="orient" default="port">
@@ -2975,8 +2136,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <!--<xs:attribute
-      ref="orient"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -2996,7 +2155,6 @@
           <xs:group ref="maths-elements"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3014,7 +2172,6 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="figure-note" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3034,14 +2191,9 @@
         <xs:choice>
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
-          <xs:element ref="form"/>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
@@ -3058,8 +2210,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <!--<xs:attribute
-      ref="orient"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -3078,11 +2228,7 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="mediaobject" maxOccurs="unbounded"/>
         <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="disclaimer" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -3099,47 +2245,17 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="longdesc" minOccurs="0"/>
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="video"/>
-          <xs:element ref="audio"/>
           <xs:element ref="img"/>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="disclaimer" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
 
   <!-- ****************** -->
-
-  <xs:element name="inline-mediaobject-group">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Inline Mediaobject Group: Container element for a group of
-        inline-mediaobject that are to be displayed together.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="inline-mediaobject" maxOccurs="unbounded"/>
-        <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="disclaimer" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
 
   <xs:element name="inline-mediaobject">
     <xs:annotation>
@@ -3152,58 +2268,16 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="longdesc" minOccurs="0"/>
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="video"/>
-          <xs:element ref="audio"/>
           <xs:element ref="img"/>
         </xs:choice>
-        <xs:element ref="disclaimer" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
 
   <!-- ****************** -->
-
-  <xs:element name="video">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Video: Pointer to external video data. An external file that holds the
-        video, such as an animation or a movie.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="media-attributes"/>
-      <xs:attribute name="controls" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="audio">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Audio: Pointer to external audio data. An external file that holds the
-        audio, such as an animation or a movie.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="src" type="xs:string" use="required"/>
-      <xs:attribute name="alt" type="xs:string" use="required"/>
-      <xs:attribute name="rendition" type="xs:string"/>
-      <xs:attribute name="mime-type" type="xs:string"/>
-      <xs:attribute name="controls" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
 
   <xs:element name="img">
     <xs:annotation>
@@ -3215,7 +2289,6 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="media-attributes"/>
@@ -3230,7 +2303,6 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="media-attributes"/>
@@ -3250,124 +2322,8 @@
       <xs:sequence>
         <xs:group ref="para-elements" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="longdesc">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Long Description: The long description is used by some systems to make the
-        object accessible to people or systems that cannot read/see/display the object.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="legend">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Legend: Legends or captions explain figures, tables, or images in the
-        manuscript.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="disclaimer">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Disclaimer: Used to capture statement that denies something, especially
-        responsibility.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="para-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="source">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Source: Used to capture the source of a published photograph, mediaobject
-        or a table. This element is expected to generate text, usually "Source" in English.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="credit">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Credit: Used to capture a note acknowledging the source of a published
-        photograph, mediaobject or a table. This element is expected to generate text, usually
-        "Credit" in English.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="para-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="table-group">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Table Group: Container element for a group of table that are to be
-          displayed together.
-        </xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="QR-code" minOccurs="0"/>
-        <xs:element ref="table" maxOccurs="unbounded"/>
-        <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="table-notes" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <!--      <xs:attributeGroup ref="correlated-attributes"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -3392,18 +2348,13 @@
           <xs:group ref="cals-or-html-group"/>
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
-          <xs:element ref="nonxml"/>
         </xs:choice>
         <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="table-notes" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attributeGroup ref="cals-table-attributes"/>
       <xs:attributeGroup ref="html-table-attributes"/>
     </xs:complexType>
@@ -3427,17 +2378,11 @@
           <xs:group ref="cals-or-html-group"/>
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
-          <xs:element ref="nonxml"/>
         </xs:choice>
-        <xs:element ref="legend" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="table-notes" minOccurs="0"/>
-        <xs:element ref="source" minOccurs="0"/>
-        <xs:element ref="credit" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <!--<xs:attributeGroup ref="correlated-attributes" />-->
       <xs:attributeGroup ref="cals-table-attributes"/>
       <xs:attributeGroup ref="html-table-attributes"/>
     </xs:complexType>
@@ -3459,10 +2404,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="colspec" maxOccurs="unbounded"/>
-        <xs:element ref="spanspec" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="thead" minOccurs="0"/>
         <xs:element ref="tbody" maxOccurs="unbounded"/>
-        <xs:element ref="tfoot" minOccurs="0"/>
       </xs:sequence>
       <xs:attributeGroup ref="align-attributes"/>
       <xs:attribute name="cols" use="required" type="xs:integer">
@@ -3560,74 +2503,6 @@
           <xs:appinfo>
             <xs:documentation>Column Width: Specifies the width of the column.</xs:documentation>
           </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="spanspec">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Span Specification: A spanspec associates a name with a span between two
-        columns in a table. In the body of the table, cells can refer to the span by name. Cells
-        that refer to a span will span horizontally from the first column to the last column,
-        inclusive. Cells can also form spans directly, by naming the start and end columns
-        themselves. The added benefit of a spanspec is that it can associate formatting information
-        (such as alignment and table rule specifications) with the span. This information does not
-        need to be repeated then, on each spanning cell. This element is expected to obey the
-        semantics of the Cals Table Model.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:attributeGroup ref="align-attributes"/>
-      <xs:attribute name="spanname">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Span Name: Provides a name for a span specification (col5-7, col9-11
-            etc).</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-        <xs:simpleType>
-          <xs:restriction base="xs:string"> </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="namest">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Name Start: Specifies an starting column by name (col1, col2 etc).</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="nameend">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>Name End: Specifies an starting column by name (col1, col2 etc).</xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="colsep" type="zeroorone">
-        <xs:annotation>
-          <xs:documentation>Column Separator: If the value is 1 then column separators are turned
-            on. If the value is 0 then column separators are turned off.</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-      <xs:attribute name="rowsep" type="zeroorone">
-        <xs:annotation>
-          <xs:documentation>Row Separator: If the value is 1 then row separators (the line that
-            separates the rows) are turned on (i.e. they are visible). If the value is 0 then row
-            separators are turned off (i.e. they are hidden).</xs:documentation>
         </xs:annotation>
       </xs:attribute>
     </xs:complexType>
@@ -3742,7 +2617,7 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- ****************** -->
+ <!-- ************* -->
 
   <xs:element name="thead">
     <xs:annotation>
@@ -3757,7 +2632,6 @@
       <xs:sequence>
         <xs:element ref="row" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="valign" type="vertical-alignment"/>
@@ -3777,27 +2651,6 @@
       <xs:sequence>
         <xs:element ref="row" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="valign" type="vertical-alignment"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="tfoot">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Table Footer: A container for the footer rows of a table. The tfoot
-        container identifies the rows of a table that form the footer of the table, as distinct from
-        the header (thead) and body (tbody) rows. This element is expected to obey the semantics of
-        the CALS Table Model.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="row" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="valign" type="vertical-alignment"/>
@@ -3821,7 +2674,6 @@
       <xs:sequence>
         <xs:element ref="entry" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="cell-color-attributes"/>
@@ -3847,7 +2699,6 @@
         <xs:element ref="th" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element ref="td" minOccurs="0" maxOccurs="unbounded"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="cell-color-attributes"/>
@@ -3875,7 +2726,6 @@
         <xs:group ref="figure-elements"/>
         <xs:group ref="maths-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="align-attributes"/>
@@ -3980,7 +2830,6 @@
         <xs:group ref="figure-elements"/>
         <xs:group ref="maths-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="align-attributes"/>
@@ -4004,7 +2853,6 @@
         <xs:group ref="figure-elements"/>
         <xs:group ref="maths-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="align-attributes"/>
@@ -4012,7 +2860,7 @@
       <xs:attributeGroup ref="cell-color-attributes"/>
     </xs:complexType>
   </xs:element>
-
+  
   <!-- ****************** -->
 
   <xs:element name="table-notes">
@@ -4027,7 +2875,7 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="table-note" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4052,7 +2900,6 @@
           <xs:group ref="maths-elements"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4081,24 +2928,7 @@
 
   <!-- ****************** -->
 
-  <xs:element name="margin-text">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Margin Text: Textual material that is part of the body of text but outside
-        the flow of the narrative text and print at margin.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="background-color" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
+  
 
   <!-- ****************** -->
 
@@ -4122,7 +2952,7 @@
           </xs:sequence>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
@@ -4135,7 +2965,7 @@
   <xs:complexType name="block-element-type">
     <xs:sequence>
       <xs:group ref="para-elements" maxOccurs="unbounded"/>
-      <xs:element ref="attrib" minOccurs="0"/>
+      
     </xs:sequence>
     <xs:attribute name="type">
       <xs:simpleType>
@@ -4146,36 +2976,14 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attributeGroup ref="id-optional"/>
+    
     <xs:attributeGroup ref="common-attributes"/>
     <xs:attributeGroup ref="revision-attributes"/>
   </xs:complexType>
 
-  <xs:element name="blockquote" type="block-element-type">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Blockquote: Block quotations are set off from the main text, as opposed to
-        occurring inline.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-  </xs:element>
+  
 
-  <xs:element name="attrib">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Attribution: An attribution identifies the source to which a blockquote or
-        epigraph is ascribed.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
+  
 
   <!-- ****************** -->
 
@@ -4194,7 +3002,7 @@
           <xs:group ref="list-elements"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4214,7 +3022,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
@@ -4252,12 +3060,11 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attribute name="relocated-to" type="xs:IDREF"/>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREF"/>
+      <xs:attributeGroup ref="rid-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -4275,16 +3082,16 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-required"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="para-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREF"/>
+      <xs:attributeGroup ref="rid-attributes"/>
     </xs:complexType>
   </xs:element>
+  
   <!-- ****************** -->
 
-  <xs:element name="commentary">
+    <xs:element name="commentary">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Commentary: The format of the Commentary includes the full text of each
@@ -4302,12 +3109,9 @@
           <xs:group ref="block-elements"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -4326,61 +3130,35 @@
         <xs:group ref="table-elements"/>
         <xs:group ref="maths-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
   </xs:element>
 
-  <!-- ****************** -->
+    <!-- ****************** -->
 
-  <xs:element name="form">
+  <xs:element name="bibliography">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Form: Form is used to capture those pages where input is most often sent
-        to a server for processing.</xs:documentation>
+        <xs:documentation>Bibliography: Its main content is a set of bibliography entries. List of
+        references (citations) for a book or book component (e.g., a chapter), which is often called
+        References, Bibliography, or Additional Reading.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="objectives" minOccurs="0"/>
-        <xs:element ref="form-spec" maxOccurs="unbounded"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="objectives"/>
+        </xs:choice>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="p"/> <!-- GS 2026-01-23 NOT "para-elements" because that includes commentary -->
+        </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="form-spec">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Form Specification: It is used to identify the form types ie. html, pdf
-        etc.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="external-ref" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="filetype" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="external-ref">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>External Reference: It is used to capture location of the form.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="location" use="required"/>
+      <xs:attribute name="tocentry" type="yesorno"/>
+      <xs:attribute name="tocautoadd" type="yesorno"/>
     </xs:complexType>
   </xs:element>
 
@@ -4399,7 +3177,7 @@
         <xs:element ref="address" minOccurs="0"/>
         <xs:element ref="references"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4416,7 +3194,6 @@
       <xs:sequence>
         <xs:element ref="ref" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4434,32 +3211,10 @@
         <xs:element ref="titlegroup"/>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="ref-text" type="xs:string" use="optional"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="nonxml">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Non XML: Used to reference Non-XML insertion types: Word, Excel, etc.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="longdesc" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="src" type="xs:string" use="required"/>
-      <xs:attribute name="alt" type="xs:string" use="required"/>
-      <xs:attribute name="filetype" type="xs:string"/>
     </xs:complexType>
   </xs:element>
 
@@ -4479,7 +3234,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="emphasis-attributes"/>
@@ -4498,7 +3252,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4516,7 +3269,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4529,7 +3281,6 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -4550,24 +3301,6 @@
         <xs:group ref="linking-elements"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="abbr">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Abbreviation: An abbreviation, especially one followed by a period. It is
-        used in the text of a document, possibly including a definition or expansion of the acronym.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4583,7 +3316,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4602,34 +3334,8 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="keyterm">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Key Term: The key term element is used to hold the glossary term within a
-        body text. It is formatted as inline to reference glossary entry.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="definition" type="xs:string"/>
-      <xs:attribute name="glossary" type="yesorno"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -4650,12 +3356,9 @@
         <xs:element ref="phrase"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" use="required" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid" use="required"/>-->
+      <xs:attributeGroup ref="rid-attributes"/>
     </xs:complexType>
   </xs:element>
 
@@ -4673,7 +3376,6 @@
         <xs:group ref="track-change-elements"/>
         <xs:element ref="inline-mediaobject"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="href" use="required" type="xs:string"/>
@@ -4693,7 +3395,6 @@
         <xs:element ref="publication-ref"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="errata-attributes"/>
@@ -4712,7 +3413,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="errata-attributes"/>
@@ -4748,7 +3448,6 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4776,7 +3475,7 @@
           <xs:group ref="list-elements"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -4795,44 +3494,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element name="division" type="backmatter-division"/>
         <xs:element ref="appendix"/>
         <xs:element ref="level-1"/>
-        <xs:element ref="glossary"/>
-        <xs:element ref="disposition-list"/>
-        <xs:element ref="endnotes"/>
-        <xs:element ref="bibliography"/>
         <xs:element ref="index"/>
-        <xs:element ref="errata"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
     </xs:complexType>
   </xs:element>
-
-  <xs:complexType name="backmatter-division">
-    <xs:sequence>
-      <xs:element ref="metadata" minOccurs="0"/>
-      <xs:element ref="titlegroup" minOccurs="0"/>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="appendix"/>
-        <xs:element ref="glossary"/>
-        <xs:element ref="level-1"/>
-        <xs:element ref="disposition-list"/>
-        <xs:element ref="endnotes"/>
-        <xs:element ref="bibliography"/>
-        <xs:element ref="index"/>
-        <xs:element ref="errata"/>
-      </xs:choice>
-    </xs:sequence>
-    <xs:attributeGroup ref="id-required"/>
-    <xs:attributeGroup ref="common-attributes"/>
-    <xs:attributeGroup ref="revision-attributes"/>
-    <!--<xs:attributeGroup ref="correlated-attributes" />-->
-    <xs:attribute name="indexnum" type="xs:string"/>
-    <xs:attribute name="tocentry" type="yesorno"/>
-    <xs:attribute name="tocautoadd" type="yesorno"/>
-  </xs:complexType>
 
   <!-- ****************** -->
 
@@ -4853,7 +3521,7 @@
         <xs:group ref="level-1-bodymatters"/>
         <xs:element ref="backmatter" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="indexnum" type="xs:string"/>
@@ -4861,533 +3529,6 @@
       <xs:attribute name="tocautoadd" type="yesorno"/>
     </xs:complexType>
   </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="glossary">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Glossary: A glossary contains a collection of terms and brief descriptions
-        or definitions of those terms. It is formatted as a displayed block. A glossary in a book
-        frequently causes a forced page break in print media. The id attribute is used to give the
-        glossary a unique id for linking purposes.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice>
-          <xs:element ref="glossdiv" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="gloss-entry" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="glossdiv">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Glossary Division: A glossdiv is a section of a glossary. A Glossary might
-        be divided into sections in order to group terms, perhaps alphabetically. A Glossary may
-        contain any number of gloss-entry or glossdiv elements, but it cannot contain a mixture of
-        both at the same level.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="gloss-entry" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="gloss-entry">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Glossary Entry: The gloss-entry element is used as a wrapper glossary
-        entry element for a glossary term and its associated definition or definition references.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="committee-desig" minOccurs="0"/>
-        <xs:element ref="term"/>
-        <xs:choice>
-          <xs:element name="def" minOccurs="0" type="gloss-definition"/>
-          <xs:element ref="gloss-see" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:complexType name="gloss-definition">
-    <xs:sequence>
-      <xs:group ref="block-elements" maxOccurs="unbounded"/>
-      <xs:element ref="gloss-seealso" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attributeGroup ref="id-optional"/>
-    <xs:attributeGroup ref="common-attributes"/>
-    <xs:attributeGroup ref="revision-attributes"/>
-  </xs:complexType>
-
-  <xs:element name="gloss-see">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Glossary See: The gloss-see element is used to create a cross-reference
-        from one gloss-entry to another. It is to be used when there is not a definition for the
-        current entry.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="otherterm" type="xs:IDREFS"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="gloss-seealso">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Glossary See Also: The gloss-seealso element is used to create a
-        cross-reference from one glossary entry to another. It is to be used when there is a
-        definition for the current entry.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="otherterm" type="xs:IDREFS"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="disposition-list">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Disposition List: Chronological list of legislation.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:element ref="toc" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="authorgroup"/>
-          <xs:element ref="other-credit"/>
-          <xs:element ref="objectives"/>
-          <xs:element ref="history"/>
-          <xs:element ref="note"/>
-        </xs:choice>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="level-2"/>
-          <xs:element name="section" maxOccurs="unbounded" type="derivation-and-disposition-section"
-          />
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:complexType name="derivation-and-disposition-section">
-    <xs:sequence>
-      <xs:element ref="titlegroup" minOccurs="0"/>
-      <xs:group ref="table-elements" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attributeGroup ref="id-required"/>
-    <xs:attributeGroup ref="common-attributes"/>
-    <!--<xs:attributeGroup ref="correlated-attributes" />-->
-    <xs:attribute name="disp-level" type="xs:integer"/>
-    <xs:attribute name="indexnum" type="xs:string"/>
-    <xs:attribute name="tocentry" type="yesorno"/>
-  </xs:complexType>
-
-  <!-- ****************** -->
-
-  <xs:element name="endnotes">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>End Notes: Container for a group of end-note at the end of a chapter or
-        book. These are alternative presentations of footnotes, which generally at end of the
-        document. In print environments that do not support footnotes at the bottom of the page,
-        they may be presented as end notes occurring at the end of the component that contains the
-        footnote.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="endnote" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="endnote">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>End Note: An endnote is a reference, explanation, or comment placed at the
-        end of an article, document, chapter, or book. Footnotes appear at the bottom of the
-        relevant page whereas endnotes appear in a list at the end of the chapter or book.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:choice maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
-          <xs:group ref="table-elements"/>
-          <xs:group ref="figure-elements"/>
-          <xs:group ref="maths-elements"/>
-          <xs:group ref="publishing-elements"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="bibliography">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Bibliography: Its main content is a set of bibliography entries. List of
-        references (citations) for a book or book component (e.g., a chapter), which is often called
-        References, Bibliography, or Additional Reading.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="objectives"/>
-        </xs:choice>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="p"/> <!-- GS 2026-01-23 NOT "para-elements" because that includes commentary -->
-          <xs:element ref="bibliodiv"/>
-          <xs:element ref="bib-entry"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="bibliodiv">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Bibliography Division: A bibliodiv is a section of a bibliography. A
-        bibliography might be divided into sections in order to group different types of sources
-        together, like books, journal articles, web sites, and so on. A bibliography may contain any
-        number of bib-entry elements or any number of bibliodivs, but it cannot contain a mixture of
-        both at the same level.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="bib-entry" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="bib-entry">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Bibliography Entry: A bib-entry is an entry in a bibliography. The
-        contents of bib-entry is a "database" of named fields. It is formatted as a displayed block.
-        A bib-entry is "raw." It contains a database-like collection of named fields. It is the
-        responsibility of the processing system to select elements from within a bib-entry, present
-        them in the correct order, and add all punctuation.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="authorgroup"/>
-          <xs:element ref="other-credit"/>
-          <xs:element ref="pubdate"/>
-          <xs:element ref="citetitle"/>
-          <xs:element ref="volumenum"/>
-          <xs:element ref="issuenum"/>
-          <xs:element ref="edition"/>
-          <xs:element ref="publisher"/>
-          <xs:element ref="address"/>
-          <xs:element ref="pagenums"/>
-          <xs:element ref="bibliomisc"/>
-          <xs:element ref="biblioid"/>
-          <xs:element ref="inline-equation"/>
-          <xs:element ref="inline-mediaobject"/>
-          <xs:element ref="inline-mediaobject-group"/>
-          <xs:group ref="formatting-elements"/>
-          <xs:group ref="linking-elements"/>
-          <xs:group ref="track-change-elements"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="pubdate">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Publish Date: The pubdate is the date of publication of a document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="citetitle">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Cite Title: A citetitle provides inline markup for the title of a cited
-        work. It is formatted as an inline. Often italicized for books and quoted for articles.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attribute name="pubwork">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="article"/>
-            <xs:enumeration value="book"/>
-            <xs:enumeration value="chapter"/>
-            <xs:enumeration value="journal"/>
-            <xs:enumeration value="manuscript"/>
-            <xs:enumeration value="part"/>
-            <xs:enumeration value="series"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="volumenum">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Volume Number: A volumenum identifies the volume number of a book in a
-        set, or a periodical.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="issuenum">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Issue Number: The issuenum contains the issue number of a periodical. May
-        be formatted inline or as a displayed block, depending on context.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="edition">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Edition: The edition contains the name or number of the edition of the
-        document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="publisher">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Publisher: A publisher associates a publisher-name and an address. Many
-        publishers have offices in more than one city. A publisher can be used to list or
-        distinguish between the multiple offices.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:choice maxOccurs="unbounded">
-        <xs:element ref="publisher-name"/>
-        <xs:element ref="address"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="publisher-name">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Publisher Name: A publisher-name is the name of a publisher. Historically,
-        this has been used in bibliographic meta-information to identify the publisher of a book or
-        other document. It is also reasonable to identify the publisher of an electronic publication
-        in this way.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="pagenums">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Page Numbers: A pagenums identifies a page or range of pages. This may be
-        useful in the bibliography of a book, to indicate the number of pages, or in a citation to a
-        journal article.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="bibliomisc">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Bibliography Misc.: The bibliomisc element is a container for
-        bibliographic information that does not fit neatly into the other bibliographic fields (such
-        as author and publisher). It is recommended that the role attribute be used to identify the
-        kind of information that this element contains.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="biblioid">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Bibliography Identifier: A bibliographic identifier, such as an ISBN
-        number, Library of Congress identifier, doi, or URI.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-      </xs:choice>
-      <xs:attribute name="type">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="doi"/>
-            <xs:enumeration value="issn"/>
-            <xs:enumeration value="isbn"/>
-            <xs:enumeration value="standard"/>
-            <xs:enumeration value="libraryofcongress"/>
-            <xs:enumeration value="pubmed"/>
-            <xs:enumeration value="uri"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
 
   <xs:element name="index">
     <xs:annotation>
@@ -5402,10 +3543,9 @@
         <xs:choice>
           <xs:element ref="indexdiv" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="index-entry" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="nonxml" minOccurs="0" maxOccurs="unbounded"/>
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="tocentry" type="yesorno"/>
@@ -5425,7 +3565,6 @@
         <xs:element ref="titlegroup" minOccurs="0"/>
         <xs:element ref="index-entry" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -5449,7 +3588,6 @@
           </xs:choice>
         </xs:sequence>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -5468,18 +3606,11 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="term"/>
-        <xs:choice minOccurs="0">
-          <xs:element ref="seeie"/>
-          <xs:element ref="seealsoie"/>
-        </xs:choice>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -5494,21 +3625,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="term"/>
-        <xs:choice minOccurs="0">
-          <xs:element ref="seeie"/>
-          <xs:element ref="seealsoie"/>
-        </xs:choice>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
     </xs:complexType>
   </xs:element>
-
+  
   <xs:element name="tertiaryie">
     <xs:annotation>
       <xs:appinfo>
@@ -5520,64 +3644,11 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="term"/>
-        <xs:choice minOccurs="0">
-          <xs:element ref="seeie"/>
-          <xs:element ref="seealsoie"/>
-        </xs:choice>
         <xs:element ref="nav-pointer-group" minOccurs="0"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="seeie">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>See Index Entry: A seeie identifies a "See" cross reference in an
-        index-entry. The index-entries occur in an index, not in the flow of the text. They are part
-        of a formatted index, not markers for indexing.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="term" maxOccurs="unbounded"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="prefix" type="xs:string" default="See"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="seealsoie">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>See Also Index Entry: A seealsoie identifies a "See also" cross-reference
-        in an index-entry. The index-entries occur in an index, not in the flow of the text. They
-        are part of a formatted index, not markers for indexing.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="term" maxOccurs="unbounded"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="prefix" type="xs:string" default="See also"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
     </xs:complexType>
   </xs:element>
 
@@ -5591,7 +3662,6 @@
       <xs:sequence>
         <xs:element ref="nav-pointer" maxOccurs="unbounded"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -5609,163 +3679,11 @@
         <xs:group ref="formatting-elements"/>
         <xs:group ref="track-change-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="type" type="xs:string"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="index-term">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Index Term: An index-term identifies text that is to be placed in the
-        index. In the simplest case, the placement of the index-term in the document identifies the
-        location of the term in the text. In other words, the index-term is placed in the flow of
-        the document at the point where the index-entry in the index should point. Index-terms are
-        suppressed in the primary text flow, although they contribute to the population of an index
-        and serve as anchors for cross references. Under no circumstances is the actual content of
-        index-term rendered in the primary flow.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="term"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="index-term"/>
-          <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element ref="see"/>
-            <xs:element ref="see-also"/>
-          </xs:choice>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="pagenum" type="xs:string"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="see">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>See: The use of see in an index-term indicates that the reader should be
-        directed elsewhere in the index if they attempt to look up this term. The content of see
-        identifies another term in the index which the reader should consult instead of the current
-        term.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="linking-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="inline-mediaobject"/>
-        <xs:element ref="inline-mediaobject-group"/>
-        <xs:element ref="acronym"/>
-        <xs:element ref="abbr"/>
-        <xs:element ref="phrase"/>
-        <xs:element ref="footnote"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="see-also">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>See Also: The use of see-also in an index-term indicates that the reader
-        should be directed elsewhere in the index for additional information. The content of
-        see-also identifies another term in the index that the reader should consult in addition to
-        the current term.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="linking-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="inline-mediaobject"/>
-        <xs:element ref="inline-mediaobject-group"/>
-        <xs:element ref="acronym"/>
-        <xs:element ref="abbr"/>
-        <xs:element ref="phrase"/>
-        <xs:element ref="footnote"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="rid" type="xs:IDREFS"/>
-      <!--<xs:attribute
-      ref="rid"/>-->
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="errata">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Errata: Container for erratum.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0" maxOccurs="1"/>
-        <xs:element ref="erratum" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="erratum">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Erratum: A mistake in a book or any printed or written document added
-        after the book is printed.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice maxOccurs="unbounded">
-          <xs:group ref="block-elements"/>
-          <xs:element ref="correction"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
-  </xs:element>
-
-  <xs:element name="correction">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Correction: Specify the corrections of the document.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-optional"/>
-      <xs:attributeGroup ref="common-attributes"/>
+      <!--<xs:attributeGroup ref="rid-attributes"/>-->
+      <xs:attribute name="rid" type="xs:IDREFS" use="optional"/>
     </xs:complexType>
   </xs:element>
 
@@ -5787,7 +3705,7 @@
         <xs:element ref="short-code" minOccurs="1" maxOccurs="1"/>
         <xs:element ref="book-icon" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attributeGroup ref="id-required"/>
+      <xs:attributeGroup ref="id-attributes"/>
       <xs:attributeGroup ref="QR-code"/>
     </xs:complexType>
   </xs:element>
@@ -5836,7 +3754,6 @@
     </xs:attribute>
   </xs:attributeGroup>
 
-
   <!-- ========================================================================== -->
   <!-- Attributes Group Definition                                                -->
   <!-- ========================================================================== -->
@@ -5852,7 +3769,7 @@
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="inline-elements"/>
       </xs:choice>
-      <xs:attributeGroup ref="id-optional"/>
+      
       <xs:attribute name="short-url" use="required" type="xs:string">
         <xs:annotation>
           <xs:appinfo>
@@ -5943,7 +3860,7 @@
     </xs:attribute>
   </xs:attributeGroup>
 
-  <xs:attributeGroup name="id-required">
+  <xs:attributeGroup name="id-attributes">
     <xs:attribute name="id" type="xs:ID" use="required">
       <xs:annotation>
         <xs:appinfo>
@@ -5963,15 +3880,12 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
-  <xs:attributeGroup name="id-optional">
-    <xs:attribute name="id" type="xs:ID">
+  
+   <xs:attributeGroup name="rid-attributes">
+    <xs:attribute name="rid" type="xs:IDREF" use="required">
       <xs:annotation>
         <xs:appinfo>
-          <xs:documentation>Identifier: Identifies the unique identifier value of the associated
-          element, so that the element's content may be cross-referenced. IDs must be unique inside
-          their document (not just within their element type). It is not required to provide an ID
-          for that associated element.</xs:documentation>
+          <xs:documentation>"Reference Identifier". An internal link to an identifier (that is, id attribute value) in this document.</xs:documentation>
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
@@ -6082,58 +3996,8 @@
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="relocated-from" type="xs:IDREF" use="optional">
-      <xs:annotation>
-        <xs:appinfo>
-          <xs:documentation>Relocated From: Provides the id of the location where the XML has been
-          moved from. This creates a cross-reference to its original text.</xs:documentation>
-        </xs:appinfo>
-      </xs:annotation>
-    </xs:attribute>
   </xs:attributeGroup>
 
-  <!--<xs:attributeGroup name="correlated-attributes">
-    <xs:attribute name="correlated-target" type="xs:string">
-      <xs:annotation>
-        <xs:appinfo>
-          <xs:documentation>Correlated Target: It is the section the correlated content is related
-          to</xs:documentation>
-        </xs:appinfo>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="correlated-type">
-      <xs:annotation>
-        <xs:appinfo>
-          <xs:documentation>Correlated Type: 
-            The editors use type 1, 2 or 3 to distinguish the correlated types.  The definition for
-            these types are:
-            •	Type 1 – Only in a single location but scoped to a committee outside the code where it resides.
-            •	Type 2 – Similar language with same technical requirements
-            •	Type 3 – Essentially identical language
-            •  Type 4 - Material from SDO
-            The following types are original in the schema:
-            Correlated 'required-control' and 'required-passive'
-          will always be marked up in pairs, meaning that there cannot be a 'required-control'
-          attribute set without a corresponding 'required-passive'. 'optional' and 'associated'
-          would be set as the type on both sides of the correlation.</xs:documentation>
-        </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="1"/>
-          <xs:enumeration value="2"/>
-          <xs:enumeration value="3"/>
-          <xs:enumeration value="4"/>
-          <xs:enumeration value="optional" />
-          <xs:enumeration value="associated" />
-          <xs:enumeration value="required-control" />
-          <xs:enumeration value="required-passive" />
-          <xs:enumeration value="1"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
--->
   <xs:attributeGroup name="para-attributes">
     <xs:attribute name="indent" type="yesorno" default="no">
       <xs:annotation>
@@ -6290,8 +4154,6 @@
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <!--<xs:attribute
-    ref="orient"/>-->
     <xs:attribute name="colsep" type="zeroorone">
       <xs:annotation>
         <xs:documentation>Column Separator: If the value is 1 then column separators are turned on.
@@ -6569,16 +4431,8 @@
     </xs:attribute>
   </xs:attributeGroup>
 
-  <xs:element name="include" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <xs:complexType>
-      <xs:attribute name="href" type="xs:anyURI" use="required"/>
-      <!-- <xs:attribute name="parse" type="xs:string" default="xml"/>-->
-      <xs:attribute name="xpointer" type="xs:string"/>
-      <xs:attribute name="encoding" type="xs:string"/>
-      <xs:attribute name="accept" type="xs:string"/>
-      <xs:attribute name="accept-language" type="xs:string"/>
-    </xs:complexType>
-  </xs:element>
+  <!--Warnings,
+  Cautions and Notes-->
 
   <!--Warnings,
   Cautions and Notes-->
@@ -6607,6 +4461,5 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
 
 </xs:schema>
