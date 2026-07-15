@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema elementFormDefault="qualified" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" version="1.30.00" xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<xs:schema elementFormDefault="qualified" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" version="1.31.02" xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
   <!--                                                                            -->
@@ -274,6 +274,12 @@
   <!-- ========================================================================== -->
   <!-- 5-15-2026   GS   JIRA X2S-197 fixed child element order in titlegroup      -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.31                              -->
+  <!-- ========================================================================== -->
+  <!-- 5-22-2026   GS   JIRA X2S-200 replace footnote content model               -->
+  <!-- 6-03-2026   GS   JIRA X2S-203 resource as a numbered level role value      -->
+  <!-- 6-03-2026   GS   JIRA X2S-205 add revision attribute value expunge         -->
+  <!-- ========================================================================== -->
   <xs:import namespace="http://www.w3.org/1998/Math/MathML" schemaLocation="mathml3.0/mathml3.xsd" />
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
   <!-- ========================================================================== -->
@@ -314,7 +320,7 @@
       <xs:appinfo>
         <xs:documentation>A footnote list occurs as a child of the element with an associated id attribute which forms the footnote scope. 
           This is presently expected to be a level-1 numbered level (conceptual chapter) but could in the future be a different numbered 
-          level or a volume.</xs:documentation>
+          level, frontmatter, or a volume.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
@@ -332,11 +338,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="number"/>
+        <xs:element ref="number"/> <!-- FIXME number or label? do we expect dagger, double-dagger, etc? -->
         <xs:choice maxOccurs="unbounded">
         <xs:element ref="p"/>
         <xs:group ref="list-elements"/>
-        <xs:group ref="linking-elements"/>
       </xs:choice>
       </xs:sequence>
       <xs:attributeGroup ref="id-attributes"/>
@@ -2176,6 +2181,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" ref="metadata" />
         <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="footnote-list" />
         <xs:element minOccurs="0" ref="history" />
         <xs:element minOccurs="0" ref="QR-code" />
         <xs:choice>
@@ -3703,8 +3709,9 @@
       <xs:simpleType>
         <xs:restriction base="xs:string">
           <xs:enumeration value="added" />
-          <xs:enumeration value="deleted" />
           <xs:enumeration value="changed" />
+          <xs:enumeration value="deleted" />
+          <xs:enumeration value="expunge" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -4202,7 +4209,7 @@
       <xs:enumeration value="legis-section" />
       <xs:enumeration value="part" />
       <xs:enumeration value="references" />
-      <!--<xs:enumeration value="referenced_standards_chapter"/>-->
+      <xs:enumeration value="resource" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="isbn-roles">
@@ -4289,7 +4296,7 @@
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="mixed-content-type">
-        <xs:attribute name="publication-id" type="xs:string" />
+        <xs:attribute name="publication-id" type="xs:string" /> <!-- why isn't this required? -->
         <xs:attribute name="internal-id" type="xs:string" />
       </xs:extension>
     </xs:complexContent>
