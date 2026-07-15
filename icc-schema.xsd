@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.25.04" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
+<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.26.00" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
 
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
@@ -21,7 +21,7 @@
   <!--                                                                            -->
   <!-- Creation date   November 10, 2021                                          -->
   <!--                                                                            -->
-  <!-- Last modified   February 24, 2026                                          -->
+  <!-- Last modified   March 10, 2026                                             -->
   <!-- ========================================================================== -->
 
   <!-- ========================================================================== -->
@@ -226,6 +226,10 @@
   <!-- ========================================================================== -->
   <!-- 2-09-2026   GS   JIRA X2S-61 Schema adjustments for commentary             -->
   <!-- ========================================================================== -->
+  <!--                                  Version 1.24                              -->
+  <!--   GS   split publication-ref into publication-ref and ICC-publication-ref  -->
+  <!--   GS   remove id from secondaryie and tertiaryie                           -->
+  <!--   GS   require id attribute on publication, backmatter                     -->
   <!-- ========================================================================== -->
   <!--                                  Version 1.25                              -->
   <!-- ========================================================================== -->
@@ -236,6 +240,11 @@
   <!-- 3-04-2026   GS   JIRA X2S-91 rearrange relocated-from and relocated-to     -->
   <!-- 3-06-2026   GS   JIRA X2S-92 add change attributes on delete, block-delete -->
   <!-- 3-09-2026   GS   JIRA X2S-94 block-delete before block-insert              -->
+  <!-- 3-10-2026   GS   JIRA X2S-95 drop role from unordered and ordered lists    -->
+  <!-- ========================================================================== -->
+  <!--                                  Version 1.26                              -->
+  <!-- ========================================================================== -->
+  <!-- 3-10-2026   GS   JIRA X2S-96 block-insert, block-delete for mediaobject    -->
   <!-- ========================================================================== -->
 
 
@@ -1758,7 +1767,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="role" type="ordered-list-roles" />
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attribute name="prefix" type="xs:string"/>
@@ -1799,7 +1807,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="role" type="unordered-list-roles" />
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
     </xs:complexType>
@@ -2065,10 +2072,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-         <xs:element ref="block-delete" minOccurs="0"/>
-        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="block-delete" />
+        <xs:element minOccurs="0" ref="block-insert" />
         <xs:group ref="block-math"/>
-        <xs:element ref="where-list" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="where-list" />
       </xs:sequence>
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
@@ -2094,10 +2101,7 @@
 <xs:element name="block-insert">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Block Insert: The ability to include an insert at the block level.
-        Currently only m:math is allowed as an element because MathML is a standard and it's
-        own schema created by the W3C.  This allows the ability to have the revision attributes
-        when math is added.</xs:documentation>
+        <xs:documentation>Block Insert: The ability to include an insert at the block level. The "block-math" group includes MathML and mediaobject. (Because sometimes equations are images, but this means it also works for figure.)</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
@@ -2111,18 +2115,13 @@
   <xs:element name="block-delete">
     <xs:annotation>
       <xs:appinfo>
-        <xs:documentation>Block Delete: The ability to include an delete at the block level.
-          Currently only m:math is allowed as an element because MathML is a standard and it's
-          own schema created by the W3C.  This allows the ability to have the revision attributes
-          when math is added.</xs:documentation>
+        <xs:documentation>Block Delete: The ability to include an delete at the block level.Block Insert: The ability to include an insert at the block level. The "block-math" group includes MathML and mediaobject. (Because sometimes equations are images, but this means it also works for figure.)</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:sequence>
         <xs:group ref="block-math"/>
-      </xs:sequence>
       <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group"/>
+      <xs:attributeGroup ref="data-changed-group" />
       <xs:attributeGroup ref="errata-attributes"/>
     </xs:complexType>
   </xs:element>
@@ -2142,7 +2141,9 @@
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="titlegroup"/>
         <xs:element ref="history" minOccurs="0"/>
-        <xs:choice>
+        <xs:element ref="block-delete" minOccurs="0"/>
+        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:choice minOccurs="0">
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
           <xs:element ref="table"/>
@@ -2221,7 +2222,9 @@
       <xs:sequence>
         <xs:element ref="metadata" minOccurs="0"/>
         <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:choice>
+        <xs:element ref="block-delete" minOccurs="0"/>
+        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:choice minOccurs="0">
           <xs:element ref="mediaobject"/>
           <xs:element ref="mediaobject-group"/>
         </xs:choice>
@@ -3499,6 +3502,7 @@
       <xs:attributeGroup ref="common-attributes"/>
       <xs:attributeGroup ref="revision-attributes"/>
       <xs:attributeGroup ref="data-changed-group"/>
+      <xs:attribute name="role" type="delete-roles"/>
     </xs:complexType>
   </xs:element>
 
@@ -4523,22 +4527,6 @@
     </xs:restriction>
   </xs:simpleType>
   
-  <xs:simpleType name="ordered-list-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>An ordered list sometimes declares its numbering special.</xs:documentation></xs:appinfo></xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="custom" />
-      <xs:enumeration value="no_mark" />
-    </xs:restriction>
-  </xs:simpleType>
-  
-  <xs:simpleType name="unordered-list-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>An unordered list sometimes declares its indicator character special.</xs:documentation></xs:appinfo></xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="disc" />
-      <xs:enumeration value="no_mark" />
-    </xs:restriction>
-  </xs:simpleType>
-  
   <xs:simpleType name="paragraph-roles">
     <xs:annotation><xs:appinfo><xs:documentation>Sometimes a paragraph is special; we should consider an element for at least rights-ICC.</xs:documentation></xs:appinfo></xs:annotation>
     <xs:restriction base="xs:string">
@@ -4550,7 +4538,6 @@
   <xs:simpleType name="phrase-roles">
     <xs:annotation><xs:appinfo><xs:documentation>Phrase is sub-para text; sometimes the function should be identified.</xs:documentation></xs:appinfo></xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="icc-publication"/>
       <xs:enumeration value="jurisdiction-insert"/>
       <xs:enumeration value="keyterm"/>
     </xs:restriction>
