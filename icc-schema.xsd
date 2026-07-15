@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.29.06" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" elementFormDefault="qualified">
-
+<xs:schema elementFormDefault="qualified" targetNamespace="https://schema.iccsafe.org/book/schema/1.0" version="1.30.00" xmlns="https://schema.iccsafe.org/book/schema/1.0" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!-- ========================================================================== -->
   <!-- Version         1.0                                                        -->
   <!--                                                                            -->
@@ -23,7 +22,6 @@
   <!--                                                                            -->
   <!-- Last modified   March 16, 2026                                             -->
   <!-- ========================================================================== -->
-
   <!-- ========================================================================== -->
   <!-- Schema Version/Change History                                              -->
   <!--                                                                            -->
@@ -129,7 +127,6 @@
   <!--09-16-2024 -  Added element 'table-group'. Container element for a group of -->
   <!--              table that are to be displayed together.                      -->
   <!--09-17-2024 -  Added elements 'warning', 'caution' and 'note'.               -->
-
   <!-- ========================================================================== -->
   <!--                                  Version 1.12                              -->
   <!-- ========================================================================== -->
@@ -160,7 +157,6 @@
   <!--                                  Version 1.15                              -->
   <!-- ========================================================================== -->
   <!-- 04-01-2025 - Added 'relocated-to' to all levels.                           -->
-
   <!-- 04-01-2025 - Added 'delete' to block elements.  This was needed for        -->
   <!--              converted files.                                              -->
   <!-- 04-01-2025 - Added 'delete' to 'def-list'.                                 -->
@@ -214,7 +210,7 @@
   <!-- 1-26-2026   MM   changed publication/@schema-version from decimal to token;-->
   <!--                  publication/@schematron-version from string to token      -->
   <!-- ========================================================================== -->
-    <!--                                  Version 1.22                             -->
+  <!--                                  Version 1.22                             -->
   <!-- ========================================================================== -->
   <!-- 2-02-2026   GS   JIRA X2S-49 Production Schema                             -->
   <!--                  remove unused elements                                    -->
@@ -274,206 +270,225 @@
   <!--                   content in blocks-then-sections elements                 -->
   <!-- 5-13-2026   GS   JIRA X2S-195 change boxed-text content model              -->
   <!-- ========================================================================== -->
-
-
-  <xs:import schemaLocation="mathml3.0/mathml3.xsd" namespace="http://www.w3.org/1998/Math/MathML"/>
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+  <!--                                  Version 1.30                              -->
+  <!-- ========================================================================== -->
+  <!-- 5-15-2026   GS   JIRA X2S-197 fixed child element order in titlegroup      -->
+  <!-- ========================================================================== -->
+  <xs:import namespace="http://www.w3.org/1998/Math/MathML" schemaLocation="mathml3.0/mathml3.xsd" />
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
   <!-- ========================================================================== -->
   <!-- Group Definitions                                                          -->
   <!-- ========================================================================== -->
-
   <xs:group name="frontmatter-elements">
     <xs:choice>
-      <xs:element ref="titlegroup"/>
-      <xs:element ref="address"/>
-      <xs:element ref="mediaobject-group"/>
-      <xs:element ref="mediaobject"/>
-      <xs:element ref="url"/>
-      <xs:element ref="isbn"/>
-      <xs:element ref="copyright"/>
-      <xs:element ref="legalnotice"/>
-      <xs:element ref="trademarks"/>
-      <xs:element ref="history"/>
-      <xs:element ref="publication-history"/>
-      <xs:element ref="printing-location"/>
-      <xs:element ref="cover-image"/>
-      <xs:element ref="boxed-text"/>
+      <xs:element ref="titlegroup" />
+      <xs:element ref="address" />
+      <xs:element ref="mediaobject-group" />
+      <xs:element ref="mediaobject" />
+      <xs:element ref="url" />
+      <xs:element ref="isbn" />
+      <xs:element ref="copyright" />
+      <xs:element ref="legalnotice" />
+      <xs:element ref="trademarks" />
+      <xs:element ref="history" />
+      <xs:element ref="publication-history" />
+      <xs:element ref="printing-location" />
+      <xs:element ref="cover-image" />
+      <xs:element ref="boxed-text" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="header-elements">
     <xs:sequence>
       <xs:choice maxOccurs="unbounded" minOccurs="0">
-        <xs:element maxOccurs="1" minOccurs="0" ref="QR-code"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="toc"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="history"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="objectives"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="note"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="prefatory-commentary"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="QR-code" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="toc" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="history" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="objectives" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="note" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="prefatory-commentary" />
       </xs:choice>
     </xs:sequence>
   </xs:group>
-
+  <xs:element name="footnote-list">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>A footnote list occurs as a child of the element with an associated id attribute which forms the footnote scope. 
+          This is presently expected to be a level-1 numbered level (conceptual chapter) but could in the future be a different numbered 
+          level or a volume.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <!-- if we add endnote, sidenote, hovernote, etc. they would go in the choice. -->
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="footnote"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="footnote">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>A footnote is block text which is accessed out of the main text flow by means of a callout value.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="number"/>
+        <xs:choice maxOccurs="unbounded">
+        <xs:element ref="p"/>
+        <xs:group ref="list-elements"/>
+        <xs:group ref="linking-elements"/>
+      </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="id-attributes"/>
+      <xs:attributeGroup ref="common-attributes"/>
+    </xs:complexType>
+  </xs:element>
   <!-- ****************** -->
-
   <xs:group name="level-1-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-2"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-2" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-2-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-3"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-3" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-3-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-4"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-4" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-4-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-5"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-5" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-5-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-6"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-6" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-6-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-7"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-7" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-7-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-8"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-8" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-8-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-9"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-9" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-9-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-10"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-10" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-10-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="level-11"/>
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="level-11" />
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="level-11-bodymatters">
     <xs:sequence>
-      <xs:element ref="body" minOccurs="0"/>
-      <xs:element ref="commentary" minOccurs="0"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="other-model"/>
-        <xs:element ref="relocated-to"/>
+      <xs:element minOccurs="0" ref="body" />
+      <xs:element minOccurs="0" ref="commentary" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="other-model" />
+        <xs:element ref="relocated-to" />
       </xs:choice>
-      <xs:element ref="closing-commentary" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="closing-commentary" />
     </xs:sequence>
   </xs:group>
-
   <!-- ****************** -->
-
   <xs:group name="cals-or-html-group">
     <xs:choice>
-      <xs:element ref="tgroup" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:group ref="html-table-group" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="tgroup" />
+      <xs:group maxOccurs="unbounded" minOccurs="0" ref="html-table-group" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="html-table-group">
     <xs:sequence>
       <xs:choice minOccurs="0">
-        <xs:element ref="col" maxOccurs="unbounded"/>
-        <xs:element ref="colgroup" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="col" />
+        <xs:element maxOccurs="unbounded" ref="colgroup" />
       </xs:choice>
-      <xs:element name="thead" minOccurs="0">
+      <xs:element minOccurs="0" name="thead">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>Table Head: A container element for the table header rows of a table.
@@ -485,14 +500,14 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="tr" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" ref="tr" />
           </xs:sequence>
-          <xs:attributeGroup ref="common-attributes"/>
-          <xs:attributeGroup ref="revision-attributes"/>
-          <xs:attribute name="valign" type="vertical-alignment"/>
+          <xs:attributeGroup ref="common-attributes" />
+          <xs:attributeGroup ref="revision-attributes" />
+          <xs:attribute name="valign" type="vertical-alignment" />
         </xs:complexType>
       </xs:element>
-      <xs:element name="tbody" maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" name="tbody">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>Table Body: A container for the body rows of a table. The tbody
@@ -503,14 +518,14 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="tr" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" ref="tr" />
           </xs:sequence>
-          <xs:attributeGroup ref="common-attributes"/>
-          <xs:attributeGroup ref="revision-attributes"/>
-          <xs:attribute name="valign" type="vertical-alignment"/>
+          <xs:attributeGroup ref="common-attributes" />
+          <xs:attributeGroup ref="revision-attributes" />
+          <xs:attribute name="valign" type="vertical-alignment" />
         </xs:complexType>
       </xs:element>
-      <xs:element name="tfoot" minOccurs="0">
+      <xs:element minOccurs="0" name="tfoot">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>Table Footer: A container for the footer rows of a table. The tfoot
@@ -521,148 +536,129 @@
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
-            <xs:element ref="tr" maxOccurs="unbounded"/>
+            <xs:element maxOccurs="unbounded" ref="tr" />
           </xs:sequence>
-          <xs:attributeGroup ref="common-attributes"/>
-          <xs:attributeGroup ref="revision-attributes"/>
-          <xs:attribute name="valign" type="vertical-alignment"/>
+          <xs:attributeGroup ref="common-attributes" />
+          <xs:attributeGroup ref="revision-attributes" />
+          <xs:attribute name="valign" type="vertical-alignment" />
         </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:group>
-
   <xs:group name="block-elements">
     <xs:choice>
-      <xs:group ref="alert-elements"/>
-      <xs:group ref="figure-elements"/>
-      <xs:group ref="list-elements"/>
-      <xs:group ref="maths-elements"/>
-      <xs:group ref="para-elements"/>
-      <xs:element ref="promulgator"/>
-      <xs:group ref="publishing-elements"/>
-      <xs:group ref="table-elements"/>
+      <xs:group ref="alert-elements" />
+      <xs:group ref="figure-elements" />
+      <xs:group ref="list-elements" />
+      <xs:group ref="maths-elements" />
+      <xs:group ref="para-elements" />
+      <xs:element ref="promulgator" />
+      <xs:group ref="publishing-elements" />
+      <xs:group ref="table-elements" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="para-elements">
     <xs:choice>
-      <xs:element ref="aside"/>
-      <xs:element ref="exception"/>
-      <xs:element ref="p"/>
+      <xs:element ref="aside" />
+      <xs:element ref="exception" />
+      <xs:element ref="p" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="list-elements">
     <xs:choice>
-      <xs:element ref="ol"/>
-      <xs:element ref="ul"/>
-      <xs:element ref="def-list"/>
+      <xs:element ref="ol" />
+      <xs:element ref="ul" />
+      <xs:element ref="def-list" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="table-elements">
     <xs:choice>
-      <xs:element ref="table"/>
-      <xs:element ref="informal-table"/>
+      <xs:element ref="table" />
+      <xs:element ref="informal-table" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="figure-elements">
     <xs:choice>
-      <xs:element ref="figure"/>
-      <xs:element ref="informal-figure"/>
-      <xs:element ref="mediaobject-group"/>
-      <xs:element ref="mediaobject"/>
+      <xs:element ref="figure" />
+      <xs:element ref="informal-figure" />
+      <xs:element ref="mediaobject-group" />
+      <xs:element ref="mediaobject" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="maths-elements">
     <xs:choice>
-      <xs:element ref="equation"/>
-      <xs:element ref="informal-equation"/>
+      <xs:element ref="equation" />
+      <xs:element ref="informal-equation" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="publishing-elements">
     <xs:choice>
-      <xs:element ref="boxed-text"/>
-      <xs:element ref="address"/>
-      <xs:element ref="note"/>
+      <xs:element ref="boxed-text" />
+      <xs:element ref="address" />
+      <xs:element ref="note" />
     </xs:choice>
   </xs:group>
-  
   <xs:group name="other-model">
     <xs:choice>
-      <xs:element ref="table"/>
-      <xs:element ref="figure"/>
-      <xs:element ref="equation"/>
+      <xs:element ref="table" />
+      <xs:element ref="figure" />
+      <xs:element ref="equation" />
     </xs:choice>
   </xs:group>
-
   <!-- ****************** -->
-
   <xs:group name="block-math">
     <xs:sequence>
-      <xs:element ref="m:math" minOccurs="0"/>
-      <xs:element ref="mediaobject" minOccurs="0"/>
-      <xs:element ref="mediaobject-group" minOccurs="0"/>
+      <xs:element minOccurs="0" ref="m:math" />
+      <xs:element minOccurs="0" ref="mediaobject" />
+      <xs:element minOccurs="0" ref="mediaobject-group" />
     </xs:sequence>
   </xs:group>
-
   <xs:group name="inline-math">
     <xs:sequence>
-      <xs:element ref="m:math" minOccurs="0"/>
-      <xs:element ref="inline-mediaobject" minOccurs="0"/>
-      
+      <xs:element minOccurs="0" ref="m:math" />
+      <xs:element minOccurs="0" ref="inline-mediaobject" />
     </xs:sequence>
   </xs:group>
-
   <!-- ****************** -->
-
   <xs:group name="inline-elements">
     <xs:choice>
-      <xs:group ref="formatting-elements"/>
-      <xs:group ref="linking-elements"/>
-      <xs:group ref="track-change-elements"/>
-      <xs:element ref="inline-equation"/>
-      <xs:element ref="inline-mediaobject"/>
-      <xs:element ref="acronym"/>
-      <xs:element ref="phrase"/>
-      <xs:element ref="history"/>
-      <xs:element ref="footnote"/>
-      <xs:element ref="no-break"/>
+      <xs:group ref="formatting-elements" />
+      <xs:group ref="linking-elements" />
+      <xs:group ref="track-change-elements" />
+      <xs:element ref="inline-equation" />
+      <xs:element ref="inline-mediaobject" />
+      <xs:element ref="acronym" />
+      <xs:element ref="callout" />
+      <xs:element ref="phrase" />
+      <xs:element ref="history" />
+      <xs:element ref="no-break" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="formatting-elements">
     <xs:choice>
-      <xs:element ref="emphasis"/>
-      <xs:element ref="sub"/>
-      <xs:element ref="sup"/>
-      <xs:element ref="br"/>
+      <xs:element ref="emphasis" />
+      <xs:element ref="sub" />
+      <xs:element ref="sup" />
+      <xs:element ref="br" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="linking-elements">
     <xs:choice>
-      <xs:element ref="xref"/>
-      <xs:element ref="url"/>
-      <xs:element ref="ICC-publication-ref"/>
-      <xs:element ref="publication-ref"/>
+      <xs:element ref="xref" />
+      <xs:element ref="url" />
+      <xs:element ref="ICC-publication-ref" />
+      <xs:element ref="publication-ref" />
     </xs:choice>
   </xs:group>
-
   <xs:group name="track-change-elements">
     <xs:choice>
-      <xs:element ref="insert"/>
-      <xs:element ref="delete"/>
+      <xs:element ref="insert" />
+      <xs:element ref="delete" />
     </xs:choice>
   </xs:group>
-
   <!-- ========================================================================== -->
   <!-- Element definitions                                                        -->
   <!-- ========================================================================== -->
-
   <xs:element name="publication">
     <xs:annotation>
       <xs:appinfo>
@@ -671,19 +667,17 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="volume" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element maxOccurs="unbounded" ref="volume" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="schema-version" use="required" type="xs:token"/>      
-      <xs:attribute name="schematron-version" use="optional" type="xs:token"/>
-      <xs:attribute name="document-version" use="optional" type="xs:decimal"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attribute name="schema-version" type="xs:token" use="required" />
+      <xs:attribute name="schematron-version" type="xs:token" use="optional" />
+      <xs:attribute name="document-version" type="xs:decimal" use="optional" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="volume">
     <xs:annotation>
       <xs:appinfo>
@@ -692,22 +686,20 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata"/>
-        <xs:element ref="titlegroup"/>
-        <xs:element ref="frontmatter" minOccurs="0"/>
+        <xs:element ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="frontmatter" />
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="level-1"/>
+          <xs:element ref="level-1" />
         </xs:choice>
-        <xs:element ref="backmatter" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="backmatter" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="volume-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="volume-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="metadata">
     <xs:annotation>
       <xs:appinfo>
@@ -715,16 +707,14 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:element ref="meta"/>
-        <xs:element ref="isbn"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
+        <xs:element ref="meta" />
+        <xs:element ref="isbn" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="frontmatter">
     <xs:annotation>
       <xs:appinfo>
@@ -734,25 +724,23 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlepage" minOccurs="0"/>
-        <xs:element ref="copyright-page" minOccurs="0"/>
-        <xs:element ref="publisher-note" minOccurs="0"/>
-        <xs:element ref="foreword" minOccurs="0"/>
-        <xs:element ref="preface" minOccurs="0"/>
-        <xs:element ref="relocation-table" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="section"/>
-          <xs:element ref="editorial-commentary"/>
+        <xs:element minOccurs="0" ref="titlepage" />
+        <xs:element minOccurs="0" ref="copyright-page" />
+        <xs:element minOccurs="0" ref="publisher-note" />
+        <xs:element minOccurs="0" ref="foreword" />
+        <xs:element minOccurs="0" ref="preface" />
+        <xs:element minOccurs="0" ref="relocation-table" />
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="section" />
+          <xs:element ref="editorial-commentary" />
         </xs:choice>
-        <xs:element ref="toc" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="toc" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
-   <!-- ****************** -->
-
+  <!-- ****************** -->
   <xs:element name="level-1">
     <xs:annotation>
       <xs:appinfo>
@@ -763,27 +751,26 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-1-bodymatters"/>
-        <xs:element ref="conclusion" minOccurs="0"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="footnote-list" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-1-bodymatters" />
+        <xs:element minOccurs="0" ref="conclusion" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-2">
     <xs:annotation>
       <xs:appinfo>
@@ -794,26 +781,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-2-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-2-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-3">
     <xs:annotation>
       <xs:appinfo>
@@ -822,27 +807,25 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-3-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-3-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
       <!--<xs:attributeGroup ref="correlated-attributes" />-->
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-4">
     <xs:annotation>
       <xs:appinfo>
@@ -851,26 +834,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-4-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-4-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-5">
     <xs:annotation>
       <xs:appinfo>
@@ -879,26 +860,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-5-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-5-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-6">
     <xs:annotation>
       <xs:appinfo>
@@ -907,26 +886,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-6-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-6-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-7">
     <xs:annotation>
       <xs:appinfo>
@@ -935,26 +912,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-7-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-7-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-8">
     <xs:annotation>
       <xs:appinfo>
@@ -963,26 +938,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-8-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-8-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
-    <!-- ****************** -->
-
+  <!-- ****************** -->
   <xs:element name="level-9">
     <xs:annotation>
       <xs:appinfo>
@@ -991,26 +964,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-9-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-9-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-10">
     <xs:annotation>
       <xs:appinfo>
@@ -1019,26 +990,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-10-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-10-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="level-11">
     <xs:annotation>
       <xs:appinfo>
@@ -1047,41 +1016,38 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-11-bodymatters"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-11-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attribute name="role" type="legis-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
-      <xs:attribute name="reservecount" type="xs:integer"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attribute name="role" type="legis-roles" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
+      <xs:attribute name="reservecount" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="meta">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Meta: Name of a single piece of metadata</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-      </xs:choice>
-      <xs:attribute name="name" use="required"/>
-      <xs:attributeGroup ref="common-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="name" use="required" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="titlegroup">
     <xs:annotation>
       <xs:appinfo>
@@ -1091,37 +1057,32 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="super-title" minOccurs="0"/>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element ref="committee-desig" minOccurs="0"/>
-          <xs:element ref="label" minOccurs="0"/>
-          <xs:element ref="number" minOccurs="0"/>
-          <xs:element ref="correlated" minOccurs="0"/>
-          <xs:element ref="title"/>
-          <xs:element ref="sub-title" minOccurs="0"/>
-        </xs:choice>
+        <xs:element minOccurs="0" ref="super-title" />
+        <xs:element minOccurs="0" ref="committee-desig" />
+        <xs:element minOccurs="0" ref="label" />
+        <xs:element minOccurs="0" ref="number" />
+        <xs:element minOccurs="0" ref="correlated" />
+        <xs:element minOccurs="0" ref="title" />
+        <xs:element minOccurs="0" ref="sub-title" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="super-title">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Super Title: Super title represents the category of the whole document.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="generic-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="role" type="generic-roles" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="committee-desig">
     <xs:annotation>
       <xs:appinfo>
@@ -1129,47 +1090,29 @@
         responsible for portions of the code in front of a code section number.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="responsible-for" type="xs:string"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="responsible-for" type="xs:string" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="label">
+  <xs:element name="label" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Label: Any prefix word associated with a number, for example, the title of
         a figure, such as "Figure 1".</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="number">
+  <xs:element name="number" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Number: The number or letter designating the sequence.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <xs:element name="title">
     <xs:annotation>
       <xs:appinfo>
@@ -1177,35 +1120,24 @@
         chapter, section, etc.).</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="title-abbreviation" type="xs:string"/>
-      <xs:attribute name="title-year" type="xs:string"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="title-abbreviation" type="xs:string" />
+          <xs:attribute name="title-year" type="xs:string" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="sub-title">
+  <xs:element name="sub-title" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Sub Title: The subtitle element holds the subtitle for a hierarchical
         section (book, chapter, section etc.).</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="titlepage">
     <xs:annotation>
       <xs:appinfo>
@@ -1214,15 +1146,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="frontmatter-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="frontmatter-elements" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="copyright-page">
     <xs:annotation>
       <xs:appinfo>
@@ -1231,34 +1161,28 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="frontmatter-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="frontmatter-elements" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="isbn">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>ISBN: Used to capture an international standard book number.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attribute name="role" type="isbn-roles"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="role" type="isbn-roles" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
- 
-
   <!-- ****************** -->
-
   <xs:element name="copyright">
     <xs:annotation>
       <xs:appinfo>
@@ -1267,8 +1191,8 @@
         legal status is required, use legal notice.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
         <xs:element ref="copyright-statement"/>
       </xs:choice>
       <xs:attributeGroup ref="common-attributes"/>
@@ -1276,8 +1200,7 @@
       <xs:attribute name="holder" type="xs:string"/>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="copyright-statement">
+  <xs:element name="copyright-statement" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Copyright Statement: The copyright statement element holds information
@@ -1285,16 +1208,8 @@
         legal status is required, use legal notice.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="legalnotice">
     <xs:annotation>
       <xs:appinfo>
@@ -1306,12 +1221,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="p" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="p" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="trademarks">
     <xs:annotation>
       <xs:appinfo>
@@ -1321,12 +1235,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="p" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="p" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="publication-history">
     <xs:annotation>
       <xs:appinfo>
@@ -1335,24 +1248,23 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="p" maxOccurs="unbounded"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element maxOccurs="unbounded" ref="p" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
       <xs:attribute name="type">
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="print"/>
-            <xs:enumeration value="pdf"/>
-            <xs:enumeration value="html"/>
-            <xs:enumeration value="ePubs"/>
-            <xs:enumeration value="other"/>
+            <xs:enumeration value="print" />
+            <xs:enumeration value="pdf" />
+            <xs:enumeration value="html" />
+            <xs:enumeration value="ePubs" />
+            <xs:enumeration value="other" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="publication-ref" type="pub-ref-type">
     <xs:annotation>
       <xs:documentation>A reference to a publication produced by an entity which is not ICC.</xs:documentation>
@@ -1363,22 +1275,6 @@
       <xs:documentation>A reference to a publication produced by ICC.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  
-  <xs:complexType mixed="true" name="pub-ref-type">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Publication Reference: This element is used as a reference to other
-        publications.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:choice maxOccurs="unbounded" minOccurs="0">
-      <xs:group ref="inline-elements"/>
-    </xs:choice>
-    <xs:attributeGroup ref="common-attributes"/>
-    <xs:attribute name="publication-id" type="xs:string"/>
-    <xs:attribute name="internal-id" type="xs:string"/>
-  </xs:complexType>
-
   <xs:element name="printing-location">
     <xs:annotation>
       <xs:appinfo>
@@ -1388,12 +1284,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="p" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="p" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="cover-image">
     <xs:annotation>
       <xs:appinfo>
@@ -1402,13 +1297,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice>
-        <xs:element ref="mediaobject" maxOccurs="unbounded"/>
-        <xs:element ref="mediaobject-group" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="mediaobject" />
+        <xs:element maxOccurs="unbounded" ref="mediaobject-group" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
   <xs:element name="preamble">
     <xs:annotation>
@@ -1432,7 +1326,6 @@
       <xs:attribute name="tocentry" type="yesorno" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="preface" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
@@ -1441,7 +1334,6 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  
   <xs:element name="relocation-table" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
@@ -1449,43 +1341,12 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  
-  <xs:complexType name="blocks-then-sections">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>This is a common pattern for front matter, broadly constructed.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" ref="metadata" />
-      <xs:element minOccurs="0" ref="titlegroup" />
-      <xs:element minOccurs="0" ref="body" />
-      <xs:choice maxOccurs="unbounded" minOccurs="0">
-        <xs:element ref="section" />
-        <xs:element ref="editorial-commentary" />
-      </xs:choice>
-    </xs:sequence>
-    <xs:attributeGroup ref="common-attributes" />
-    <xs:attributeGroup ref="revision-attributes" />
-    <xs:attribute name="tocentry" type="yesorno" />
-  </xs:complexType>
-  
   <xs:attributeGroup name="section-attributes">
     <xs:attribute name="disp-level" type="xs:integer" />
     <xs:attribute name="indexnum" type="xs:string" />
     <xs:attribute name="reservecount" type="xs:integer" />
   </xs:attributeGroup>
-  
-  <xs:complexType name="blocks-then-sections-with-id">
-      <xs:complexContent>
-        <xs:extension base="blocks-then-sections">
-          <xs:attributeGroup ref="id-attributes" />
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-
   <!-- ****************** -->
-
   <xs:element name="foreword" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
@@ -1494,10 +1355,7 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
-
   <!-- ****************** -->
-
   <xs:element name="publisher-note" type="blocks-then-sections-with-id">
     <xs:annotation>
       <xs:appinfo>
@@ -1507,9 +1365,7 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="toc">
     <xs:annotation>
       <xs:appinfo>
@@ -1520,16 +1376,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="tocdiv"/>
-          <xs:element ref="toc-entry"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="tocdiv" />
+          <xs:element ref="toc-entry" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="tocdiv">
     <xs:annotation>
       <xs:appinfo>
@@ -1539,13 +1394,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element ref="tocdiv"/>
-        <xs:element ref="toc-entry"/>
+        <xs:element ref="tocdiv" />
+        <xs:element ref="toc-entry" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="toc-entry">
     <xs:annotation>
       <xs:appinfo>
@@ -1555,35 +1409,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:element ref="title"/>
+        <xs:element minOccurs="0" ref="label" />
+        <xs:element ref="title" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="pagenum" type="xs:string"/>
-      <xs:attributeGroup ref="optional-rid-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attribute name="pagenum" type="xs:string" />
+      <xs:attributeGroup ref="optional-rid-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
-  <xs:element name="orgname">
+  <xs:element name="orgname" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Organization Name: An orgname identifies the name of an organization or
         corporation.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="address">
     <xs:annotation>
       <xs:appinfo>
@@ -1593,117 +1436,65 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element ref="orgname"/>
-        <xs:element ref="phone"/>
-        <xs:element ref="street"/>
-        <xs:element ref="city"/>
-        <xs:element ref="state"/>
-        <xs:element ref="country"/>
-        <xs:element ref="postalcode"/>
-        <xs:element ref="url"/>
+        <xs:element ref="orgname" />
+        <xs:element ref="phone" />
+        <xs:element ref="street" />
+        <xs:element ref="city" />
+        <xs:element ref="state" />
+        <xs:element ref="country" />
+        <xs:element ref="postalcode" />
+        <xs:element ref="url" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="city">
+  <xs:element name="city" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>City: The name of a city in an address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="country">
+  <xs:element name="country" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Country: The name of a country, typically in an address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="postalcode">
+  <xs:element name="postalcode" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Postal Code: A postal code (in the United States, a ZIP code) in an
         address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-  
-    <xs:element name="phone">
+  <xs:element name="phone" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Phone: A phone identifies a telephone number in an address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="state">
+  <xs:element name="state" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>State: A state is the name or postal abbreviation for a state (or
         province) in an address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="street">
+  <xs:element name="street" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Street: In postal addresses, the street element contains the street
         address portion of the address.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="objectives">
     <xs:annotation>
       <xs:appinfo>
@@ -1713,16 +1504,14 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="body" maxOccurs="1"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="1" ref="body" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="history">
     <xs:annotation>
       <xs:appinfo>
@@ -1732,19 +1521,17 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="linking-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="footnote"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:group ref="linking-elements" />
+        <xs:group ref="track-change-elements" />
+        <xs:element ref="callout" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="body">
     <xs:annotation>
       <xs:appinfo>
@@ -1753,13 +1540,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="block-elements" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="section">
     <xs:annotation>
       <xs:appinfo>
@@ -1777,7 +1562,6 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="editorial-commentary" type="blocks-then-sections">
     <xs:annotation>
       <xs:appinfo>
@@ -1789,9 +1573,7 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="ol">
     <xs:annotation>
       <xs:appinfo>
@@ -1802,10 +1584,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="li" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="li" />
       </xs:sequence>
-      <xs:attribute name="type" default="custom">
+      <xs:attribute default="custom" name="type">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>List Type: Indicates the desired numeration type.</xs:documentation>
@@ -1813,23 +1595,22 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="arabic"/>
-            <xs:enumeration value="upper-alpha"/>
-            <xs:enumeration value="lower-alpha"/>
-            <xs:enumeration value="upper-roman"/>
-            <xs:enumeration value="lower-roman"/>
-            <xs:enumeration value="custom"/>
+            <xs:enumeration value="arabic" />
+            <xs:enumeration value="upper-alpha" />
+            <xs:enumeration value="lower-alpha" />
+            <xs:enumeration value="upper-roman" />
+            <xs:enumeration value="lower-roman" />
+            <xs:enumeration value="custom" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="prefix" type="xs:string"/>
-      <xs:attribute name="suffix" type="xs:string"/>
-      <xs:attribute name="start" type="xs:integer"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="prefix" type="xs:string" />
+      <xs:attribute name="suffix" type="xs:string" />
+      <xs:attribute name="start" type="xs:integer" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="ul">
     <xs:annotation>
       <xs:appinfo>
@@ -1839,10 +1620,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="li" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="li" />
       </xs:sequence>
-      <xs:attribute name="type" default="disc">
+      <xs:attribute default="disc" name="type">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>List Type: Indicates the desired symbol type. The allowed values are:
@@ -1851,22 +1632,23 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="disc"/><!-- U+2022 -->
-            <xs:enumeration value="square"/>
-            <xs:enumeration value="gray-square"/>
-            <xs:enumeration value="circle"/>
-            <xs:enumeration value="check"/>
-            <xs:enumeration value="hyphen"/><!-- U+002D, U+2010 -->
-            <xs:enumeration value="custom"/>
-            <xs:enumeration value="none"/>
+            <xs:enumeration value="disc" />
+            <!-- U+2022 -->
+            <xs:enumeration value="square" />
+            <xs:enumeration value="gray-square" />
+            <xs:enumeration value="circle" />
+            <xs:enumeration value="check" />
+            <xs:enumeration value="hyphen" />
+            <!-- U+002D, U+2010 -->
+            <xs:enumeration value="custom" />
+            <xs:enumeration value="none" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="li">
     <xs:annotation>
       <xs:appinfo>
@@ -1877,18 +1659,16 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
-        <xs:element ref="list-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="label" />
+        <xs:group maxOccurs="unbounded" ref="block-elements" />
+        <xs:element minOccurs="0" ref="list-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="where-list">
     <xs:annotation>
       <xs:appinfo>
@@ -1899,24 +1679,23 @@
     <xs:complexType>
       <xs:sequence>
         <!-- GS 2026-02-24 IRC2025V2 has a second var-def -->
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="var-def"/>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="var-def" />
           <!--BH:  made this minOccurs="0" because found a where clause without a var-entries structure.-->
-          <xs:element minOccurs="0" ref="var-entries"/>
+          <xs:element minOccurs="0" ref="var-entries" />
         </xs:choice>
         <!--Added
         the ability to have an informal equation or a where-list in a where-list
         based on findings of PDF generation and confirmation by Jen Fitzsimmons.-->
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="informal-equation"/>
-          <xs:element ref="where-list"/>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="informal-equation" />
+          <xs:element ref="where-list" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="var-def">
     <xs:annotation>
       <xs:appinfo>
@@ -1925,16 +1704,15 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="informal-equation"/>
-        <xs:element ref="p"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="informal-equation" />
+        <xs:element ref="p" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="para-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="var-entries">
     <xs:annotation>
       <xs:appinfo>
@@ -1944,11 +1722,10 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="var-entry" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="var-entry" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="var-entry">
     <xs:annotation>
       <xs:appinfo>
@@ -1958,30 +1735,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="varname"/>
-        <xs:element ref="vardesc" minOccurs="0"/>
+        <xs:element ref="varname" />
+        <xs:element minOccurs="0" ref="vardesc" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="varname">
+  <xs:element name="varname" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Variable Name: The word or phrase being defined or described in a variable
         list.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <xs:element name="vardesc">
     <xs:annotation>
       <xs:appinfo>
@@ -1991,15 +1759,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="block-elements"/>
+        <xs:group ref="block-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="def-list">
     <xs:annotation>
       <xs:appinfo>
@@ -2010,22 +1776,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.
     I found this scenario in IMC id ='IMCComm2024P1_Ch02_Sec202_Comment'.-->
         <!--BH - Added commentary to make data parse.  This commentary would be against the entire def-list.-->
         <!-- GS 2026-02-02 put the commentary in the choice -->
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="commentary"/>
-          <xs:element ref="def-item"/>
-          <xs:element ref="relocated-to"/>
+          <xs:element ref="commentary" />
+          <xs:element ref="def-item" />
+          <xs:element ref="relocated-to" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="def-item">
     <xs:annotation>
       <xs:appinfo>
@@ -2035,22 +1800,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="relocated-from" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="committee-desig" minOccurs="0"/>
-        <xs:element ref="term"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="relocated-from" />
+        <xs:element minOccurs="0" ref="committee-desig" />
+        <xs:element ref="term" />
         <xs:sequence minOccurs="0">
-          <xs:element ref="def"/>
+          <xs:element ref="def" />
           <!--This commentary would be against a single def-item-->
-          <xs:element minOccurs="0" ref="commentary"/>
+          <xs:element minOccurs="0" ref="commentary" />
         </xs:sequence>
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="term">
     <xs:annotation>
       <xs:appinfo>
@@ -2060,20 +1824,19 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="linking-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="inline-mediaobject"/>
-        <xs:element ref="acronym"/>
-        <xs:element ref="phrase"/>
-        <xs:element ref="footnote"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:group ref="linking-elements" />
+        <xs:group ref="track-change-elements" />
+        <xs:element ref="inline-mediaobject" />
+        <xs:element ref="acronym" />
+        <xs:element ref="phrase" />
+        <xs:element ref="callout" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="def">
     <xs:annotation>
       <xs:appinfo>
@@ -2083,15 +1846,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="block-elements" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="equation">
     <xs:annotation>
       <xs:appinfo>
@@ -2102,22 +1863,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:element ref="number" minOccurs="0"/>
-        <xs:element ref="title" minOccurs="0"/>
-        <xs:element ref="block-delete" minOccurs="0"/>
-        <xs:element ref="block-insert" minOccurs="0"/>
-        <xs:group ref="block-math"/>
-        <xs:element ref="where-list" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="equation-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="label" />
+        <xs:element minOccurs="0" ref="number" />
+        <xs:element minOccurs="0" ref="title" />
+        <xs:element minOccurs="0" ref="block-delete" />
+        <xs:element minOccurs="0" ref="block-insert" />
+        <xs:group ref="block-math" />
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="where-list" />
+        <xs:element minOccurs="0" ref="equation-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="tocentry" type="yesorno" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="informal-equation">
     <xs:annotation>
       <xs:appinfo>
@@ -2128,17 +1888,16 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="block-delete"/>
-        <xs:element minOccurs="0" ref="block-insert"/>
-        <xs:group ref="block-math"/>
-        <xs:element minOccurs="0" ref="where-list"/>
-        <xs:element ref="equation-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="block-delete" />
+        <xs:element minOccurs="0" ref="block-insert" />
+        <xs:group ref="block-math" />
+        <xs:element minOccurs="0" ref="where-list" />
+        <xs:element minOccurs="0" ref="equation-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="inline-equation">
     <xs:annotation>
       <xs:appinfo>
@@ -2148,27 +1907,25 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="inline-math"/>
+        <xs:group ref="inline-math" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
-<xs:element name="block-insert">
+  <xs:element name="block-insert">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Block Insert: The ability to include an insert at the block level. The "block-math" group includes MathML and mediaobject. (Because sometimes equations are images, but this means it also works for figure.)</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:group ref="block-math"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group"/>
-      <xs:attributeGroup ref="errata-attributes"/>
+      <xs:group ref="block-math" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="data-changed-group" />
+      <xs:attributeGroup ref="errata-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="block-delete">
     <xs:annotation>
       <xs:appinfo>
@@ -2176,15 +1933,13 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-        <xs:group ref="block-math"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group"/>
-      <xs:attributeGroup ref="errata-attributes"/>
+      <xs:group ref="block-math" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="data-changed-group" />
+      <xs:attributeGroup ref="errata-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="figure">
     <xs:annotation>
       <xs:appinfo>
@@ -2195,27 +1950,27 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:element ref="history" minOccurs="0"/>
-        <xs:element ref="block-delete" minOccurs="0"/>
-        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="history" />
+        <xs:element minOccurs="0" ref="block-delete" />
+        <xs:element minOccurs="0" ref="block-insert" />
         <xs:choice minOccurs="0">
-          <xs:element ref="mediaobject"/>
-          <xs:element ref="mediaobject-group"/>
-          <xs:element ref="table"/>
-          <xs:element ref="informal-table"/>
+          <xs:element ref="mediaobject" />
+          <xs:element ref="mediaobject-group" />
+          <xs:element ref="table" />
+          <xs:element ref="informal-table" />
         </xs:choice>
-        <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="figure-notes" minOccurs="0"/>
-        <xs:element ref="figure-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="caption" />
+        <xs:element minOccurs="0" ref="figure-notes" />
+        <xs:element minOccurs="0" ref="figure-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="float" type="float"/>
-      <xs:attribute name="orient" default="port">
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="float" type="float" />
+      <xs:attribute default="port" name="orient">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>Orientation: Specifies the orientation of the associate element.</xs:documentation>
@@ -2223,14 +1978,13 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="port"/>
-            <xs:enumeration value="land"/>
+            <xs:enumeration value="port" />
+            <xs:enumeration value="land" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="figure-note">
     <xs:annotation>
       <xs:appinfo>
@@ -2240,18 +1994,17 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="label" />
         <xs:choice maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
-          <xs:group ref="maths-elements"/>
+          <xs:group ref="para-elements" />
+          <xs:group ref="list-elements" />
+          <xs:group ref="maths-elements" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="figure-notes">
     <xs:annotation>
       <xs:appinfo>
@@ -2261,15 +2014,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="figure-note" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="figure-note" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-       
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="informal-figure">
     <xs:annotation>
       <xs:appinfo>
@@ -2279,20 +2030,20 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="block-delete" minOccurs="0"/>
-        <xs:element ref="block-insert" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="p" />
+        <xs:element minOccurs="0" ref="block-delete" />
+        <xs:element minOccurs="0" ref="block-insert" />
         <xs:choice minOccurs="0">
-          <xs:element ref="mediaobject"/>
-          <xs:element ref="mediaobject-group"/>
+          <xs:element ref="mediaobject" />
+          <xs:element ref="mediaobject-group" />
         </xs:choice>
-        <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="figure-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="caption" />
+        <xs:element minOccurs="0" ref="figure-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="orient" default="port">
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute default="port" name="orient">
         <xs:annotation>
           <xs:appinfo>
             <xs:documentation>Orientation: Specifies the orientation of the associate element.</xs:documentation>
@@ -2300,16 +2051,14 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:enumeration value="port"/>
-            <xs:enumeration value="land"/>
+            <xs:enumeration value="port" />
+            <xs:enumeration value="land" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="mediaobject-group">
     <xs:annotation>
       <xs:appinfo>
@@ -2319,16 +2068,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="mediaobject" maxOccurs="unbounded"/>
-        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="mediaobject" />
+        <xs:element minOccurs="0" ref="caption" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="mediaobject">
     <xs:annotation>
       <xs:appinfo>
@@ -2338,20 +2086,18 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element minOccurs="0" ref="titlegroup" />
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="img"/>
+          <xs:element ref="img" />
         </xs:choice>
-        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="caption" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="inline-mediaobject">
     <xs:annotation>
       <xs:appinfo>
@@ -2361,19 +2107,17 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element minOccurs="0" ref="caption" />
         <xs:choice maxOccurs="unbounded">
-          <xs:element ref="img"/>
+          <xs:element ref="img" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="img">
     <xs:annotation>
       <xs:appinfo>
@@ -2384,12 +2128,11 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="media-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="media-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="book-icon">
     <xs:annotation>
       <xs:appinfo>
@@ -2398,14 +2141,12 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="media-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="media-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="caption">
     <xs:annotation>
       <xs:appinfo>
@@ -2415,15 +2156,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="para-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="para-elements" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="table">
     <xs:annotation>
       <xs:appinfo>
@@ -2435,28 +2174,27 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:element ref="history" minOccurs="0"/>
-        <xs:element ref="QR-code" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="history" />
+        <xs:element minOccurs="0" ref="QR-code" />
         <xs:choice>
-          <xs:group ref="cals-or-html-group"/>
-          <xs:element ref="mediaobject"/>
-          <xs:element ref="mediaobject-group"/>
+          <xs:group ref="cals-or-html-group" />
+          <xs:element ref="mediaobject" />
+          <xs:element ref="mediaobject-group" />
         </xs:choice>
-        <xs:element ref="caption" minOccurs="0"/>
-        <xs:element ref="table-notes" minOccurs="0"/>
-        <xs:element ref="table-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="caption" />
+        <xs:element minOccurs="0" ref="table-notes" />
+        <xs:element minOccurs="0" ref="table-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="table-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="cals-table-attributes"/>
-      <xs:attributeGroup ref="html-table-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attribute name="role" type="table-roles" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="cals-table-attributes" />
+      <xs:attributeGroup ref="html-table-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="informal-table">
     <xs:annotation>
       <xs:appinfo>
@@ -2469,26 +2207,24 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="caption" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element minOccurs="0" ref="caption" />
         <xs:choice>
-          <xs:group ref="cals-or-html-group"/>
-          <xs:element ref="mediaobject"/>
-          <xs:element ref="mediaobject-group"/>
+          <xs:group ref="cals-or-html-group" />
+          <xs:element ref="mediaobject" />
+          <xs:element ref="mediaobject-group" />
         </xs:choice>
-        <xs:element ref="table-notes" minOccurs="0"/>
-        <xs:element ref="table-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="table-notes" />
+        <xs:element minOccurs="0" ref="table-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="table-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="cals-table-attributes"/>
-      <xs:attributeGroup ref="html-table-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attribute name="role" type="table-roles" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="cals-table-attributes" />
+      <xs:attributeGroup ref="html-table-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="tgroup">
     <xs:annotation>
       <xs:appinfo>
@@ -2502,12 +2238,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="colspec" maxOccurs="unbounded"/>
-        <xs:element ref="thead" minOccurs="0"/>
-        <xs:element ref="tbody" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="colspec" />
+        <xs:element minOccurs="0" ref="thead" />
+        <xs:element maxOccurs="unbounded" ref="tbody" />
       </xs:sequence>
-      <xs:attributeGroup ref="align-attributes"/>
-      <xs:attribute name="cols" use="required" type="xs:integer">
+      <xs:attributeGroup ref="align-attributes" />
+      <xs:attribute name="cols" type="xs:integer" use="required">
         <xs:annotation>
           <xs:documentation> Columns: If the value is 1 then column separators are turned on. If the
             value is 0 then column separators are turned off. </xs:documentation>
@@ -2542,9 +2278,7 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="colspec">
     <xs:annotation>
       <xs:appinfo>
@@ -2557,7 +2291,7 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="align-attributes"/>
+      <xs:attributeGroup ref="align-attributes" />
       <xs:attribute name="colnum">
         <xs:annotation>
           <xs:appinfo>
@@ -2567,7 +2301,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:pattern value="([0-9]+)"/>
+            <xs:pattern value="([0-9]+)" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -2580,7 +2314,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
+            <xs:pattern value="(col[0-9]+)" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -2606,9 +2340,7 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="colgroup">
     <xs:annotation>
       <xs:appinfo>
@@ -2618,9 +2350,9 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="col" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="col" />
       </xs:sequence>
-      <xs:attributeGroup ref="align-attributes"/>
+      <xs:attributeGroup ref="align-attributes" />
       <xs:attribute name="class" type="xs:string">
         <xs:annotation>
           <xs:appinfo>
@@ -2663,7 +2395,6 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="col">
     <xs:annotation>
       <xs:appinfo>
@@ -2672,7 +2403,7 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="align-attributes"/>
+      <xs:attributeGroup ref="align-attributes" />
       <xs:attribute name="class" type="xs:string">
         <xs:annotation>
           <xs:appinfo>
@@ -2715,9 +2446,7 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
- <!-- ************* -->
-
+  <!-- ************* -->
   <xs:element name="thead">
     <xs:annotation>
       <xs:appinfo>
@@ -2729,14 +2458,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="row" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="row" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="valign" type="vertical-alignment"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="valign" type="vertical-alignment" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="tbody">
     <xs:annotation>
       <xs:appinfo>
@@ -2748,16 +2476,14 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="row" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="row" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="valign" type="vertical-alignment"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="valign" type="vertical-alignment" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="row">
     <xs:annotation>
       <xs:appinfo>
@@ -2771,11 +2497,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="entry" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="entry" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="cell-color-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="cell-color-attributes" />
       <xs:attribute name="rowsep" type="zeroorone">
         <xs:annotation>
           <xs:documentation>Row Separator: If the value is 1 then row separators (the line that
@@ -2785,7 +2511,6 @@
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="tr">
     <xs:annotation>
       <xs:appinfo>
@@ -2795,17 +2520,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice>
-        <xs:element ref="th" minOccurs="0" maxOccurs="unbounded"/>
-        <xs:element ref="td" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="th" />
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="td" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="cell-color-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="cell-color-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="entry">
     <xs:annotation>
       <xs:appinfo>
@@ -2819,14 +2542,14 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="para-elements"/>
-        <xs:group ref="list-elements"/>
-        <xs:group ref="figure-elements"/>
-        <xs:group ref="maths-elements"/>
+        <xs:group ref="para-elements" />
+        <xs:group ref="list-elements" />
+        <xs:group ref="figure-elements" />
+        <xs:group ref="maths-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="align-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="align-attributes" />
       <xs:attribute name="colname">
         <xs:annotation>
           <xs:appinfo>
@@ -2836,7 +2559,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
+            <xs:pattern value="(col[0-9]+)" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -2859,7 +2582,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
+            <xs:pattern value="(col[0-9]+)" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -2871,7 +2594,7 @@
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:string">
-            <xs:pattern value="(col[0-9]+)"/>
+            <xs:pattern value="(col[0-9]+)" />
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -2896,12 +2619,11 @@
             separators are turned off (i.e. they are hidden).</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attributeGroup ref="cell-color-attributes"/>
+      <xs:attributeGroup ref="cell-color-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:attributeGroup name="cell-color-attributes">
-    <xs:attribute name="background-color" use="optional" type="xs:string">
+    <xs:attribute name="background-color" type="xs:string" use="optional">
       <xs:annotation>
         <xs:documentation>Background Color: Specifies the background color of the entry.</xs:documentation>
       </xs:annotation>
@@ -2912,7 +2634,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:element name="td">
     <xs:annotation>
       <xs:appinfo>
@@ -2922,20 +2643,19 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="para-elements"/>
-        <xs:group ref="list-elements"/>
-        <xs:group ref="table-elements"/>
-        <xs:group ref="figure-elements"/>
-        <xs:group ref="maths-elements"/>
+        <xs:group ref="para-elements" />
+        <xs:group ref="list-elements" />
+        <xs:group ref="table-elements" />
+        <xs:group ref="figure-elements" />
+        <xs:group ref="maths-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="align-attributes"/>
-      <xs:attributeGroup ref="td-attributes"/>
-      <xs:attributeGroup ref="cell-color-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="align-attributes" />
+      <xs:attributeGroup ref="td-attributes" />
+      <xs:attributeGroup ref="cell-color-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="th">
     <xs:annotation>
       <xs:appinfo>
@@ -2945,22 +2665,20 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="para-elements"/>
-        <xs:group ref="list-elements"/>
-        <xs:group ref="table-elements"/>
-        <xs:group ref="figure-elements"/>
-        <xs:group ref="maths-elements"/>
+        <xs:group ref="para-elements" />
+        <xs:group ref="list-elements" />
+        <xs:group ref="table-elements" />
+        <xs:group ref="figure-elements" />
+        <xs:group ref="maths-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="align-attributes"/>
-      <xs:attributeGroup ref="td-attributes"/>
-      <xs:attributeGroup ref="cell-color-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="align-attributes" />
+      <xs:attributeGroup ref="td-attributes" />
+      <xs:attributeGroup ref="cell-color-attributes" />
     </xs:complexType>
   </xs:element>
-  
   <!-- ****************** -->
-
   <xs:element name="table-notes">
     <xs:annotation>
       <xs:appinfo>
@@ -2970,14 +2688,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="table-note" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="table-note" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="table-note">
     <xs:annotation>
       <xs:appinfo>
@@ -2987,23 +2704,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:element ref="number" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="label" />
+        <xs:element minOccurs="0" ref="number" />
         <xs:choice maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
-          <xs:group ref="table-elements"/>
-          <xs:group ref="figure-elements"/>
-          <xs:group ref="maths-elements"/>
+          <xs:group ref="para-elements" />
+          <xs:group ref="list-elements" />
+          <xs:group ref="table-elements" />
+          <xs:group ref="figure-elements" />
+          <xs:group ref="maths-elements" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:simpleType name="zeroorone">
     <xs:restriction base="xs:string">
       <xs:enumeration value="0">
@@ -3022,13 +2737,8 @@
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-
   <!-- ****************** -->
-
-  
-
   <!-- ****************** -->
-
   <xs:element name="boxed-text">
     <xs:annotation>
       <xs:appinfo>
@@ -3046,34 +2756,7 @@
       <xs:attribute ref="text-color" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
-  <xs:complexType name="block-element-type">
-    <xs:sequence>
-      <xs:group ref="para-elements" maxOccurs="unbounded"/>
-      
-    </xs:sequence>
-    <xs:attribute name="type">
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="extract"/>
-          <xs:enumeration value="display-quote"/>
-          <xs:enumeration value="epigraph"/>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-    
-    <xs:attributeGroup ref="common-attributes"/>
-    <xs:attributeGroup ref="revision-attributes"/>
-  </xs:complexType>
-
-  
-
-  
-
-  <!-- ****************** -->
-
   <xs:element name="note">
     <xs:annotation>
       <xs:appinfo>
@@ -3083,19 +2766,17 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice minOccurs="1" maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:choice maxOccurs="unbounded" minOccurs="1">
+          <xs:group ref="para-elements" />
+          <xs:group ref="list-elements" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="p">
     <xs:annotation>
       <xs:appinfo>
@@ -3104,51 +2785,47 @@
         attribute is used to subclass the paragraph to achieve variations in presentation.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="paragraph-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
-      <xs:attribute name="vertical" default="no">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation> Vertical: Specifies the text orientation of the associated element.
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="role" type="paragraph-roles" />
+          <xs:attributeGroup ref="para-attributes" />
+          <xs:attribute default="no" name="vertical">
+            <xs:annotation>
+              <xs:appinfo>
+                <xs:documentation> Vertical: Specifies the text orientation of the associated element.
             Allowed values: - "no" (default): No vertical text. - "yes": Text is vertical. -
             "up-side-down": Text is vertical, starting from the bottom. </xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="no"/>
-            <xs:enumeration value="yes"/>
-            <xs:enumeration value="up-side-down"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="no" />
+                <xs:enumeration value="yes" />
+                <xs:enumeration value="up-side-down" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="aside">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Aside: A minimal editorial note; same content model as a paragraph. These get distinct formatting and the text is semantically distinct from the legislative content around it. No associated id so an aside cannot be referenced.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
-      <xs:attribute ref="background-color"/>
-      <xs:attribute ref="text-color"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="para-attributes" />
+          <xs:attribute ref="background-color" />
+          <xs:attribute ref="text-color" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="relocated-to">
     <xs:annotation>
       <xs:appinfo>
@@ -3156,93 +2833,43 @@
         been relocated to another place in the document. The id attribute of the relocated-to element is the id which corresponds to what it used to be (so it sorts with its legislative level siblings); the rid attribute corresponds to where it is now.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
-      <xs:attributeGroup ref="rid-attributes"/>
-      <xs:attribute name="formerly" type="xs:string"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="id-attributes" />
+          <xs:attributeGroup ref="para-attributes" />
+          <xs:attributeGroup ref="rid-attributes" />
+          <xs:attribute name="formerly" type="xs:string" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <xs:element name="relocated-from">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>relocated-from: ~metadata on the legislative level that has been moved. Indicates that this content has been moved. The associated rid attribute points back to the relocated-to element located where this content used to be.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
-      <xs:attributeGroup ref="rid-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="para-attributes" />
+          <xs:attributeGroup ref="rid-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
   <!-- ****************** -->
-
-  <xs:complexType name="commentary-type">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Commentary: The format of the Commentary includes the full text of each
-        section, table and figure in the code, followed immediately by the commentary applicable to
-        that text.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-      <xs:sequence>
-      <xs:element minOccurs="0" ref="titlegroup"/>
-      <xs:choice maxOccurs="unbounded" minOccurs="1">
-          <!--BH - added section to commentary-->
-          <xs:element ref="section"/>
-          <xs:element ref="bibliography"/>
-          <xs:group ref="block-elements"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
-
+  <!-- standard model commentary elements -->
   <xs:element name="commentary" type="commentary-type"><!-- after body; "regular" commentary --></xs:element>
   <xs:element name="prefatory-commentary" type="commentary-type"><!-- in the header --></xs:element>
   <xs:element name="closing-commentary" type="commentary-type"><!-- after the child legislative levels --></xs:element>
   <xs:element name="concluding-commentary" type="commentary-type"><!-- in the conclusion --></xs:element>
   <xs:element name="list-commentary" type="commentary-type"><!-- last thing in a list item --></xs:element>
-
-  <xs:complexType name="other-model-commentary-type">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Commentary added in content in other models (tables, whether HTML or CALS; equations,
-          whether images or MathML; figures, in whatever format) should not allow other-model block elements
-          (figure, equation, or table) in its content model lest we introduce a complex way to do unwanted
-          content nesting. Which means no sections as well as no table, equation, or figure children.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
-      <xs:sequence>
-      <xs:choice maxOccurs="unbounded" minOccurs="1">
-          <xs:element ref="bibliography"/>
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
-          <xs:element ref="note"/>
-          <xs:element ref="promulgator"/>
-          <xs:group ref="alert-elements"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-  </xs:complexType>
-  
-  <xs:element name="equation-commentary" type="other-model-commentary-type"/>
-  <xs:element name="figure-commentary" type="other-model-commentary-type"/>
-  <xs:element name="table-commentary" type="other-model-commentary-type"/>
-  
+  <!-- other-model commentary elements -->
+  <xs:element name="equation-commentary" type="other-model-commentary-type" />
+  <xs:element name="figure-commentary" type="other-model-commentary-type" />
+  <xs:element name="table-commentary" type="other-model-commentary-type" />
   <xs:element name="exception">
     <xs:annotation>
       <xs:appinfo>
@@ -3253,18 +2880,16 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="para-elements"/>
-        <xs:group ref="list-elements"/>
-        <xs:group ref="table-elements"/>
-        <xs:group ref="maths-elements"/>
+        <xs:group ref="para-elements" />
+        <xs:group ref="list-elements" />
+        <xs:group ref="table-elements" />
+        <xs:group ref="maths-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
-    <!-- ****************** -->
-
+  <!-- ****************** -->
   <xs:element name="bibliography">
     <xs:annotation>
       <xs:appinfo>
@@ -3275,24 +2900,22 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="objectives"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="objectives" />
         </xs:choice>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+          <xs:group ref="para-elements" />
         </xs:choice>
-        <xs:element ref="editorial-commentary" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="editorial-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="promulgator">
     <xs:annotation>
       <xs:appinfo>
@@ -3302,16 +2925,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="acronym"/>
-        <xs:element ref="address" minOccurs="0"/>
-        <xs:element ref="references" minOccurs="0"/>
+        <xs:element ref="acronym" />
+        <xs:element minOccurs="0" ref="address" />
+        <xs:element minOccurs="0" ref="references" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="references">
     <xs:annotation>
       <xs:appinfo>
@@ -3321,13 +2943,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="ref" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="ref" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="ref">
     <xs:annotation>
       <xs:appinfo>
@@ -3337,17 +2958,16 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
-        <xs:element ref="revision-list" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element minOccurs="0" ref="nav-pointer-group" />
+        <xs:element minOccurs="0" ref="revision-list" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="ref-text" type="xs:string" use="optional"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="ref-text" type="xs:string" use="optional" />
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="revision-list">
     <xs:annotation>
       <xs:appinfo>
@@ -3356,13 +2976,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="revision" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="revision" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="revision">
     <xs:annotation>
       <xs:appinfo>
@@ -3371,28 +2990,25 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="instruction"/>
-        <xs:element ref="revision-description" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="instruction" />
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="revision-description" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="instruction">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>The type and location of the change the reader is expected to make; "delete", "revise", etc. It gets its own element as an aide to formatting.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="para-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="para-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="revision-description">
     <xs:annotation>
       <xs:appinfo>
@@ -3401,13 +3017,11 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group ref="block-elements" maxOccurs="unbounded"/>
+        <xs:group maxOccurs="unbounded" ref="block-elements" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="emphasis">
     <xs:annotation>
       <xs:appinfo>
@@ -3418,17 +3032,15 @@
         sanserif, other-style and roman.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="emphasis-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="emphasis-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="sub">
+  <xs:element name="sub" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Subscript: A number or expression that is set lower than the baseline and
@@ -3436,16 +3048,8 @@
         be displayed as a subscript when rendered.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
-  <xs:element name="sup">
+  <xs:element name="sup" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Superscript: A number or expression that is set higher than the baseline
@@ -3453,15 +3057,7 @@
         in a smaller font and shifted up with respect to the baseline.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <xs:element name="br">
     <xs:annotation>
       <xs:appinfo>
@@ -3469,12 +3065,10 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="acronym">
     <xs:annotation>
       <xs:appinfo>
@@ -3484,31 +3078,22 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="linking-elements"/>
-        <xs:group ref="track-change-elements"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:group ref="linking-elements" />
+        <xs:group ref="track-change-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="no-break">
+  <xs:element name="no-break" type="mixed-content-type">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>No-break: wraps text that must have no line break.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-    </xs:complexType>
   </xs:element>
-
   <xs:element name="phrase">
     <xs:annotation>
       <xs:appinfo>
@@ -3517,19 +3102,16 @@
         words smaller than a paragraph so that it is possible to provide attributes for them.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attribute name="role" type="phrase-roles"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="optional-rid-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="role" type="phrase-roles" />
+          <xs:attributeGroup ref="optional-rid-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="xref">
     <xs:annotation>
       <xs:appinfo>
@@ -3540,17 +3122,16 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:element ref="phrase"/>
-        <xs:group ref="track-change-elements"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:element ref="phrase" />
+        <xs:group ref="track-change-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="rid-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="rid-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="url">
     <xs:annotation>
       <xs:appinfo>
@@ -3560,19 +3141,29 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
-        <xs:element ref="inline-mediaobject"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:group ref="track-change-elements" />
+        <xs:element ref="inline-mediaobject" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="href" use="required" type="xs:string"/>
-      <xs:attribute name="target" fixed="blank"/>
-      <xs:attribute name="alt" type="xs:string"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="href" type="xs:string" use="required" />
+      <xs:attribute fixed="blank" name="target" />
+      <xs:attribute name="alt" type="xs:string" />
     </xs:complexType>
   </xs:element>
-
+  <xs:element name="callout">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>The callout element points to an out-of-text-flow note. These notes customarily have a chapter-scale scope.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="rid-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="correlated">
     <xs:annotation>
       <xs:appinfo>
@@ -3580,103 +3171,69 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="publication-ref"/>
-        <xs:element ref="ICC-publication-ref"/>
-        <xs:element ref="url"/>
-        <xs:group ref="track-change-elements"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="publication-ref" />
+        <xs:element ref="ICC-publication-ref" />
+        <xs:element ref="url" />
+        <xs:group ref="track-change-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="errata-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attributeGroup ref="errata-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="insert">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Insert: It is used to capture inserted text of track change.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group"/>
-      <xs:attributeGroup ref="errata-attributes"/>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="data-changed-group" />
+          <xs:attributeGroup ref="revision-attributes" />
+          <xs:attributeGroup ref="errata-attributes" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <xs:attributeGroup name="errata-attributes">
-    <xs:attribute name="errata" default="no" use="optional">
+    <xs:attribute default="no" name="errata" use="optional">
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="no"/>
-          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no" />
+          <xs:enumeration value="yes" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="errata-list" default="no" use="optional">
+    <xs:attribute default="no" name="errata-list" use="optional">
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="no"/>
-          <xs:enumeration value="yes"/>
+          <xs:enumeration value="no" />
+          <xs:enumeration value="yes" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:element name="delete">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Delete: It is used to capture deleted text of track change.</xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attributeGroup ref="data-changed-group"/>
-      <xs:attribute name="role" type="delete-roles"/>
-    </xs:complexType>
-  </xs:element>
-
-  <!-- ****************** -->
-
-  <xs:element name="footnote">
-    <xs:annotation>
-      <xs:appinfo>
-        <xs:documentation>Footnote: This element is a container around the contents of a footnote.
-        The footnote element usually generates a mark (a superscript symbol or number) at the place
-        in the flow of the document in which it occurs. The id attribute is used to give the
-        footnote a unique id that can be referenced by the link element. The label attribute is used
-        to indicate the text that should be used to reference the footnote inline with the body
-        text. The body of the footnote is then presented elsewhere, typically at the bottom of the
-        page.</xs:documentation>
-      </xs:appinfo>
-    </xs:annotation>
     <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="label" minOccurs="0"/>
-        <xs:choice maxOccurs="unbounded">
-          <xs:group ref="para-elements"/>
-          <xs:group ref="list-elements"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attributeGroup ref="data-changed-group" />
+          <xs:attributeGroup ref="revision-attributes" />
+          <xs:attribute name="role" type="delete-roles" />
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="backmatter">
     <xs:annotation>
       <xs:appinfo>
@@ -3688,17 +3245,15 @@
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:element ref="appendix"/>
-        <xs:element ref="level-1"/>
-        <xs:element ref="index"/>
+        <xs:element ref="appendix" />
+        <xs:element ref="level-1" />
+        <xs:element ref="index" />
       </xs:choice>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="conclusion">
     <xs:annotation>
       <xs:appinfo>
@@ -3709,15 +3264,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="bibliography"/>
-        <xs:element minOccurs="0" ref="concluding-commentary"/>
+        <xs:element minOccurs="0" ref="bibliography" />
+        <xs:element minOccurs="0" ref="concluding-commentary" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!-- ****************** -->
-
   <xs:element name="appendix">
     <xs:annotation>
       <xs:appinfo>
@@ -3729,21 +3282,21 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="metadata" minOccurs="0"/>
-        <xs:element ref="preamble" minOccurs="0"/>
-        <xs:element ref="titlegroup"/>
-        <xs:group ref="header-elements"/>
-        <xs:group ref="level-1-bodymatters"/>
+        <xs:element minOccurs="0" ref="metadata" />
+        <xs:element minOccurs="0" ref="preamble" />
+        <xs:element ref="titlegroup" />
+        <xs:element minOccurs="0" ref="footnote-list" />
+        <xs:group ref="header-elements" />
+        <xs:group ref="level-1-bodymatters" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="indexnum" type="xs:string"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
-      <xs:attribute name="tocautoadd" type="yesorno"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="indexnum" type="xs:string" />
+      <xs:attribute name="tocentry" type="yesorno" />
+      <xs:attribute name="tocautoadd" type="yesorno" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="index">
     <xs:annotation>
       <xs:appinfo>
@@ -3753,19 +3306,18 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
         <xs:choice>
-          <xs:element ref="indexdiv" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="index-entry" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="indexdiv" />
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="index-entry" />
         </xs:choice>
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="tocentry" type="yesorno"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="tocentry" type="yesorno" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="indexdiv">
     <xs:annotation>
       <xs:appinfo>
@@ -3776,14 +3328,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="titlegroup" minOccurs="0"/>
-        <xs:element ref="index-entry" maxOccurs="unbounded"/>
+        <xs:element minOccurs="0" ref="titlegroup" />
+        <xs:element maxOccurs="unbounded" ref="index-entry" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="index-entry">
     <xs:annotation>
       <xs:appinfo>
@@ -3794,19 +3345,18 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="primaryie"/>
-        <xs:sequence minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="secondaryie"/>
-          <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element ref="tertiaryie"/>
+        <xs:element ref="primaryie" />
+        <xs:sequence maxOccurs="unbounded" minOccurs="0">
+          <xs:element ref="secondaryie" />
+          <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="tertiaryie" />
           </xs:choice>
         </xs:sequence>
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="primaryie">
     <xs:annotation>
       <xs:appinfo>
@@ -3819,15 +3369,14 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="term"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
+        <xs:element ref="term" />
+        <xs:element minOccurs="0" ref="nav-pointer-group" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="secondaryie">
     <xs:annotation>
       <xs:appinfo>
@@ -3838,14 +3387,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="term"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
+        <xs:element ref="term" />
+        <xs:element minOccurs="0" ref="nav-pointer-group" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-  
   <xs:element name="tertiaryie">
     <xs:annotation>
       <xs:appinfo>
@@ -3856,14 +3404,13 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="term"/>
-        <xs:element ref="nav-pointer-group" minOccurs="0"/>
+        <xs:element ref="term" />
+        <xs:element minOccurs="0" ref="nav-pointer-group" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="nav-pointer-group">
     <xs:annotation>
       <xs:appinfo>
@@ -3872,13 +3419,12 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="nav-pointer" maxOccurs="unbounded"/>
+        <xs:element maxOccurs="unbounded" ref="nav-pointer" />
       </xs:sequence>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
     </xs:complexType>
   </xs:element>
-
   <xs:element name="nav-pointer">
     <xs:annotation>
       <xs:appinfo>
@@ -3887,21 +3433,19 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="formatting-elements"/>
-        <xs:group ref="track-change-elements"/>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:group ref="formatting-elements" />
+        <xs:group ref="track-change-elements" />
       </xs:choice>
-      <xs:attributeGroup ref="common-attributes"/>
-      <xs:attributeGroup ref="revision-attributes"/>
-      <xs:attribute name="type" type="generic-roles"/>
-      <xs:attributeGroup ref="optional-rid-attributes"/>
+      <xs:attributeGroup ref="common-attributes" />
+      <xs:attributeGroup ref="revision-attributes" />
+      <xs:attribute name="type" type="generic-roles" />
+      <xs:attributeGroup ref="optional-rid-attributes" />
     </xs:complexType>
   </xs:element>
-
   <!--==========================================================================-->
   <!-- QR Codes                                                                 -->
   <!--==========================================================================-->
-
   <xs:element name="QR-code">
     <xs:annotation>
       <xs:appinfo>
@@ -3912,15 +3456,14 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="img" minOccurs="1" maxOccurs="1"/>
-        <xs:element ref="short-code" minOccurs="1" maxOccurs="1"/>
-        <xs:element ref="book-icon" minOccurs="0" maxOccurs="1"/>
+        <xs:element maxOccurs="1" minOccurs="1" ref="img" />
+        <xs:element maxOccurs="1" minOccurs="1" ref="short-code" />
+        <xs:element maxOccurs="1" minOccurs="0" ref="book-icon" />
       </xs:sequence>
-      <xs:attributeGroup ref="id-attributes"/>
-      <xs:attributeGroup ref="QR-code"/>
+      <xs:attributeGroup ref="id-attributes" />
+      <xs:attributeGroup ref="QR-code" />
     </xs:complexType>
   </xs:element>
-
   <xs:attributeGroup name="QR-code">
     <xs:attribute name="display" use="required">
       <xs:annotation>
@@ -3931,12 +3474,12 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
-          <xs:enumeration value="yes"/>
-          <xs:enumeration value="no"/>
+          <xs:enumeration value="yes" />
+          <xs:enumeration value="no" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="levelref" use="required" type="xs:string">
+    <xs:attribute name="levelref" type="xs:string" use="required">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>The "levelref" attribute defines a mandatory ID of the component that
@@ -3953,22 +3496,20 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
-          <xs:enumeration value="add"/>
-          <xs:enumeration value="change"/>
-          <xs:enumeration value="relocated_from"/>
-          <xs:enumeration value="relocated_to"/>
-          <xs:enumeration value="delete"/>
-          <xs:enumeration value="table"/>
-          <xs:enumeration value="appendix"/>
+          <xs:enumeration value="add" />
+          <xs:enumeration value="change" />
+          <xs:enumeration value="relocated_from" />
+          <xs:enumeration value="relocated_to" />
+          <xs:enumeration value="delete" />
+          <xs:enumeration value="table" />
+          <xs:enumeration value="appendix" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
   <!-- ========================================================================== -->
   <!-- Attributes Group Definition                                                -->
   <!-- ========================================================================== -->
-
   <xs:element name="short-code">
     <xs:annotation>
       <xs:appinfo>
@@ -3976,56 +3517,50 @@
         url on Digital Codes. For example: 'abcde'. The shortcode will be created programmatically. </xs:documentation>
       </xs:appinfo>
     </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="inline-elements"/>
-      </xs:choice>
-      
-      <xs:attribute name="short-url" use="required" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo>
-            <xs:documentation>The "short-url" element is a url that links to Digital Codes and gets
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="mixed-content-type">
+          <xs:attribute name="short-url" type="xs:string" use="required">
+            <xs:annotation>
+              <xs:appinfo>
+                <xs:documentation>The "short-url" element is a url that links to Digital Codes and gets
             resolved on the backend to the full-url, i.e., http://short.iccsafe.org/abcde. </xs:documentation>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:attribute>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
   <xs:simpleType name="yesorno">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="yes"/>
-      <xs:enumeration value="no"/>
+      <xs:enumeration value="yes" />
+      <xs:enumeration value="no" />
     </xs:restriction>
   </xs:simpleType>
-
   <xs:simpleType name="alignment">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="left"/>
-      <xs:enumeration value="center"/>
-      <xs:enumeration value="right"/>
-      <xs:enumeration value="justify"/>
+      <xs:enumeration value="left" />
+      <xs:enumeration value="center" />
+      <xs:enumeration value="right" />
+      <xs:enumeration value="justify" />
     </xs:restriction>
   </xs:simpleType>
-
   <xs:simpleType name="vertical-alignment">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="top"/>
-      <xs:enumeration value="bottom"/>
-      <xs:enumeration value="middle"/>
+      <xs:enumeration value="top" />
+      <xs:enumeration value="bottom" />
+      <xs:enumeration value="middle" />
     </xs:restriction>
   </xs:simpleType>
-
   <xs:simpleType name="float">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="top"/>
-      <xs:enumeration value="bottom"/>
-      <xs:enumeration value="margin"/>
+      <xs:enumeration value="top" />
+      <xs:enumeration value="bottom" />
+      <xs:enumeration value="margin" />
     </xs:restriction>
   </xs:simpleType>
-
   <!-- ****************** -->
-
   <xs:attributeGroup name="volume-attributes">
     <xs:attribute name="customer-id" type="xs:string">
       <xs:annotation>
@@ -4042,10 +3577,10 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="code"/>
-          <xs:enumeration value="landuse"/>
-          <xs:enumeration value="manual"/>
-          <xs:enumeration value="personnel"/>
+          <xs:enumeration value="code" />
+          <xs:enumeration value="landuse" />
+          <xs:enumeration value="manual" />
+          <xs:enumeration value="personnel" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -4057,20 +3592,19 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="authority"/>
-          <xs:enumeration value="borough"/>
-          <xs:enumeration value="city"/>
-          <xs:enumeration value="country"/>
-          <xs:enumeration value="municipality"/>
-          <xs:enumeration value="town"/>
-          <xs:enumeration value="township"/>
-          <xs:enumeration value="townvillage"/>
-          <xs:enumeration value="village"/>
+          <xs:enumeration value="authority" />
+          <xs:enumeration value="borough" />
+          <xs:enumeration value="city" />
+          <xs:enumeration value="country" />
+          <xs:enumeration value="municipality" />
+          <xs:enumeration value="town" />
+          <xs:enumeration value="township" />
+          <xs:enumeration value="townvillage" />
+          <xs:enumeration value="village" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="id-attributes">
     <xs:attribute name="id" type="xs:ID" use="required">
       <xs:annotation>
@@ -4091,7 +3625,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-  
   <xs:attributeGroup name="optional-rid-attributes">
     <xs:attribute name="rid" type="xs:IDREF" use="optional">
       <xs:annotation>
@@ -4101,8 +3634,7 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-  
-   <xs:attributeGroup name="rid-attributes">
+  <xs:attributeGroup name="rid-attributes">
     <xs:attribute name="rid" type="xs:IDREF" use="required">
       <xs:annotation>
         <xs:appinfo>
@@ -4111,7 +3643,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="common-attributes">
     <xs:attribute name="display" type="xs:string">
       <xs:annotation>
@@ -4128,7 +3659,7 @@
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="lang" type="xs:string" default="en-us">
+    <xs:attribute default="en-us" name="lang" type="xs:string">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>Language: Specifies the natural language of the element and its
@@ -4145,7 +3676,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="revision-attributes">
     <xs:attribute name="revision-by" type="xs:string">
       <xs:annotation>
@@ -4172,9 +3702,9 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="added"/>
-          <xs:enumeration value="deleted"/>
-          <xs:enumeration value="changed"/>
+          <xs:enumeration value="added" />
+          <xs:enumeration value="deleted" />
+          <xs:enumeration value="changed" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -4187,13 +3717,12 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-  
   <xs:attributeGroup name="data-changed-group">
     <xs:annotation>
-        <xs:appinfo>
-          <xs:documentation>Data-changed information is specific to insertions.</xs:documentation>
-        </xs:appinfo>
-      </xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Data-changed information is specific to insertions.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:attribute name="data-changed" type="xs:string">
       <xs:annotation>
         <xs:appinfo>
@@ -4209,9 +3738,8 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="para-attributes">
-    <xs:attribute name="indent" type="yesorno" default="no">
+    <xs:attribute default="no" name="indent" type="yesorno">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>Indent: Specifies indentation of the paragraph.</xs:documentation>
@@ -4226,7 +3754,6 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="media-attributes">
     <xs:attribute name="src" type="xs:string" use="required">
       <xs:annotation>
@@ -4316,7 +3843,7 @@
         </xs:appinfo>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="scalefit" type="zeroorone" default="1">
+    <xs:attribute default="1" name="scalefit" type="zeroorone">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>Scalefit: Specify the vertical position of the contents.</xs:documentation>
@@ -4324,9 +3851,8 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="cals-table-attributes">
-    <xs:attribute name="frame" default="topbot">
+    <xs:attribute default="topbot" name="frame">
       <xs:annotation>
         <xs:documentation>Frame: Specifies which sides of the table should be given rules, making a
           box or frame of lines around the table.</xs:documentation>
@@ -4334,26 +3860,26 @@
       <xs:simpleType>
         <xs:restriction base="xs:string">
           <!-- Applied on Cals Table -->
-          <xs:enumeration value="topbot"/>
-          <xs:enumeration value="top"/>
-          <xs:enumeration value="bottom"/>
-          <xs:enumeration value="none"/>
-          <xs:enumeration value="all"/>
-          <xs:enumeration value="sides"/>
+          <xs:enumeration value="topbot" />
+          <xs:enumeration value="top" />
+          <xs:enumeration value="bottom" />
+          <xs:enumeration value="none" />
+          <xs:enumeration value="all" />
+          <xs:enumeration value="sides" />
           <!-- Applied on HTML Table -->
-          <xs:enumeration value="void"/>
-          <xs:enumeration value="above"/>
-          <xs:enumeration value="below"/>
-          <xs:enumeration value="hsides"/>
-          <xs:enumeration value="lsides"/>
-          <xs:enumeration value="lhs"/>
-          <xs:enumeration value="rhs"/>
-          <xs:enumeration value="box"/>
-          <xs:enumeration value="border"/>
+          <xs:enumeration value="void" />
+          <xs:enumeration value="above" />
+          <xs:enumeration value="below" />
+          <xs:enumeration value="hsides" />
+          <xs:enumeration value="lsides" />
+          <xs:enumeration value="lhs" />
+          <xs:enumeration value="rhs" />
+          <xs:enumeration value="box" />
+          <xs:enumeration value="border" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
-    <xs:attribute name="orient" default="port">
+    <xs:attribute default="port" name="orient">
       <xs:annotation>
         <xs:appinfo>
           <xs:documentation>Orientation: Specifies the orientation of the associate element.</xs:documentation>
@@ -4361,8 +3887,8 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="port"/>
-          <xs:enumeration value="land"/>
+          <xs:enumeration value="port" />
+          <xs:enumeration value="land" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -4413,12 +3939,10 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <!-- GDS 2026-04-14 used several places outside of table cells;
     want to keep it singly defined should we start to restrict it -->
-  <xs:attribute name="background-color" type="xs:string"/>
-  <xs:attribute name="text-color" type="xs:string"/>
-
+  <xs:attribute name="background-color" type="xs:string" />
+  <xs:attribute name="text-color" type="xs:string" />
   <xs:attributeGroup name="html-table-attributes">
     <xs:attribute name="class" type="xs:string">
       <xs:annotation>
@@ -4492,16 +4016,15 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
-          <xs:enumeration value="none"/>
-          <xs:enumeration value="groups"/>
-          <xs:enumeration value="rows"/>
-          <xs:enumeration value="cols"/>
-          <xs:enumeration value="all"/>
+          <xs:enumeration value="none" />
+          <xs:enumeration value="groups" />
+          <xs:enumeration value="rows" />
+          <xs:enumeration value="cols" />
+          <xs:enumeration value="all" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="td-attributes">
     <xs:attribute name="class" type="xs:string">
       <xs:annotation>
@@ -4555,16 +4078,15 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
-          <xs:enumeration value="col"/>
-          <xs:enumeration value="colgroup"/>
-          <xs:enumeration value="row"/>
-          <xs:enumeration value="rowgroup"/>
+          <xs:enumeration value="col" />
+          <xs:enumeration value="colgroup" />
+          <xs:enumeration value="row" />
+          <xs:enumeration value="rowgroup" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
-  <xs:attribute name="orient" default="port">
+  <xs:attribute default="port" name="orient">
     <xs:annotation>
       <xs:appinfo>
         <xs:documentation>Orientation: Specifies the orientation of the associate element.</xs:documentation>
@@ -4572,12 +4094,11 @@
     </xs:annotation>
     <xs:simpleType>
       <xs:restriction base="xs:string">
-        <xs:enumeration value="port"/>
-        <xs:enumeration value="land"/>
+        <xs:enumeration value="port" />
+        <xs:enumeration value="land" />
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
-
   <xs:attributeGroup name="align-attributes">
     <xs:attribute name="align">
       <xs:annotation>
@@ -4588,11 +4109,11 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="left"/>
-          <xs:enumeration value="center"/>
-          <xs:enumeration value="right"/>
-          <xs:enumeration value="justify"/>
-          <xs:enumeration value="char"/>
+          <xs:enumeration value="left" />
+          <xs:enumeration value="center" />
+          <xs:enumeration value="right" />
+          <xs:enumeration value="justify" />
+          <xs:enumeration value="char" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -4626,99 +4147,116 @@
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-
   <xs:attributeGroup name="emphasis-attributes">
-    <xs:attribute name="type" default="italic">
+    <xs:attribute default="italic" name="type">
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:enumeration value="bold"/>
-          <xs:enumeration value="italic"/>
-          <xs:enumeration value="bold-italic"/>
-          <xs:enumeration value="underline"/>
-          <xs:enumeration value="double-underline"/>
-          <xs:enumeration value="small-caps"/>
-          <xs:enumeration value="monospace"/>
-          <xs:enumeration value="strikethrough"/>
-          <xs:enumeration value="overline"/>
-          <xs:enumeration value="sans-serif"/>
-          <xs:enumeration value="roman"/>
-          <xs:enumeration value="other-style"/>
+          <xs:enumeration value="bold" />
+          <xs:enumeration value="italic" />
+          <xs:enumeration value="bold-italic" />
+          <xs:enumeration value="underline" />
+          <xs:enumeration value="double-underline" />
+          <xs:enumeration value="small-caps" />
+          <xs:enumeration value="monospace" />
+          <xs:enumeration value="strikethrough" />
+          <xs:enumeration value="overline" />
+          <xs:enumeration value="sans-serif" />
+          <xs:enumeration value="roman" />
+          <xs:enumeration value="other-style" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-
   <!-- role attributes -->
   <xs:simpleType name="delete-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>There's only one role known for delete but it's expected by downstream processing.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>There's only one role known for delete but it's expected by downstream processing.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="deletion-marker"/>
+      <xs:enumeration value="deletion-marker" />
     </xs:restriction>
   </xs:simpleType>
-  
   <xs:simpleType name="generic-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Any role we have not yet enumerated is uncontrolled</xs:documentation></xs:appinfo></xs:annotation>
-    <xs:restriction base="xs:string"/>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Any role we have not yet enumerated is uncontrolled</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string" />
   </xs:simpleType>
-  
   <xs:simpleType name="legis-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Roles for numbered levels representing legislative content</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Roles for numbered levels representing legislative content</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="appendix"/>
-      <xs:enumeration value="article"/>
-      <xs:enumeration value="chapter"/>
-      <xs:enumeration value="division"/>
-      <xs:enumeration value="errata"/>
-      <xs:enumeration value="in-legis-section"/>
-      <xs:enumeration value="legis-section"/>
-      <xs:enumeration value="part"/>
-      <xs:enumeration value="references"/>
+      <xs:enumeration value="appendix" />
+      <xs:enumeration value="article" />
+      <xs:enumeration value="chapter" />
+      <xs:enumeration value="division" />
+      <xs:enumeration value="errata" />
+      <xs:enumeration value="in-legis-section" />
+      <xs:enumeration value="legis-section" />
+      <xs:enumeration value="part" />
+      <xs:enumeration value="references" />
       <!--<xs:enumeration value="referenced_standards_chapter"/>-->
     </xs:restriction>
   </xs:simpleType>
-  
   <xs:simpleType name="isbn-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Roles for the isbn child element of copyright-page; effectively printable metadata.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Roles for the isbn child element of copyright-page; effectively printable metadata.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="PDF"/>
-      <xs:enumeration value="loose-leaf"/>
-      <xs:enumeration value="pdf-download"/>
-      <xs:enumeration value="soft-cover"/>
+      <xs:enumeration value="PDF" />
+      <xs:enumeration value="loose-leaf" />
+      <xs:enumeration value="pdf-download" />
+      <xs:enumeration value="soft-cover" />
     </xs:restriction>
   </xs:simpleType>
-  
   <xs:simpleType name="paragraph-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Sometimes a paragraph is special; we should consider an element for at least rights-ICC.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Sometimes a paragraph is special; we should consider an element for at least rights-ICC.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="no-text-change"/>
-      <xs:enumeration value="rights-ICC"/>
+      <xs:enumeration value="no-text-change" />
+      <xs:enumeration value="rights-ICC" />
     </xs:restriction>
   </xs:simpleType>
-
   <xs:simpleType name="phrase-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Phrase is sub-para text; sometimes the function should be identified.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Phrase is sub-para text; sometimes the function should be identified.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="jurisdiction-insert"/>
-      <xs:enumeration value="keyterm"/>
+      <xs:enumeration value="jurisdiction-insert" />
+      <xs:enumeration value="keyterm" />
     </xs:restriction>
   </xs:simpleType>
-  
   <xs:simpleType name="table-roles">
-    <xs:annotation><xs:appinfo><xs:documentation>Downstream processing is used to having tables with a code role.</xs:documentation></xs:appinfo></xs:annotation>
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Downstream processing is used to having tables with a code role.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="code"/>
+      <xs:enumeration value="code" />
     </xs:restriction>
   </xs:simpleType>
-
   <!--Warnings, Cautions, and Notes-->
-
   <xs:group name="alert-elements">
     <xs:choice>
-      <xs:element ref="warning"/>
-      <xs:element ref="caution"/>
+      <xs:element ref="warning" />
+      <xs:element ref="caution" />
     </xs:choice>
   </xs:group>
-
   <xs:element name="warning" type="block-element-type">
     <xs:annotation>
       <xs:appinfo>
@@ -4727,7 +4265,6 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
   <xs:element name="caution" type="block-element-type">
     <xs:annotation>
       <xs:appinfo>
@@ -4736,5 +4273,110 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-
+  <!-- complex type definitions -->
+  <xs:complexType mixed="true" name="mixed-content-type">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:group ref="inline-elements" />
+    </xs:choice>
+    <xs:attributeGroup ref="common-attributes" />
+  </xs:complexType>
+  <xs:complexType name="pub-ref-type">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Publication Reference: This element is used as a reference to other
+        publications.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="mixed-content-type">
+        <xs:attribute name="publication-id" type="xs:string" />
+        <xs:attribute name="internal-id" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="blocks-then-sections">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>This is a common pattern for front matter, broadly constructed.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="metadata" />
+      <xs:element minOccurs="0" ref="titlegroup" />
+      <xs:element minOccurs="0" ref="body" />
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="section" />
+        <xs:element ref="editorial-commentary" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attributeGroup ref="revision-attributes" />
+    <xs:attribute name="tocentry" type="yesorno" />
+  </xs:complexType>
+  <xs:complexType name="blocks-then-sections-with-id">
+    <xs:complexContent>
+      <xs:extension base="blocks-then-sections">
+        <xs:attributeGroup ref="id-attributes" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="block-element-type">
+    <xs:sequence>
+      <xs:group maxOccurs="unbounded" ref="para-elements" />
+    </xs:sequence>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="extract" />
+          <xs:enumeration value="display-quote" />
+          <xs:enumeration value="epigraph" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attributeGroup ref="revision-attributes" />
+  </xs:complexType>
+  <xs:complexType name="commentary-type">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Commentary: The format of the Commentary includes the full text of each
+        section, table and figure in the code, followed immediately by the commentary applicable to
+        that text.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="titlegroup" />
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
+        <!--BH - added section to commentary-->
+        <xs:element ref="section" />
+        <xs:element ref="bibliography" />
+        <xs:group ref="block-elements" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="id-attributes" />
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attributeGroup ref="revision-attributes" />
+  </xs:complexType>
+  <xs:complexType name="other-model-commentary-type">
+    <xs:annotation>
+      <xs:appinfo>
+        <xs:documentation>Commentary added in content in other models (tables, whether HTML or CALS; equations,
+          whether images or MathML; figures, in whatever format) should not allow other-model block elements
+          (figure, equation, or table) in its content model lest we introduce a complex way to do unwanted
+          content nesting. Which means no sections as well as no table, equation, or figure children.</xs:documentation>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded" minOccurs="1">
+        <xs:element ref="bibliography" />
+        <xs:group ref="para-elements" />
+        <xs:group ref="list-elements" />
+        <xs:element ref="note" />
+        <xs:element ref="promulgator" />
+        <xs:group ref="alert-elements" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attributeGroup ref="common-attributes" />
+    <xs:attributeGroup ref="revision-attributes" />
+  </xs:complexType>
 </xs:schema>
